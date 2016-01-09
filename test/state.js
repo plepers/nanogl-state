@@ -8,7 +8,7 @@ var expect = require( 'expect.js' ),
 
 
 
-var defaultCfg, gl;
+var defaultCfg, gl, gl2;
 
 var bin = function( str ){
   return parseInt( str, 2 );
@@ -77,10 +77,32 @@ function propertyTest( gl, fn, params, getprop, result ){
   }else{
     expect( p ).to.eql( result );
   }
+  stackTest( gl, fn, params, getprop, result )
+}
+
+function stackTest( gl, fn, params, getprop, result ){
+  var cfg = new GLState();
+  cfg[fn].apply( cfg, params );
+  cfg.setupGL( gl );
+  var p = gl.getParameter( getprop )
+  if( p.length ){
+    for (var i = 0; i < p.length; i++) {
+      almostEqual( p[i], result[i] );
+    };
+  }else{
+    expect( p ).to.eql( result );
+  }
 
 }
 
 gl = createContext()
+gl2 = createContext()
+
+
+
+var ptestStack = GLState.makeStack();
+ptestStack.initFromGL( gl2 );
+
 
 describe( "gl - GLState", function(){
 

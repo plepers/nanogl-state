@@ -4,7 +4,9 @@
   "description": "Efficient webgl context state management",
   "main": "state.js",
   "scripts": {
-    "test": "jshint *.js && karma start"
+    "test": "npm run build && jshint src/*.js && karma start",
+    "build": "uglifyjs --screw-ie8 -m -c warnings=false -b -o state.js -- src/state.js",
+    "gztest": "uglifyjs --screw-ie8 -m -c warnings=false -o state.js -- src/state.js && gzip -k -9 state.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "karma-sauce-launcher": "^0.3.0",
     "mocha": "^2.3.4",
     "sinon": "^1.17.2",
-    "stringify": "^3.2.0"
+    "stringify": "^3.2.0",
+    "uglify-js": "^2.6.1"
   }
 }

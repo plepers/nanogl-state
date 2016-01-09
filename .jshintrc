@@ -10,7 +10,7 @@
         "console",
         "process"
     ],
-
+  "esversion": 6,
   "boss": true,
   "curly": true,
     "elision": true,

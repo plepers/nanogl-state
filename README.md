@@ -2,7 +2,7 @@
 
 
 # nanogl-state
-Simply configure webgl context state, restore to previous or default state....
+Simply configure webgl context state, restore to previous or default state. (3Ko gzipped)
 
 WIP
 
