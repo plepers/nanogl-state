@@ -123,7 +123,7 @@ describe( "gl - GLStateStack", function(){
       stack.push( cfg );
 
       var head =  getHead( stack );
-      expect( head._set ).to.be.equal( bin( '111110001111110011110011111' ) );
+      expect( head._set.toString(2) ).to.be.equal('110111110001111110011110011111' );
 
     });
 

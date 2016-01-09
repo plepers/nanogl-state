@@ -58,8 +58,15 @@ var BLEND_ENABLE          = 0 ,
     BLEND_COLOR_G         = 41,
     BLEND_COLOR_B         = 42,
     BLEND_COLOR_A         = 43,
+    VIEWPORT_X            = 44,
+    VIEWPORT_Y            = 45,
+    VIEWPORT_W            = 46,
+    VIEWPORT_H            = 47,
+    DEPTH_RANGE_NEAR      = 48,
+    DEPTH_RANGE_FAR       = 49,
+    LINE_WIDTH            = 50,
 
-    LEN = 44,
+    LEN = 51,
 
 
     BLEND_ENABLE_SET       = 1 << 0 ,
@@ -90,6 +97,9 @@ var BLEND_ENABLE          = 0 ,
     COLOR_MASK_SET         = 1 << 24,
     DEPTH_MASK_SET         = 1 << 25,
     BLEND_COLOR_SET        = 1 << 26,
+    VIEWPORT_SET           = 1 << 27,
+    DEPTH_RANGE_SET        = 1 << 28,
+    LINE_WIDTH_SET         = 1 << 29,
 
 
     DAT_MASKS = [
@@ -145,66 +155,104 @@ var BLEND_ENABLE          = 0 ,
       BLEND_COLOR_SET|0,
       BLEND_COLOR_SET|0,
       BLEND_COLOR_SET|0,
-      BLEND_COLOR_SET|0
+      BLEND_COLOR_SET|0,
+
+      VIEWPORT_SET|0,
+      VIEWPORT_SET|0,
+      VIEWPORT_SET|0,
+      VIEWPORT_SET|0,
+
+      DEPTH_RANGE_SET|0,
+      DEPTH_RANGE_SET|0,
+
+      LINE_WIDTH_SET|0
     ],
 
 
     //            <b >< enab  >
     // b 0001111110011000000000
-    _DEFAULT_SET = parseInt( '111110001111110011110011111', 2 ),
+    _DEFAULT_SET = (
+      BLEND_ENABLE_SET      |
+      CULL_FACE_ENABLE_SET  |
+      DEPTH_ENABLE_SET      |
+      DITHER_ENABLE_SET     |
+      POLYOFF_ENABLE_SET    |
+      SCISSOR_ENABLE_SET    |
+      STENCIL_ENABLE_SET    |
+      BLEND_EQ_SET          |
+      BLEND_FUNC_SET        |
+      DEPTH_FUNC_SET        |
+      CULL_MODE_SET         |
+      FACE_DIR_SET          |
+      STENCIL_FUNC_SET      |
+      STENCIL_OP_SET        |
+      STENCIL_MASK_SET      |
+      SCISSOR_TEST_SET      |
+      POLYOFF_SET           |
+      COLOR_MASK_SET        |
+      DEPTH_MASK_SET        |
+      BLEND_COLOR_SET       |
+      DEPTH_RANGE_SET       |
+      LINE_WIDTH_SET
+    ),
+
 
     _DEFAULT_STATE = new Uint16Array([
-      0,       // BLEND disabled
-      32774,   // BLEND_EQ_C            :   FUNC_ADD
-      0,       // BLEND_FUNC_C_DST      :   ZERO
-      1,       // BLEND_FUNC_C_SRC      :   ONE
-      0,       // BLEND_EQ_A            :   --
-      0,       // BLEND_FUNC_A_DST      :   --
-      0,       // BLEND_FUNC_A_SRC      :   --
+      0,             // BLEND disabled
+      32774,         // BLEND_EQ_C            :   FUNC_ADD
+      0,             // BLEND_FUNC_C_DST      :   ZERO
+      1,             // BLEND_FUNC_C_SRC      :   ONE
+      0,             // BLEND_EQ_A            :   --
+      0,             // BLEND_FUNC_A_DST      :   --
+      0,             // BLEND_FUNC_A_SRC      :   --
 
-      0,       // DEPTH disabled
-      513,     // DEPTH_FUNC            :   gl.LESS
+      0,             // DEPTH disabled
+      513,           // DEPTH_FUNC            :   gl.LESS
 
-      0,       // CULL_FACE disabled
-      1029,    // CULL_MODE             :   gl.BACK
-      2305,    // FACE_DIR              :   gl.CCW
+      0,             // CULL_FACE disabled
+      1029,          // CULL_MODE             :   gl.BACK
+      2305,          // FACE_DIR              :   gl.CCW
 
-      0,       // STENCIL disabled
-      519,     // STENCIL_FUNC          :   gl.ALWAYS
-      0,       // STENCIL_REF           :   0x0
-      65535,   // STENCIL_VALUE_MASK    :   0xFFFF
-      65535,   // STENCIL_WRITEMASK     :   0xFFFF
-      7680,    // STENCIL_OP_FAIL       :   gl.KEEP
-      7680,    // STENCIL_OP_ZFAIL      :   gl.KEEP
-      7680,    // STENCIL_OP_ZPASS      :   gl.KEEP
-      0,       // STENCIL_B_FUNC        :   --
-      0,       // STENCIL_B_REF         :   --
-      0,       // STENCIL_B_VALUE_MASK  :   --
-      0,       // STENCIL_B_WRITEMASK   :   --
-      0,       // STENCIL_B_OP_FAIL     :   --
-      0,       // STENCIL_B_OP_ZFAIL    :   --
-      0,       // STENCIL_B_OP_ZPASS    :   --
-      0,       // SCISSOR enabled
-      0,       // SCISSOR_TEST          :   x
-      0,       // SCISSOR_TEST          :   y
-      0,       // SCISSOR_TEST          :   w
-      0,       // SCISSOR_TEST          :   h
+      0,             // STENCIL disabled
+      519,           // STENCIL_FUNC          :   gl.ALWAYS
+      0,             // STENCIL_REF           :   0x0
+      65535,         // STENCIL_VALUE_MASK    :   0xFFFF
+      65535,         // STENCIL_WRITEMASK     :   0xFFFF
+      7680,          // STENCIL_OP_FAIL       :   gl.KEEP
+      7680,          // STENCIL_OP_ZFAIL      :   gl.KEEP
+      7680,          // STENCIL_OP_ZPASS      :   gl.KEEP
+      0,             // STENCIL_B_FUNC        :   --
+      0,             // STENCIL_B_REF         :   --
+      0,             // STENCIL_B_VALUE_MASK  :   --
+      0,             // STENCIL_B_WRITEMASK   :   --
+      0,             // STENCIL_B_OP_FAIL     :   --
+      0,             // STENCIL_B_OP_ZFAIL    :   --
+      0,             // STENCIL_B_OP_ZPASS    :   --
 
-      1,       // DITHER enabled
-      0,       // POLYOFF enabled
-      0,       // POLYOFF factor
-      0,       // POLYOFF units
+      0,             // SCISSOR enabled
+      0, 0, 0,  0,   // SCISSOR_TEST          :   h
 
-      0,       // COVERAGE enabled
-      0,       // ACOVERAGE enabled
+      1,             // DITHER enabled
+      0,             // POLYOFF enabled
+      0,             // POLYOFF factor
+      0,             // POLYOFF units
 
-      15,      // color mask 1111,
-      1,       // write to depth
+      0,             // COVERAGE enabled
+      0,             // ACOVERAGE enabled
 
-      0,       // blend color
-      0,       // blend color
-      0,       // blend color
-      0,       // blend color
+      15,            // color mask 1111,
+      1,             // write to depth
+
+      0, 0, 0, 0,    // blend color
+
+      0, 0, 0, 0,    // viewport
+
+      // depthRange
+      encodeClampedFloat(0),
+      encodeClampedFloat(1),
+
+      // lineWidth
+      encodeClampedFloat(1),
 
     ]);
 
@@ -225,7 +273,7 @@ function _fixSet( set ){
 
 
 function encodeClampedFloat(f){
-  return (f*0xFFFF)|0;
+  return Math.round(f*0xFFFF)|0;
 }
 
 function decodeClampedFloat(s){
@@ -619,20 +667,51 @@ GLConfig.prototype = {
 
     if ( set & (BLEND_COLOR_SET) ){
       gl.blendColor(
-        decodeClampedFloat( dat[ 0|BLEND_COLOR_R ] ),
-        decodeClampedFloat( dat[ 0|BLEND_COLOR_G ] ),
-        decodeClampedFloat( dat[ 0|BLEND_COLOR_B ] ),
-        decodeClampedFloat( dat[ 0|BLEND_COLOR_A ] )
+        decodeHalf( dat[ 0|BLEND_COLOR_R ] ),
+        decodeHalf( dat[ 0|BLEND_COLOR_G ] ),
+        decodeHalf( dat[ 0|BLEND_COLOR_B ] ),
+        decodeHalf( dat[ 0|BLEND_COLOR_A ] )
+      );
+    }
+
+    if ( set & SCISSOR_ENABLE_SET ){
+      dat[ 0|SCISSOR_ENABLE ] ? gl.enable( gl.SCISSOR_TEST ) : gl.disable( gl.SCISSOR_TEST );
+    }
+
+    if ( set & SCISSOR_TEST_SET ){
+      gl.scissor(
+        dat[ 0|SCISSOR_TEST_X ],
+        dat[ 0|SCISSOR_TEST_Y ],
+        dat[ 0|SCISSOR_TEST_W ],
+        dat[ 0|SCISSOR_TEST_H ]
+      );
+    }
+
+    if ( set & VIEWPORT_SET ){
+      gl.viewport(
+        dat[ 0|VIEWPORT_X ],
+        dat[ 0|VIEWPORT_Y ],
+        dat[ 0|VIEWPORT_W ],
+        dat[ 0|VIEWPORT_H ]
       );
     }
 
 
-    if ( (set & POLYOFF_SET) === POLYOFF_SET ){
+    if ( set & POLYOFF_SET ){
       gl.polygonOffset(
         decodeHalf( dat[ 0|POLYOFF_FACTOR ] ),
         decodeHalf( dat[ 0|POLYOFF_UNITS ] )
       );
     }
+
+
+    if ( set & DEPTH_RANGE_SET ){
+      gl.depthRange(
+        decodeClampedFloat( dat[ 0|DEPTH_RANGE_NEAR ] ),
+        decodeClampedFloat( dat[ 0|DEPTH_RANGE_FAR ] )
+      );
+    }
+
 
 
   },
@@ -682,7 +761,10 @@ GLConfig.prototype = {
         scissorBox        = getP( gl, gl.SCISSOR_BOX ),
         colorMaskArray    = getP( gl, gl.COLOR_WRITEMASK ),
         depthWriteMask    = getP( gl, gl.DEPTH_WRITEMASK ),
-        blendColor        = getP( gl, gl.BLEND_COLOR );
+        blendColor        = getP( gl, gl.BLEND_COLOR ),
+        viewport          = getP( gl, gl.VIEWPORT ),
+        depthRange        = getP( gl, gl.DEPTH_RANGE ),
+        lineWidth         = getP( gl, gl.LINE_WIDTH );
 
 
 
@@ -818,6 +900,20 @@ GLConfig.prototype = {
       blendColor[3]
     );
 
+    this.viewport(
+      viewport[0],
+      viewport[1],
+      viewport[2],
+      viewport[3]
+    );
+
+    this.depthRange(
+      depthRange[0],
+      depthRange[1]
+    );
+
+    this.lineWidth( lineWidth );
+
   },
 
 
@@ -890,10 +986,10 @@ GLConfig.prototype = {
       r g b a  as Float [0.0, 1.0]
   */
   blendColor: function( r, g, b, a ){
-    this._dat[ 0|BLEND_COLOR_R ] = encodeClampedFloat( r );
-    this._dat[ 0|BLEND_COLOR_G ] = encodeClampedFloat( g );
-    this._dat[ 0|BLEND_COLOR_B ] = encodeClampedFloat( b );
-    this._dat[ 0|BLEND_COLOR_A ] = encodeClampedFloat( a );
+    this._dat[ 0|BLEND_COLOR_R ] = encodeHalf( r );
+    this._dat[ 0|BLEND_COLOR_G ] = encodeHalf( g );
+    this._dat[ 0|BLEND_COLOR_B ] = encodeHalf( b );
+    this._dat[ 0|BLEND_COLOR_A ] = encodeHalf( a );
     this._set |= BLEND_COLOR_SET;
   },
 
@@ -920,6 +1016,17 @@ GLConfig.prototype = {
   enableDepthTest: function( flag ){
     this._dat[ 0|DEPTH_ENABLE ] = flag|0;
     this._set |= DEPTH_ENABLE_SET|0;
+  },
+
+  depthRange : function( near, far ){
+    this._dat[ 0|DEPTH_RANGE_NEAR ] = encodeClampedFloat( near );
+    this._dat[ 0|DEPTH_RANGE_FAR ]  = encodeClampedFloat( far );
+    this._set |= DEPTH_RANGE_SET|0;
+  },
+
+  lineWidth: function( w ){
+    this._dat[ 0|LINE_WIDTH ] = encodeClampedFloat( w );
+    this._set |= LINE_WIDTH_SET|0;
   },
 
 
@@ -975,6 +1082,16 @@ GLConfig.prototype = {
     this._set |= SCISSOR_TEST_SET;
   },
 
+  // VIEWPORT
+  // --------
+
+  viewport: function( x, y, w, h ){
+    this._dat[ 0|VIEWPORT_X ] = x;
+    this._dat[ 0|VIEWPORT_Y ] = y;
+    this._dat[ 0|VIEWPORT_W ] = w;
+    this._dat[ 0|VIEWPORT_H ] = h;
+    this._set |= VIEWPORT_SET;
+  },
 
 
   enableDither: function( flag ){

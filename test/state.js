@@ -14,11 +14,21 @@ var bin = function( str ){
   return parseInt( str, 2 );
 };
 
-
+function almostEqual( a, b ){
+  if( Math.abs( a-b ) > 0.001 ){
+    expect( a ).to.be.equal( b );
+  }
+}
 
 var equalConfig = function( cfgA, cfgB ){
-  aequal( cfgA._dat, cfgB._dat );
-  expect( cfgA._set ).to.be.equal( cfgB._set );
+  var f1 = new Uint16Array( cfgA._dat )
+  var f2 = new Uint16Array( cfgB._dat )
+  f1[44] = f2[44] = 0
+  f1[45] = f2[45] = 0
+  f1[46] = f2[46] = 0
+  f1[47] = f2[47] = 0
+  aequal(f1, f2);
+  expect( (cfgA._set | (1 << 27)).toString(2) ).to.be.equal( (cfgB._set | (1 << 27)).toString(2) );
 };
 
 var compareFromGl = function( cfg, gl ){
@@ -48,10 +58,26 @@ var logState = function( cfg ){
 
 function createContext() {
   var cvs = document.createElement( 'canvas' );
-  cvs.width = cvs.height = 2;
+  cvs.width = cvs.height = 16;
   gl = cvs.getContext( 'webgl' ) || cvs.getContext( 'experimental-webgl' );
   gl.scissor( 0, 0, 0, 0 ); // normalize
   return gl;
+}
+
+
+function propertyTest( gl, fn, params, getprop, result ){
+  var cfg = new GLState();
+  cfg[fn].apply( cfg, params );
+  cfg.setupGL( gl );
+  var p = gl.getParameter( getprop )
+  if( p.length ){
+    for (var i = 0; i < p.length; i++) {
+      almostEqual( p[i], result[i] );
+    };
+  }else{
+    expect( p ).to.eql( result );
+  }
+
 }
 
 gl = createContext()
@@ -75,14 +101,14 @@ describe( "gl - GLState", function(){
       cfg.toDefault();
 
       expect( gl ).to.be.ok();
-      expect( cfg._set ).to.be.equal( bin( '111110001111110011110011111' ) ); // default set
+      expect( cfg._set ).to.be.equal( bin( '110111110001111110011110011111' ) ); // default set
       // todo check datas
 
     });
 
   });
 
-  describe( "setupGl", function(){
+  describe( "setupGL", function(){
 
     it( "should not call enable/disable if empty", function(){
       var dis = sinon.spy(gl, "disable");
@@ -157,8 +183,7 @@ describe( "gl - GLState", function(){
       cfg.fromGL( gl );
 
       expect( gl ).to.be.ok();
-      expect( cfg._set ).to.be.equal( defaultCfg._set );
-      aequal( cfg._dat, defaultCfg._dat );
+      equalConfig( cfg, defaultCfg );
 
     });
 
@@ -686,6 +711,612 @@ describe( "gl - GLState", function(){
       cfg.setupGL( gl );
       compareFromGl( cfg, gl );
     });
+
+  });
+
+
+
+
+  describe( "colorMask", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.colorMask( true, false, true, false );
+      expect( cfg._set ).to.be.equal( bin( '1000000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.colorMask( true, false, true, false );
+      expect( cfg._dat[38] ).to.be.equal( 5 );
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.colorMask( true, false, true, false  );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+  describe( "depthMask", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.depthMask( false );
+      expect( cfg._set ).to.be.equal( bin( '10000000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.depthMask( false );
+      expect( cfg._dat[39] ).to.be.equal( 0 );
+      cfg.depthMask( true );
+      expect( cfg._dat[39] ).to.be.equal( 1 );
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.depthMask( false  );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+
+  describe( "polygonOffset", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.polygonOffset( -.6, .5 );
+      expect( cfg._set ).to.be.equal( bin( '100000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.polygonOffset( -.5, .6 );
+      almostEqual( GLState.decodeHalf(cfg._dat[34]), -.5 );
+      almostEqual( GLState.decodeHalf(cfg._dat[35]),  .6 );
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.depthMask( false  );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+
+
+  describe( "scissor", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.scissor( 1, 2, 4, 5 );
+      expect( cfg._set ).to.be.equal( bin( '10000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.scissor( 1, 2, 4, 5 );
+      expect( cfg._dat[28] ).to.be.equal(1);
+      expect( cfg._dat[29] ).to.be.equal(2);
+      expect( cfg._dat[30] ).to.be.equal(4);
+      expect( cfg._dat[31] ).to.be.equal(5);
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.scissor( 1, 2, 4, 5 );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+
+  describe( "viewport", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.viewport( 10, 20, 30, 40 );
+      expect( cfg._set ).to.be.equal( bin( '1000000000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.viewport( 10, 20, 30, 40 );
+      expect( cfg._dat[44] ).to.be.equal(10);
+      expect( cfg._dat[45] ).to.be.equal(20);
+      expect( cfg._dat[46] ).to.be.equal(30);
+      expect( cfg._dat[47] ).to.be.equal(40);
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.viewport( 10, 20, 30, 40 );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+  describe( "depthRange", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.depthRange( .15, .45 );
+      expect( cfg._set ).to.be.equal( bin( '10000000000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.depthRange( .15, .45 );
+      expect( cfg._dat[48] ).to.be.equal( Math.round(.15*0xFFFF) );
+      expect( cfg._dat[49] ).to.be.equal( Math.round(.45*0xFFFF) );
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.depthRange( .15, .45 );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+  describe( "lineWidth", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.lineWidth( 3 );
+      expect( cfg._set ).to.be.equal( bin( '100000000000000000000000000000' ) );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.lineWidth( 3 );
+      almostEqual( GLState.decodeHalf( cfg._dat[50]), 3 );
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.depthRange( .15, .45 );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+
+
+  describe( "blendColor", function(){
+
+    it( "should fill correct set", function(){
+      var cfg = new GLState();
+      cfg.blendColor( .1, .2, .3, .4 );
+      expect( cfg._set.toString(2) ).to.be.equal( '100000000000000000000000000' );
+    });
+
+
+    it( "should fill correct cfg", function(){
+      var cfg = new GLState();
+      cfg.blendColor( .1, .2, .3, .4 );
+      almostEqual( GLState.decodeHalf( cfg._dat[40]), .1 );
+      almostEqual( GLState.decodeHalf( cfg._dat[41]), .2 );
+      almostEqual( GLState.decodeHalf( cfg._dat[42]), .3 );
+      almostEqual( GLState.decodeHalf( cfg._dat[43]), .4 );
+    });
+
+
+    it( "should setup gl context", function(){
+      var cfg = new GLState();
+      cfg.toDefault();
+      cfg.blendColor( false  );
+      cfg.setupGL( gl );
+      compareFromGl( cfg, gl );
+    });
+
+  });
+
+
+
+
+
+
+  describe( "half float encoding", function(){
+
+    it( " should work", function(){
+
+      var panel = [
+       0, 1, -1,
+       0.1, 0.2, -0.1,
+       1000.5,
+       0.015,
+       -1000.5
+      ]
+
+      for (var i = 0; i < panel.length; i++) {
+        var n = panel[i]
+        var e = GLState.encodeHalf( n );
+        var d = GLState.decodeHalf( e );
+
+        almostEqual( d, n )
+      };
+    });
+
+
+
+  });
+
+
+
+
+  describe( "get property tests - ", function(){
+
+    it( "blendColor", function(){
+      propertyTest( gl,
+        'blendColor', [.1, .2, .3, .4],
+        gl.BLEND_COLOR, [.1, .2, .3, .4]
+      );
+    });
+
+
+    it( 'blendEquation', function(){
+      propertyTest( gl,
+        'blendEquation', [gl.FUNC_SUBTRACT],
+        gl.BLEND_EQUATION_RGB, gl.FUNC_SUBTRACT
+      );
+    });
+
+    it( 'blendEquation', function(){
+      propertyTest( gl,
+        'blendEquation', [gl.FUNC_SUBTRACT],
+        gl.BLEND_EQUATION_ALPHA, gl.FUNC_SUBTRACT
+      );
+    });
+
+
+    it( 'blendEquationSeparate rgb', function(){
+      propertyTest( gl,
+        'blendEquationSeparate', [gl.FUNC_SUBTRACT, gl.FUNC_REVERSE_SUBTRACT],
+        gl.BLEND_EQUATION_RGB, gl.FUNC_SUBTRACT
+      );
+    });
+
+    it( 'blendEquationSeparate alpha', function(){
+      propertyTest( gl,
+        'blendEquationSeparate', [gl.FUNC_SUBTRACT, gl.FUNC_REVERSE_SUBTRACT],
+        gl.BLEND_EQUATION_ALPHA, gl.FUNC_REVERSE_SUBTRACT
+      );
+    });
+
+    it( 'blendFunc', function(){
+      propertyTest( gl,
+        'blendFunc', [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA],
+        gl.BLEND_SRC_RGB, gl.SRC_ALPHA
+      );
+    });
+
+    it( 'blendFunc', function(){
+      propertyTest( gl,
+        'blendFunc', [gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA],
+        gl.BLEND_DST_RGB, gl.ONE_MINUS_SRC_ALPHA
+      );
+    });
+
+    it( 'blendFuncSeparate', function(){
+      propertyTest( gl,
+        'blendFuncSeparate', [gl.SRC_COLOR, gl.ONE_MINUS_SRC_COLOR, gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA],
+        gl.BLEND_SRC_RGB, gl.SRC_COLOR
+      );
+    });
+    it( 'blendFuncSeparate', function(){
+      propertyTest( gl,
+        'blendFuncSeparate', [gl.SRC_COLOR, gl.ONE_MINUS_SRC_COLOR, gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA],
+        gl.BLEND_DST_RGB, gl.ONE_MINUS_SRC_COLOR
+      );
+    });
+    it( 'blendFuncSeparate', function(){
+      propertyTest( gl,
+        'blendFuncSeparate', [gl.SRC_COLOR, gl.ONE_MINUS_SRC_COLOR, gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA],
+        gl.BLEND_SRC_ALPHA, gl.SRC_ALPHA
+      );
+    });
+    it( 'blendFuncSeparate', function(){
+      propertyTest( gl,
+        'blendFuncSeparate', [gl.SRC_COLOR, gl.ONE_MINUS_SRC_COLOR, gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA],
+        gl.BLEND_DST_ALPHA, gl.ONE_MINUS_SRC_ALPHA
+      );
+    });
+
+
+
+
+    it( 'colorMask', function(){
+      propertyTest( gl,
+        'colorMask', [true, false, true, false],
+        gl.COLOR_WRITEMASK, [true, false, true, false]
+      );
+    });
+
+    it( 'cullFace', function(){
+      propertyTest( gl,
+        'cullFace', [gl.FRONT_AND_BACK],
+        gl.CULL_FACE_MODE, gl.FRONT_AND_BACK
+      );
+    });
+
+    it( 'depthFunc', function(){
+      propertyTest( gl,
+        'depthFunc', [gl.NOTEQUAL],
+        gl.DEPTH_FUNC, gl.NOTEQUAL
+      );
+    });
+
+    it( 'depthMask', function(){
+      propertyTest( gl,
+        'depthMask', [false],
+        gl.DEPTH_WRITEMASK, false
+      );
+    });
+
+    it( 'frontFace', function(){
+      propertyTest( gl,
+        'frontFace', [gl.CW],
+        gl.FRONT_FACE, gl.CW
+      );
+    });
+
+    it( 'polygonOffset', function(){
+      propertyTest( gl,
+        'polygonOffset', [-5, 10.5],
+        gl.POLYGON_OFFSET_FACTOR, -5
+      );
+    });
+    it( 'polygonOffset', function(){
+      propertyTest( gl,
+        'polygonOffset', [-5, 10.5],
+        gl.POLYGON_OFFSET_UNITS, 10.5
+      );
+    });
+
+    it( 'scissor', function(){
+      propertyTest( gl,
+        'scissor', [10, 20, 30, 40],
+        gl.SCISSOR_BOX,[10, 20, 30, 40]
+      );
+    });
+
+
+
+    it( 'stencilFunc func', function(){
+      propertyTest( gl,
+        'stencilFunc', [gl.GREATER, 2, 0x46],
+        gl.STENCIL_FUNC, gl.GREATER
+      );
+    });
+
+    it( 'stencilFunc ref', function(){
+      propertyTest( gl,
+        'stencilFunc', [gl.GREATER, 2, 0x46],
+        gl.STENCIL_REF, 2
+      );
+    });
+
+    it( 'stencilFunc mask', function(){
+      propertyTest( gl,
+        'stencilFunc', [gl.GREATER, 2, 0x46],
+        gl.STENCIL_VALUE_MASK, 0x46
+      );
+    });
+
+
+
+    it( 'stencilFuncSeparate func', function(){
+      propertyTest( gl,
+        'stencilFuncSeparate', [gl.GREATER, 2, 0x46, gl.NOTEQUAL, 3, 0x25],
+        gl.STENCIL_FUNC, gl.GREATER
+      );
+    });
+
+    it( 'stencilFuncSeparate ref', function(){
+      propertyTest( gl,
+        'stencilFuncSeparate', [gl.GREATER, 2, 0x46, gl.NOTEQUAL, 3, 0x25],
+        gl.STENCIL_REF, 2
+      );
+    });
+
+    it( 'stencilFuncSeparate mask', function(){
+      propertyTest( gl,
+        'stencilFuncSeparate', [gl.GREATER, 2, 0x46, gl.NOTEQUAL, 3, 0x25],
+        gl.STENCIL_VALUE_MASK, 0x46
+      );
+    });
+
+    it( 'stencilFuncSeparate fback unc', function(){
+      propertyTest( gl,
+        'stencilFuncSeparate', [gl.GREATER, 2, 0x46, gl.NOTEQUAL, 3, 0x25],
+        gl.STENCIL_BACK_FUNC, gl.NOTEQUAL
+      );
+    });
+
+    it( 'stencilFuncSeparate back ref', function(){
+      propertyTest( gl,
+        'stencilFuncSeparate', [gl.GREATER, 2, 0x46, gl.NOTEQUAL, 3, 0x25],
+        gl.STENCIL_BACK_REF, 3
+      );
+    });
+
+    it( 'stencilFuncSeparate back mask', function(){
+      propertyTest( gl,
+        'stencilFuncSeparate', [gl.GREATER, 2, 0x46, gl.NOTEQUAL, 3, 0x25],
+        gl.STENCIL_BACK_VALUE_MASK, 0x25
+      );
+    });
+
+
+
+    it( 'stencilMask', function(){
+      propertyTest( gl,
+        'stencilMask', [0x82],
+        gl.STENCIL_WRITEMASK, 0x82
+      );
+    });
+
+    it( 'stencilMaskSeparate', function(){
+      propertyTest( gl,
+        'stencilMaskSeparate', [0x10, 0x20],
+        gl.STENCIL_WRITEMASK, 0x10
+      );
+    });
+
+    it( 'stencilMaskSeparate back', function(){
+      propertyTest( gl,
+        'stencilMaskSeparate', [0x10, 0x20],
+        gl.STENCIL_BACK_WRITEMASK, 0x20
+      );
+    });
+
+// -----------------------------------------------------
+
+
+
+    it( 'stencilOp sfail', function(){
+      propertyTest( gl,
+        'stencilOp', [gl.REPLACE, gl.INCR, gl.DECR],
+        gl.STENCIL_FAIL, gl.REPLACE
+      );
+    });
+
+    it( 'stencilOp dpfail', function(){
+      propertyTest( gl,
+        'stencilOp', [gl.REPLACE, gl.INCR, gl.DECR],
+        gl.STENCIL_PASS_DEPTH_FAIL, gl.INCR
+      );
+    });
+
+    it( 'stencilOp dppass', function(){
+      propertyTest( gl,
+        'stencilOp', [gl.REPLACE, gl.INCR, gl.DECR],
+        gl.STENCIL_PASS_DEPTH_PASS, gl.DECR
+      );
+    });
+
+
+
+
+
+
+
+
+    it( 'stencilOpSeparate sfail', function(){
+      propertyTest( gl,
+        'stencilOpSeparate', [gl.REPLACE, gl.INCR, gl.DECR, gl.INVERT, gl.INCR_WRAP, gl.DECR_WRAP],
+        gl.STENCIL_FAIL, gl.REPLACE
+      );
+    });
+
+    it( 'stencilOpSeparate dpfail', function(){
+      propertyTest( gl,
+        'stencilOpSeparate', [gl.REPLACE, gl.INCR, gl.DECR, gl.INVERT, gl.INCR_WRAP, gl.DECR_WRAP],
+        gl.STENCIL_PASS_DEPTH_FAIL, gl.INCR
+      );
+    });
+
+    it( 'stencilOpSeparate dppass', function(){
+      propertyTest( gl,
+        'stencilOpSeparate', [gl.REPLACE, gl.INCR, gl.DECR, gl.INVERT, gl.INCR_WRAP, gl.DECR_WRAP],
+        gl.STENCIL_PASS_DEPTH_PASS, gl.DECR
+      );
+    });
+
+    it( 'stencilOpSeparate fback sfail', function(){
+      propertyTest( gl,
+        'stencilOpSeparate', [gl.REPLACE, gl.INCR, gl.DECR, gl.INVERT, gl.INCR_WRAP, gl.DECR_WRAP],
+        gl.STENCIL_BACK_FAIL, gl.INVERT
+      );
+    });
+
+    it( 'stencilOpSeparate back dpfail', function(){
+      propertyTest( gl,
+        'stencilOpSeparate', [gl.REPLACE, gl.INCR, gl.DECR, gl.INVERT, gl.INCR_WRAP, gl.DECR_WRAP],
+        gl.STENCIL_BACK_PASS_DEPTH_FAIL, gl.INCR_WRAP
+      );
+    });
+
+    it( 'stencilOpSeparate back dppass', function(){
+      propertyTest( gl,
+        'stencilOpSeparate', [gl.REPLACE, gl.INCR, gl.DECR, gl.INVERT, gl.INCR_WRAP, gl.DECR_WRAP],
+        gl.STENCIL_BACK_PASS_DEPTH_PASS, gl.DECR_WRAP
+      );
+    });
+
+
+// --------------------------------------
+
+    it( 'viewport', function(){
+
+      propertyTest( gl,
+        'viewport', [4, 3, 6, 7],
+        gl.VIEWPORT, [4, 3, 6, 7]
+      );
+    });
+
+    it( 'depthRange', function(){
+      propertyTest( gl,
+        'depthRange', [.1, .9],
+        gl.DEPTH_RANGE, [.1, .9]
+      );
+    });
+
+    it( 'lineWidth', function(){
+      propertyTest( gl,
+        'lineWidth', [1],
+        gl.LINE_WIDTH, 1
+      );
+    });
+
+
 
   });
 
