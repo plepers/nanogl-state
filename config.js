@@ -14,13 +14,13 @@
     }
     function n(t) {
         c[0] = t;
-        var e = _[0], s = e >> 31 << 5, i = e >> 23 & 255;
+        var e = d[0], s = e >> 31 << 5, i = e >> 23 & 255;
         return i = i - 112 & 112 - i >> 4 >> 27, s = (s | i) << 10, s |= e >> 13 & 1023;
     }
     function a() {
         this._dat = new Uint16Array(51), this._set = 0;
     }
-    var h = [ 1, 512, 1024, 1024, 2048, 4096, 4096, 4, 8192, 2, 16384, 32768, 256, 65536, 65536, 65536, 262144, 131072, 131072, 131072, 524288, 524288, 524288, 2097152, 1048576, 1048576, 1048576, 128, 4194304, 4194304, 4194304, 4194304, 8, 16, 8388608, 8388608, 32, 64, 16777216, 33554432, 67108864, 67108864, 67108864, 67108864, 134217728, 134217728, 134217728, 134217728, 268435456, 268435456, 536870912 ], r = 935847839, u = new Uint16Array([ 0, 32774, 0, 1, 0, 0, 0, 0, 513, 0, 1029, 2305, 0, 519, 0, 65535, 65535, 7680, 7680, 7680, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0, e(0), e(1), e(1) ]), c = new Float32Array(1), _ = new Uint32Array(c.buffer), d = function(t, e) {
+    var h = [ 1, 512, 1024, 1024, 2048, 4096, 4096, 4, 8192, 2, 16384, 32768, 256, 65536, 65536, 65536, 262144, 131072, 131072, 131072, 524288, 524288, 524288, 2097152, 1048576, 1048576, 1048576, 128, 4194304, 4194304, 4194304, 4194304, 8, 16, 8388608, 8388608, 32, 64, 16777216, 33554432, 67108864, 67108864, 67108864, 67108864, 134217728, 134217728, 134217728, 134217728, 268435456, 268435456, 536870912 ], r = 935847839, u = new Uint16Array([ 0, 32774, 0, 1, 0, 0, 0, 0, 513, 0, 1029, 2305, 0, 519, 0, 65535, 65535, 7680, 7680, 7680, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 15, 1, 0, 0, 0, 0, 0, 0, 0, 0, e(0), e(1), e(1) ]), c = new Float32Array(1), d = new Uint32Array(c.buffer), o = function(t, e) {
         return t.getParameter(e);
     };
     a.DAT_MASKS = h, a.encodeHalf = function(t) {
@@ -36,9 +36,9 @@
             return t._dat.set(this._dat), t._set = this._set, t;
         },
         patch: function(e, s) {
-            for (var i, n = this._dat, a = this._set, r = e._dat, u = e._set, c = s._dat, _ = 0, d = 0; 51 > d; d++) i = h[d], 
-            0 !== (a & i) && ((0 === (u & i) || n[d] !== r[d]) && (_ |= i), r[d] = n[d]);
-            c.set(r), e._set |= a, s._set = t(_);
+            for (var i, n = this._dat, a = this._set, r = e._dat, u = e._set, c = s._dat, d = 0, o = 0; 51 > o; o++) i = h[o], 
+            0 !== (a & i) && ((0 === (u & i) || n[o] !== r[o]) && (d |= i), r[o] = n[o]);
+            c.set(r), e._set |= a, s._set = t(d);
         },
         setupGL: function(t) {
             var e, n = this._set, a = this._dat;
@@ -63,11 +63,11 @@
         },
         fromGL: function(t) {
             this._set = 0;
-            var e = d(t, 3042), s = d(t, 2884), i = d(t, 2929), n = d(t, 3024), a = d(t, 32823), h = d(t, 3089), r = d(t, 2960), u = d(t, 32969), c = d(t, 32968), _ = d(t, 32971), o = d(t, 32970), l = d(t, 32777), f = d(t, 34877), p = d(t, 2962), b = d(t, 2967), S = d(t, 2963), F = d(t, 2968), M = d(t, 2964), v = d(t, 2965), k = d(t, 2966), g = d(t, 34816), O = d(t, 36003), y = d(t, 36004), w = d(t, 36005), m = d(t, 34817), q = d(t, 34818), A = d(t, 34819), D = d(t, 32824), E = d(t, 10752), P = d(t, 3088), C = d(t, 3107), R = d(t, 2930), T = d(t, 32773), U = d(t, 2978), B = d(t, 2928), G = d(t, 2849);
-            this.enableBlend(e), u !== _ || c !== o ? this.blendFuncSeparate(u, c, _, o) : this.blendFunc(u, c), 
+            var e = o(t, 3042), s = o(t, 2884), i = o(t, 2929), n = o(t, 3024), a = o(t, 32823), h = o(t, 3089), r = o(t, 2960), u = o(t, 32969), c = o(t, 32968), d = o(t, 32971), _ = o(t, 32970), l = o(t, 32777), f = o(t, 34877), p = o(t, 2962), b = o(t, 2967), S = o(t, 2963), F = o(t, 2968), v = o(t, 2964), M = o(t, 2965), k = o(t, 2966), g = o(t, 34816), O = o(t, 36003), y = o(t, 36004), w = o(t, 36005), m = o(t, 34817), q = o(t, 34818), A = o(t, 34819), D = o(t, 32824), E = o(t, 10752), P = o(t, 3088), C = o(t, 3107), R = o(t, 2930), T = o(t, 32773), U = o(t, 2978), B = o(t, 2928), G = o(t, 2849);
+            this.enableBlend(e), u !== d || c !== _ ? this.blendFuncSeparate(u, c, d, _) : this.blendFunc(u, c), 
             l !== f ? this.blendEquationSeparate(l, f) : this.blendEquation(l), this.enableStencil(r), 
             p !== g || b !== O || S !== y ? this.stencilFuncSeparate(p, b, S, g, O, y) : this.stencilFunc(p, b, S), 
-            M !== m || v !== q || k !== A ? this.stencilOpSeparate(M, v, k, m, q, A) : this.stencilOp(M, v, k), 
+            v !== m || M !== q || k !== A ? this.stencilOpSeparate(v, M, k, m, q, A) : this.stencilOp(v, M, k), 
             F !== w ? this.stencilMaskSeparate(F, w) : this.stencilMask(F), this.depthFunc(t.getParameter(2932)), 
             this.enableDepthTest(i), this.cullFace(t.getParameter(2885)), this.enableCullface(s), 
             this.frontFace(t.getParameter(2886)), this.enablePolygonOffset(a), this.polygonOffset(D, E), 
@@ -76,7 +76,7 @@
             this.viewport(U[0], U[1], U[2], U[3]), this.depthRange(B[0], B[1]), this.lineWidth(G);
         },
         enableBlend: function(t) {
-            return this._dat[0] = 0 | t, this._set |= 1, this;
+            return void 0 === t && (t = !0), this._dat[0] = 0 | t, this._set |= 1, this;
         },
         blendFunc: function(t, e) {
             return this._dat[3] = t, this._dat[2] = e, this._set = -4097 & this._set | 1024, 
@@ -100,7 +100,7 @@
             return this._dat[8] = t, this._set |= 8192, this;
         },
         enableDepthTest: function(t) {
-            return this._dat[7] = 0 | t, this._set |= 4, this;
+            return void 0 === t && (t = !0), this._dat[7] = 0 | t, this._set |= 4, this;
         },
         depthRange: function(t, s) {
             return this._dat[48] = e(t), this._dat[49] = e(s), this._set |= 268435456, this;
@@ -112,7 +112,7 @@
             return this._dat[10] = t, this._set |= 16384, this;
         },
         enableCullface: function(t) {
-            return this._dat[9] = 0 | t, this._set |= 2, this;
+            return void 0 === t && (t = !0), this._dat[9] = 0 | t, this._set |= 2, this;
         },
         polygonOffset: function(t, e) {
             return this._dat[34] = n(t), this._dat[35] = n(e), this._set |= 8388608, this;
@@ -121,7 +121,7 @@
             return this._dat[33] = 0 | t, this._set |= 16, this;
         },
         enableScissor: function(t) {
-            return this._dat[27] = 0 | t, this._set |= 128, this;
+            return void 0 === t && (t = !0), this._dat[27] = 0 | t, this._set |= 128, this;
         },
         scissor: function(t, e, s, i) {
             return this._dat[28] = t, this._dat[29] = e, this._dat[30] = s, this._dat[31] = i, 
@@ -132,7 +132,7 @@
             this._set |= 134217728, this;
         },
         enableDither: function(t) {
-            return this._dat[32] = 0 | t, this._set |= 8, this;
+            return void 0 === t && (t = !0), this._dat[32] = 0 | t, this._set |= 8, this;
         },
         depthMask: function(t) {
             return this._dat[39] = 0 | t, this._set |= 33554432, this;
@@ -145,7 +145,7 @@
             return this._dat[11] = t, this._set |= 32768, this;
         },
         enableStencil: function(t) {
-            return this._dat[12] = 0 | t, this._set |= 256, this;
+            return void 0 === t && (t = !0), this._dat[12] = 0 | t, this._set |= 256, this;
         },
         stencilFunc: function(t, e, s) {
             return this._dat[13] = t, this._dat[14] = e, this._dat[15] = s, this._set = -524289 & this._set | 65536, 

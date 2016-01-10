@@ -802,6 +802,7 @@ GLConfig.prototype = {
 
 
   enableBlend: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|BLEND_ENABLE ] = flag|0;
     this._set |= BLEND_ENABLE_SET|0;
     return this;
@@ -905,6 +906,7 @@ GLConfig.prototype = {
 
 
   enableDepthTest: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|DEPTH_ENABLE ] = flag|0;
     this._set |= DEPTH_ENABLE_SET|0;
     return this;
@@ -938,6 +940,7 @@ GLConfig.prototype = {
   },
 
   enableCullface: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|CULL_FACE_ENABLE ] = flag|0;
     this._set |= CULL_FACE_ENABLE_SET|0;
     return this;
@@ -967,6 +970,7 @@ GLConfig.prototype = {
   // --------
 
   enableScissor : function  ( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|SCISSOR_ENABLE ] = flag|0;
     this._set |= SCISSOR_ENABLE_SET|0;
     return this;
@@ -996,6 +1000,7 @@ GLConfig.prototype = {
 
 
   enableDither: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|DITHER_ENABLE ] = flag|0;
     this._set |= DITHER_ENABLE_SET|0;
     return this;
@@ -1051,6 +1056,7 @@ GLConfig.prototype = {
   */
 
   enableStencil: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|STENCIL_ENABLE ] = flag|0;
     this._set |= STENCIL_ENABLE_SET|0;
     return this;
