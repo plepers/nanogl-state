@@ -804,6 +804,7 @@ GLConfig.prototype = {
   enableBlend: function( flag ){
     this._dat[ 0|BLEND_ENABLE ] = flag|0;
     this._set |= BLEND_ENABLE_SET|0;
+    return this;
   },
 
   /*
@@ -824,6 +825,7 @@ GLConfig.prototype = {
     this._dat[ 0|BLEND_FUNC_C_SRC ] = src;
     this._dat[ 0|BLEND_FUNC_C_DST ] = dst;
     this._set = this._set & ~BLEND_FUNC_A_SET | (~~BLEND_FUNC_SET);
+    return this;
   },
 
   /*
@@ -846,11 +848,13 @@ GLConfig.prototype = {
     this._dat[ 0|BLEND_FUNC_A_SRC ] = srcAlpha;
     this._dat[ 0|BLEND_FUNC_A_DST ] = dstAlpha;
     this._set |= BLEND_FUNC_SET | BLEND_FUNC_A_SET;
+    return this;
   },
 
   blendEquation: function( eq ){
     this._dat[ 0|BLEND_EQ_C ] = eq;
     this._set = this._set & ~BLEND_EQ_A_SET | (~~BLEND_EQ_SET);
+    return this;
   },
 
   /*
@@ -863,6 +867,7 @@ GLConfig.prototype = {
     this._dat[ 0|BLEND_EQ_C] = rgbEq;
     this._dat[ 0|BLEND_EQ_A ] = alphaEq;
     this._set |= BLEND_EQ_SET | BLEND_EQ_A_SET;
+    return this;
   },
 
   /*
@@ -875,6 +880,7 @@ GLConfig.prototype = {
     this._dat[ 0|BLEND_COLOR_B ] = encodeHalf( b );
     this._dat[ 0|BLEND_COLOR_A ] = encodeHalf( a );
     this._set |= BLEND_COLOR_SET|0;
+    return this;
   },
 
 
@@ -894,23 +900,27 @@ GLConfig.prototype = {
   depthFunc: function( func ){
     this._dat[ 0|DEPTH_FUNC ] = func;
     this._set |= DEPTH_FUNC_SET|0;
+    return this;
   },
 
 
   enableDepthTest: function( flag ){
     this._dat[ 0|DEPTH_ENABLE ] = flag|0;
     this._set |= DEPTH_ENABLE_SET|0;
+    return this;
   },
 
   depthRange : function( near, far ){
     this._dat[ 0|DEPTH_RANGE_NEAR ] = encodeClampedFloat( near );
     this._dat[ 0|DEPTH_RANGE_FAR ]  = encodeClampedFloat( far );
     this._set |= DEPTH_RANGE_SET|0;
+    return this;
   },
 
   lineWidth: function( w ){
     this._dat[ 0|LINE_WIDTH ] = encodeClampedFloat( w );
     this._set |= LINE_WIDTH_SET|0;
+    return this;
   },
 
 
@@ -924,11 +934,13 @@ GLConfig.prototype = {
   cullFace : function( mode ){
     this._dat[ 0|CULL_MODE ] = mode;
     this._set |= CULL_MODE_SET|0;
+    return this;
   },
 
   enableCullface: function( flag ){
     this._dat[ 0|CULL_FACE_ENABLE ] = flag|0;
     this._set |= CULL_FACE_ENABLE_SET|0;
+    return this;
   },
 
 
@@ -940,11 +952,13 @@ GLConfig.prototype = {
     this._dat[ 0|POLYOFF_FACTOR] = encodeHalf( polyOffsetFactor );
     this._dat[ 0|POLYOFF_UNITS ] = encodeHalf( polyOffsetUnits );
     this._set |= POLYOFF_SET|0;
+    return this;
   },
 
   enablePolygonOffset: function( flag ){
     this._dat[ 0|POLYOFF_ENABLE ] = flag|0;
     this._set |= POLYOFF_ENABLE_SET|0;
+    return this;
   },
 
 
@@ -955,6 +969,7 @@ GLConfig.prototype = {
   enableScissor : function  ( flag ){
     this._dat[ 0|SCISSOR_ENABLE ] = flag|0;
     this._set |= SCISSOR_ENABLE_SET|0;
+    return this;
   },
 
   scissor: function( x, y, w, h )
@@ -964,6 +979,7 @@ GLConfig.prototype = {
     this._dat[ 0|SCISSOR_TEST_W ] = w;
     this._dat[ 0|SCISSOR_TEST_H ] = h;
     this._set |= SCISSOR_TEST_SET|0;
+    return this;
   },
 
   // VIEWPORT
@@ -975,17 +991,20 @@ GLConfig.prototype = {
     this._dat[ 0|VIEWPORT_W ] = w;
     this._dat[ 0|VIEWPORT_H ] = h;
     this._set |= VIEWPORT_SET|0;
+    return this;
   },
 
 
   enableDither: function( flag ){
     this._dat[ 0|DITHER_ENABLE ] = flag|0;
     this._set |= DITHER_ENABLE_SET|0;
+    return this;
   },
 
   depthMask: function( flag ){
     this._dat[ 0|DEPTH_MASK ] = flag|0;
     this._set |= DEPTH_MASK_SET|0;
+    return this;
   },
 
   colorMask: function( r, g, b, a ){
@@ -997,6 +1016,7 @@ GLConfig.prototype = {
 
     this._dat[ 0|COLOR_MASK ] = mask;
     this._set |= COLOR_MASK_SET|0;
+    return this;
   },
 
 
@@ -1023,6 +1043,7 @@ GLConfig.prototype = {
   frontFace : function( dir ){
     this._dat[ 0|FACE_DIR ] = dir;
     this._set |= FACE_DIR_SET|0;
+    return this;
   },
 
   /*
@@ -1032,6 +1053,7 @@ GLConfig.prototype = {
   enableStencil: function( flag ){
     this._dat[ 0|STENCIL_ENABLE ] = flag|0;
     this._set |= STENCIL_ENABLE_SET|0;
+    return this;
   },
 
   stencilFunc: function ( func, ref, mask ){
@@ -1039,6 +1061,7 @@ GLConfig.prototype = {
     this._dat[ 0|STENCIL_REF        ] = ref;
     this._dat[ 0|STENCIL_VALUE_MASK ] = mask;
     this._set = this._set & ~STENCIL_B_FUNC_SET | (~~STENCIL_FUNC_SET);
+    return this;
   },
 
   stencilOp : function( sfail, dpfail, dppass ){
@@ -1046,11 +1069,13 @@ GLConfig.prototype = {
     this._dat[ 0|STENCIL_OP_ZFAIL] = dpfail;
     this._dat[ 0|STENCIL_OP_ZPASS ] = dppass;
     this._set = this._set & ~STENCIL_B_OP_SET | (~~STENCIL_OP_SET);
+    return this;
   },
 
   stencilMask : function( mask ){
     this._dat[ 0|STENCIL_WRITEMASK ] = mask;
     this._set = (this._set & ~STENCIL_B_MASK_SET) | (~~STENCIL_MASK_SET);
+    return this;
   },
 
 
@@ -1064,6 +1089,7 @@ GLConfig.prototype = {
     dat[ 0|STENCIL_B_REF        ] = refback;
     dat[ 0|STENCIL_B_VALUE_MASK ] = maskback;
     this._set |= STENCIL_B_FUNC_SET | STENCIL_FUNC_SET;
+    return this;
   },
 
   stencilOpSeparate: function ( sfail, dpfail, dppass, sfailback, dpfailback, dppassback ){
@@ -1075,12 +1101,14 @@ GLConfig.prototype = {
     dat[ 0|STENCIL_B_OP_ZFAIL ] = dpfailback;
     dat[ 0|STENCIL_B_OP_ZPASS ] = dppassback;
     this._set |= STENCIL_B_OP_SET | STENCIL_OP_SET;
+    return this;
   },
 
   stencilMaskSeparate: function ( mask, maskback ){
     this._dat[ 0|STENCIL_WRITEMASK   ] = mask;
     this._dat[ 0|STENCIL_B_WRITEMASK ] = maskback;
     this._set |= STENCIL_B_MASK_SET | STENCIL_MASK_SET;
+    return this;
   }
 
 };

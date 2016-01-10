@@ -8,6 +8,8 @@ Design to efficiently keep track of the actual context state, and reduce api cal
 
 ##### Example
 
+Rendering alpha blended and opaque primitves
+
 ```javascript
 var GLState = require( 'nanogl-state' );
 
@@ -15,32 +17,50 @@ var GLState = require( 'nanogl-state' );
 var glState = new GLState( gl );
 
 
+// create a config to change glCullFace for both opaques and blended
+var cfgG = GLState.config()
+  .cullFace( gl.FRONT );
+
+
 // create a configuration to enable DEPTH_TEST
-var cfgA = GLState.config();
-cfgA.enableDepthTest();
+var cfgA = GLState.config()
+  .enableDepthTest()
+  .enableCullface();
 
 // create another config for alpha blending and depth test
 
-var cfgB = GLState.config();
-cfgB.enableBlend();
-cfgB.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_DRC_ALPHA );
-cfgB.enableDepthTest();
-cfgB.depthMask( false );
+var cfgB = GLState.config()
+  .enableBlend()
+  .blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_DRC_ALPHA )
+  .enableDepthTest()
+  .enableCullface()
+  .depthMask( false );
+
 
 
 // somewhere in your render loop
 function render(){
+  // context in default state
 
-  glState.push( cfgA );
-  glState.apply();
-  // renderOpaqueStuffs();
+  // add the cullFace cfg to the stack
+  glState.push( cfgG );
+
+  // add cfgA to the stack, apply the complete stack to the context, then pop cfgA
+  glState.now( cfgA );
+  renderOpaqueStuffs();
+
+
+  // apply the cfgB, enable DEPTH_TEST and CULL_FACE are skipped since they are already enabled
+  glState.now( cfgB );
+  renderBlendableStuffs();
+
+  // pop the cullFace config (cfgG)
   glState.pop();
 
-
-  glState.push( cfgB );
+  // sync the glState and the actual gl context
   glState.apply();
-  // renderBlendableStuffs();
-  glState.pop();
+
+  // here we are back to the default state
 }
 
 ```
