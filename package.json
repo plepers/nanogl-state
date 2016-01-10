@@ -5,7 +5,7 @@
   "main": "state.js",
   "scripts": {
     "test": "npm run prepublish && jshint src/*.js && karma start",
-    "prepublish": "uglifyjs --screw-ie8 -m -c warnings=false -b -o config.js -- src/config.js && uglifyjs --screw-ie8 -m -c warnings=false -b -o stack.js -- src/stack.js" ,
+    "build": "uglifyjs --screw-ie8 -m -c warnings=false -b -o config.js -- src/config.js && uglifyjs --screw-ie8 -m -c warnings=false -b -o stack.js -- src/stack.js" ,
     "gztest": "uglifyjs --screw-ie8 -m -c warnings=false -o gztest.js -- src/config.js src/stack.js state.js && gzip -k -9 gztest.js"
   },
   "repository": {
