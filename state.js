@@ -14,6 +14,11 @@ function GLState( gl ){
 }
 
 
+GLState.config = function(){
+  return new GLConfig();
+};
+
+
 GLState.prototype = {
 
 
