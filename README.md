@@ -14,6 +14,7 @@ Rendering alpha blended and opaque primitves
 var GLState = require( 'nanogl-state' );
 
 // create the state machine from a gl context
+// glStage will be sync with the actuel gl state
 var glState = new GLState( gl );
 
 
@@ -64,3 +65,35 @@ function render(){
 }
 
 ```
+
+##### GLConfig API
+
+
+  - enableBlend
+  - blendFunc
+  - blendFuncSeparate
+  - blendEquation
+  - blendEquationSeparate
+  - blendColor
+  - depthFunc
+  - enableDepthTest
+  - depthRange
+  - lineWidth
+  - cullFace
+  - enableCullface
+  - polygonOffset
+  - enablePolygonOffset
+  - enableScissor
+  - scissor
+  - viewport
+  - enableDither
+  - depthMask
+  - colorMask
+  - frontFace
+  - enableStencil
+  - stencilFunc
+  - stencilOp
+  - stencilMask
+  - stencilFuncSeparate
+  - stencilOpSeparate
+  - stencilMaskSeparate
