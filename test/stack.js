@@ -1,4 +1,5 @@
-var GLState = require( '../state' )
+var GLConfig = require( '../config' ),
+    GLStack = require( '../stack' );
 
 var expect = require( 'expect.js' ),
     aequal = require( './utils/aequal.js' ),
@@ -20,7 +21,7 @@ function equalConfig( cfgA, cfgB ){
 
 
 function getComplexConfig(){
-  var cfg = new GLState();
+  var cfg = new GLConfig();
 
   cfg.blendEquationSeparate(
     gl.FUNC_SUBTRACT,
@@ -49,12 +50,12 @@ function getComplexConfig(){
 
 
 function getHead( stack ){
-  var head = new GLState();
+  var head = new GLConfig();
   stack.copyConfig( stack._ptr, head );
   return head;
 }
 
-describe( "gl - GLStateStack", function(){
+describe( "gl - GLConfigStack", function(){
 
   beforeEach(function(){
 
@@ -62,8 +63,8 @@ describe( "gl - GLStateStack", function(){
     gl = cvs.getContext( 'webgl' ) || cvs.getContext( 'experimental-webgl' );
     gl.scissor( 0, 0, 0, 0 ); // normalize
 
-    stack = GLState.makeStack();
-    defaultCfg = new GLState();
+    stack = new GLStack();
+    defaultCfg = new GLConfig();
     defaultCfg.toDefault();
 
   })
@@ -87,7 +88,7 @@ describe( "gl - GLStateStack", function(){
 
       stack.push( defaultCfg );
 
-      var cfg = new GLState();
+      var cfg = new GLConfig();
       cfg.blendFunc( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA );
 
       stack.push( cfg );
@@ -103,9 +104,9 @@ describe( "gl - GLStateStack", function(){
 
     it( "empty configs should give empty head", function(){
 
-      stack.push( new GLState() );
-      stack.push( new GLState() );
-      stack.push( new GLState() );
+      stack.push( new GLConfig() );
+      stack.push( new GLConfig() );
+      stack.push( new GLConfig() );
       var head =  getHead( stack );
 
 
@@ -117,13 +118,13 @@ describe( "gl - GLStateStack", function(){
 
       stack.push( defaultCfg );
 
-      var cfg = new GLState();
+      var cfg = new GLConfig();
       cfg.stencilFunc( gl.GEQUAL, 0, 5 );
 
       stack.push( cfg );
 
       var head =  getHead( stack );
-      expect( head._set ).to.be.equal( bin( '111110001111110011110011111' ) );
+      expect( head._set.toString(2) ).to.be.equal('110111110001111110011110011111' );
 
     });
 
@@ -172,12 +173,12 @@ describe( "gl - GLStateStack", function(){
 
       stack.initFromGL( gl );
 
-      var blendCfg = new GLState();
+      var blendCfg = new GLConfig();
       blendCfg.enableBlend( true );
 
       stack.push( blendCfg );
 
-      var patch = new GLState();
+      var patch = new GLConfig();
       stack.commit( patch );
 
       var ena = sinon.spy(gl, "enable").withArgs( gl.BLEND );
@@ -195,9 +196,9 @@ describe( "gl - GLStateStack", function(){
 
       stack.initFromGL( gl );
 
-      var _patch = new GLState();
+      var _patch = new GLConfig();
 
-      var blendCfg = new GLState();
+      var blendCfg = new GLConfig();
       blendCfg.enableBlend( true );
 
 

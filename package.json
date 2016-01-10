@@ -1,10 +1,12 @@
 {
   "name": "nanogl-state",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Efficient webgl context state management",
   "main": "state.js",
   "scripts": {
-    "test": "jshint *.js && karma start"
+    "test": "npm run prepublish && jshint src/*.js && karma start",
+    "prepublish": "uglifyjs --screw-ie8 -m -c warnings=false -b -o config.js -- src/config.js && uglifyjs --screw-ie8 -m -c warnings=false -b -o stack.js -- src/stack.js" ,
+    "gztest": "uglifyjs --screw-ie8 -m -c warnings=false -o gztest.js -- src/config.js src/stack.js state.js && gzip -k -9 gztest.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "karma-sauce-launcher": "^0.3.0",
     "mocha": "^2.3.4",
     "sinon": "^1.17.2",
-    "stringify": "^3.2.0"
+    "stringify": "^3.2.0",
+    "uglify-js": "^2.6.1"
   }
 }
