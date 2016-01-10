@@ -44,7 +44,7 @@ GLState.prototype = {
 
 
   now: function( cfg ){
-    this.push( config );
+    this.push( cfg );
     this.apply();
     this.pop();
   }
