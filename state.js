@@ -14,6 +14,11 @@ function GLState( gl ){
 }
 
 
+GLState.config = function(){
+  return new GLConfig();
+};
+
+
 GLState.prototype = {
 
 
@@ -35,6 +40,13 @@ GLState.prototype = {
       _patch.setupGL( this.gl );
       this._validCfg = true;
     }
+  },
+
+
+  now: function( cfg ){
+    this.push( config );
+    this.apply();
+    this.pop();
   }
 
 
