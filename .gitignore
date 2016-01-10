@@ -1,1 +1,5 @@
 /node_modules
+*.gz
+
+config.js
+stack.js
