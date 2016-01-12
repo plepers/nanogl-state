@@ -42,24 +42,24 @@
         },
         setupGL: function(t) {
             var e, n = this._set, a = this._dat;
-            if (1 === (1 & n) && (a[0] ? t.enable(3042) : t.disable(3042)), e = 2560 & n, 0 !== e && (2560 === e ? t.blendEquationSeparate(a[1], a[4]) : t.blendEquation(a[1])), 
+            if (0 !== (1 & n) && (a[0] ? t.enable(3042) : t.disable(3042)), e = 2560 & n, 0 !== e && (2560 === e ? t.blendEquationSeparate(a[1], a[4]) : t.blendEquation(a[1])), 
             e = 5120 & n, 0 !== e && (5120 === e ? t.blendFuncSeparate(a[3], a[2], a[6], a[5]) : t.blendFunc(a[3], a[2])), 
-            4 & n && (a[7] ? t.enable(2929) : t.disable(2929)), 8192 & n && t.depthFunc(a[8]), 
-            2 & n && (a[9] ? t.enable(2884) : t.disable(2884)), 16384 & n && t.cullFace(a[10]), 
-            32768 & n && t.frontFace(a[11]), 256 & n && (a[12] ? t.enable(2960) : t.disable(2960)), 
+            0 !== (4 & n) && (a[7] ? t.enable(2929) : t.disable(2929)), 0 !== (8192 & n) && t.depthFunc(a[8]), 
+            0 !== (2 & n) && (a[9] ? t.enable(2884) : t.disable(2884)), 0 !== (16384 & n) && t.cullFace(a[10]), 
+            0 !== (32768 & n) && t.frontFace(a[11]), 0 !== (256 & n) && (a[12] ? t.enable(2960) : t.disable(2960)), 
             e = 589824 & n, 0 !== e && (589824 === e ? (t.stencilFuncSeparate(1028, a[13], a[14], a[15]), 
             t.stencilFuncSeparate(1029, a[20], a[21], a[22])) : t.stencilFunc(a[13], a[14], a[15])), 
             e = 1179648 & n, 0 !== e && (1179648 === e ? (t.stencilOpSeparate(1028, a[17], a[18], a[19]), 
             t.stencilOpSeparate(1029, a[24], a[25], a[26])) : t.stencilOp(a[17], a[18], a[19])), 
             e = 2359296 & n, 0 !== e && (2359296 === e ? (t.stencilMaskSeparate(1028, a[16]), 
-            t.stencilMaskSeparate(1029, a[23])) : t.stencilMask(a[16])), 16777216 & n) {
+            t.stencilMaskSeparate(1029, a[23])) : t.stencilMask(a[16])), 0 !== (16777216 & n)) {
                 var h = a[38];
                 t.colorMask(1 === (1 & h), 2 === (2 & h), 4 === (4 & h), 8 === (8 & h));
             }
-            33554432 & n && t.depthMask(1 === a[39]), 67108864 & n && t.blendColor(i(a[40]), i(a[41]), i(a[42]), i(a[43])), 
-            128 & n && (a[27] ? t.enable(3089) : t.disable(3089)), 4194304 & n && t.scissor(a[28], a[29], a[30], a[31]), 
-            134217728 & n && t.viewport(a[44], a[45], a[46], a[47]), 8388608 & n && t.polygonOffset(i(a[34]), i(a[35])), 
-            268435456 & n && t.depthRange(s(a[48]), s(a[49]));
+            0 !== (33554432 & n) && t.depthMask(1 === a[39]), 0 !== (67108864 & n) && t.blendColor(i(a[40]), i(a[41]), i(a[42]), i(a[43])), 
+            0 !== (128 & n) && (a[27] ? t.enable(3089) : t.disable(3089)), 0 !== (4194304 & n) && t.scissor(a[28], a[29], a[30], a[31]), 
+            0 !== (134217728 & n) && t.viewport(a[44], a[45], a[46], a[47]), 0 !== (8388608 & n) && t.polygonOffset(i(a[34]), i(a[35])), 
+            0 !== (268435456 & n) && t.depthRange(s(a[48]), s(a[49]));
         },
         fromGL: function(t) {
             this._set = 0;
