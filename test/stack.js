@@ -164,6 +164,42 @@ describe( "gl - GLConfigStack", function(){
 
   });
 
+
+  describe( "flush", function(){
+
+
+
+    it( "should set ptr to 0", function(){
+
+      stack.push( defaultCfg );
+      stack.push( defaultCfg );
+      stack.flush();
+      expect( stack._ptr ).to.be.equal( 0 )
+    });
+
+    it( "should restore head to initial value", function(){
+
+      var cfg = getComplexConfig();
+      stack.initFromGL( gl )
+
+      var icfg = new GLConfig();
+      icfg.fromGL( gl );
+
+      stack.push( defaultCfg );
+      stack.push( cfg );
+      stack.push( cfg );
+      stack.push( cfg );
+      stack.flush();
+
+      var head = getHead( stack );
+
+
+      aequal( head._dat, icfg._dat );
+
+    });
+
+  });
+
   describe( "commit enableBlend ", function(){
 
 
@@ -222,6 +258,8 @@ describe( "gl - GLConfigStack", function(){
 
 
   });
+
+
 
 
 });

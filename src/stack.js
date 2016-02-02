@@ -22,13 +22,13 @@ const MIN_ALLOC = 16,
 
 function ConfigStack(){
   this._stack = new Uint32Array( ( (LEN|0) * MIN_ALLOC)|0 );
-  this._sets = new Uint32Array( MIN_ALLOC|0 );
-  this._size = MIN_ALLOC|0;
-  this._ptr = 0;
+  this._sets  = new Uint32Array( MIN_ALLOC|0 );
+  this._tmpDat = new Uint32Array( LEN|0 );
+  this._size  = MIN_ALLOC|0;
+  this._ptr   = 0;
 
   this._headPos = 0;
   this._wcfg = new GLConfig();
-  this._tmpDat = new Uint32Array( LEN|0 );
 }
 
 
@@ -85,12 +85,18 @@ ConfigStack.prototype = {
     var ptr = --this._ptr;
 
     if( this._headPos > ptr ){
-
       this._sets[ptr] |= this._sets[ptr+1];
       this._headPos = ptr;
     }
 
 
+  },
+
+
+  flush : function(){
+    while( this._ptr>0 ){
+      this.pop();
+    }
   },
 
 
@@ -114,7 +120,7 @@ ConfigStack.prototype = {
 
   copyConfig : function( at, cfg )
   {
-    var range = new Uint32Array( this._stack.buffer, at*(0|LEN) * 4,  (0|LEN));
+    var range = new Uint32Array( this._stack.buffer, at*(LEN<<2),  (0|LEN));
     cfg._dat.set( range );
     cfg._set = this._sets[at];
   },
