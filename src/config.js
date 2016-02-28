@@ -1,7 +1,7 @@
 (function(){
 /*
  * All following contstants should be inlined by uglify js
- * use  0|CONST  or  ~~CONTS to help uglifyjs2 inline them
+ * use  0|CONST  or  ~~CONTS to force constants evaluation and inline exp by uglifyjs2
  */
 const BLEND_ENABLE          = 0 ,
       BLEND_EQ_C            = 1 ,    // BlendingFactorDest
@@ -431,7 +431,7 @@ GLConfig.prototype = {
 
     // blend enabled
 
-    if ( (set & (0|BLEND_ENABLE_SET)) === (0|BLEND_ENABLE_SET) ){
+    if ( (set & ~~BLEND_ENABLE_SET) !== 0 ) {
       dat[ 0|BLEND_ENABLE ] ? gl.enable( ~~GL_BLEND ) : gl.disable( ~~GL_BLEND );
     }
 
@@ -445,7 +445,6 @@ GLConfig.prototype = {
         gl.blendEquationSeparate( dat[ 0|BLEND_EQ_C ], dat[ 0|BLEND_EQ_A ] );
       else
         gl.blendEquation( dat[ 0|BLEND_EQ_C ] );
-
     }
 
 
@@ -464,11 +463,11 @@ GLConfig.prototype = {
 
     // depth Function
 
-    if ( set & ~~DEPTH_ENABLE_SET ){
+    if ( (set & ~~DEPTH_ENABLE_SET) !== 0 ){
       dat[ 0|DEPTH_ENABLE ] ? gl.enable( ~~GL_DEPTH_TEST ) : gl.disable( ~~GL_DEPTH_TEST );
     }
 
-    if ( set & ~~DEPTH_FUNC_SET ){
+    if ( (set & ~~DEPTH_FUNC_SET) !== 0 ){
       gl.depthFunc( dat[ 0|DEPTH_FUNC ] );
     }
 
@@ -476,22 +475,22 @@ GLConfig.prototype = {
     // culling mode (front/back/front_and_back)
 
 
-    if ( set & ~~CULL_FACE_ENABLE_SET ){
+    if ( (set & ~~CULL_FACE_ENABLE_SET) !== 0 ){
       dat[ 0|CULL_FACE_ENABLE ] ? gl.enable( ~~GL_CULL_FACE ) : gl.disable( ~~GL_CULL_FACE );
     }
-    if ( set & ~~CULL_MODE_SET ){
+    if ( (set & ~~CULL_MODE_SET) !== 0 ){
       gl.cullFace( dat[ 0|CULL_MODE ] );
     }
 
     // face direction (cw/ccw)
-    if ( set & ~~FACE_DIR_SET ){
+    if ( (set & ~~FACE_DIR_SET) !== 0 ){
       gl.frontFace( dat[ 0|FACE_DIR ] );
     }
 
 
     // Stencil enabled
 
-    if ( set & ~~STENCIL_ENABLE_SET ){
+    if ( (set & ~~STENCIL_ENABLE_SET) !== 0 ){
       dat[ 0|STENCIL_ENABLE ] ? gl.enable( ~~GL_STENCIL_TEST ) : gl.disable( ~~GL_STENCIL_TEST );
     }
 
@@ -533,7 +532,7 @@ GLConfig.prototype = {
       }
     }
 
-    if ( set & ~~COLOR_MASK_SET ){
+    if ( (set & ~~COLOR_MASK_SET) !== 0 ){
       var flags = dat[ 0|COLOR_MASK ];
       gl.colorMask(
         (flags & 1) === 1,
@@ -543,13 +542,13 @@ GLConfig.prototype = {
       );
     }
 
-    if ( set & ~~DEPTH_MASK_SET ){
+    if ( (set & ~~DEPTH_MASK_SET) !== 0 ){
       gl.depthMask( dat[ 0|DEPTH_MASK ] === 1 );
     }
 
 
 
-    if ( set & ~~BLEND_COLOR_SET ){
+    if ( (set & ~~BLEND_COLOR_SET) !== 0 ){
       gl.blendColor(
         decodeHalf( dat[ 0|BLEND_COLOR_R ] ),
         decodeHalf( dat[ 0|BLEND_COLOR_G ] ),
@@ -558,11 +557,11 @@ GLConfig.prototype = {
       );
     }
 
-    if ( set & ~~SCISSOR_ENABLE_SET ){
+    if ( (set & ~~SCISSOR_ENABLE_SET) !== 0 ){
       dat[ 0|SCISSOR_ENABLE ] ? gl.enable( ~~GL_SCISSOR_TEST ) : gl.disable( ~~GL_SCISSOR_TEST );
     }
 
-    if ( set & ~~SCISSOR_TEST_SET ){
+    if ( (set & ~~SCISSOR_TEST_SET) !== 0 ){
       gl.scissor(
         dat[ 0|SCISSOR_TEST_X ],
         dat[ 0|SCISSOR_TEST_Y ],
@@ -571,7 +570,7 @@ GLConfig.prototype = {
       );
     }
 
-    if ( set & ~~VIEWPORT_SET ){
+    if ( (set & ~~VIEWPORT_SET) !== 0 ){
       gl.viewport(
         dat[ 0|VIEWPORT_X ],
         dat[ 0|VIEWPORT_Y ],
@@ -581,7 +580,11 @@ GLConfig.prototype = {
     }
 
 
-    if ( set & ~~POLYOFF_SET ){
+    if ( (set & ~~POLYOFF_ENABLE_SET) !== 0 ){
+      dat[ 0|POLYOFF_ENABLE ] ? gl.enable( ~~GL_POLYGON_OFFSET_FILL ) : gl.disable( ~~GL_POLYGON_OFFSET_FILL );
+    }
+
+    if ( (set & ~~POLYOFF_SET) !== 0 ){
       gl.polygonOffset(
         decodeHalf( dat[ 0|POLYOFF_FACTOR ] ),
         decodeHalf( dat[ 0|POLYOFF_UNITS ] )
@@ -589,7 +592,7 @@ GLConfig.prototype = {
     }
 
 
-    if ( set & ~~DEPTH_RANGE_SET ){
+    if ( (set & ~~DEPTH_RANGE_SET) !== 0 ){
       gl.depthRange(
         decodeClampedFloat( dat[ 0|DEPTH_RANGE_NEAR ] ),
         decodeClampedFloat( dat[ 0|DEPTH_RANGE_FAR ] )
@@ -959,6 +962,7 @@ GLConfig.prototype = {
   },
 
   enablePolygonOffset: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|POLYOFF_ENABLE ] = flag|0;
     this._set |= POLYOFF_ENABLE_SET|0;
     return this;

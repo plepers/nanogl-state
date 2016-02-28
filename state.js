@@ -14,27 +14,22 @@ function GLState( gl ){
 }
 
 
-GLState.config = function(){
-  return new GLConfig();
-};
-
-
 GLState.prototype = {
 
 
-  push: function( cfg ){
+  push : function( cfg ){
     this.cfgStack.push( cfg );
     this._validCfg = false;
   },
 
 
-  pop: function() {
+  pop : function() {
     this.cfgStack.pop();
     this._validCfg = false;
   },
 
 
-  apply: function(){
+  apply : function(){
     if( !this._validCfg ) {
       this.cfgStack.commit( _patch );
       _patch.setupGL( this.gl );
@@ -43,13 +38,41 @@ GLState.prototype = {
   },
 
 
-  now: function( cfg ){
+  now : function( cfg ){
     this.push( cfg );
     this.apply();
     this.pop();
+  },
+
+
+  config : function() {
+    return new LocalConfig( this );
   }
 
 
 }
+
+/**
+ * LocalConfig
+ *
+ */
+
+function LocalConfig( state ){
+  GLConfig.call( this );
+  this.state = state;
+}
+
+LocalConfig.prototype = Object.create( GLConfig.prototype );
+LocalConfig.prototype.constructor = LocalConfig;
+
+LocalConfig.prototype.apply = function(){
+  this.state.now( this );
+};
+
+
+GLState.config = function(){
+  return new GLConfig();
+};
+
 
 module.exports = GLState;
