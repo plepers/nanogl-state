@@ -580,6 +580,10 @@ GLConfig.prototype = {
     }
 
 
+    if ( (set & ~~POLYOFF_ENABLE_SET) !== 0 ){
+      dat[ 0|POLYOFF_ENABLE ] ? gl.enable( ~~GL_POLYGON_OFFSET_FILL ) : gl.disable( ~~GL_POLYGON_OFFSET_FILL );
+    }
+
     if ( (set & ~~POLYOFF_SET) !== 0 ){
       gl.polygonOffset(
         decodeHalf( dat[ 0|POLYOFF_FACTOR ] ),
@@ -958,6 +962,7 @@ GLConfig.prototype = {
   },
 
   enablePolygonOffset: function( flag ){
+    if( flag === undefined ) flag = true;
     this._dat[ 0|POLYOFF_ENABLE ] = flag|0;
     this._set |= POLYOFF_ENABLE_SET|0;
     return this;

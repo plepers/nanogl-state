@@ -58,8 +58,8 @@
             }
             0 !== (33554432 & n) && t.depthMask(1 === a[39]), 0 !== (67108864 & n) && t.blendColor(i(a[40]), i(a[41]), i(a[42]), i(a[43])), 
             0 !== (128 & n) && (a[27] ? t.enable(3089) : t.disable(3089)), 0 !== (4194304 & n) && t.scissor(a[28], a[29], a[30], a[31]), 
-            0 !== (134217728 & n) && t.viewport(a[44], a[45], a[46], a[47]), 0 !== (8388608 & n) && t.polygonOffset(i(a[34]), i(a[35])), 
-            0 !== (268435456 & n) && t.depthRange(s(a[48]), s(a[49]));
+            0 !== (134217728 & n) && t.viewport(a[44], a[45], a[46], a[47]), 0 !== (16 & n) && (a[33] ? t.enable(32823) : t.disable(32823)), 
+            0 !== (8388608 & n) && t.polygonOffset(i(a[34]), i(a[35])), 0 !== (268435456 & n) && t.depthRange(s(a[48]), s(a[49]));
         },
         fromGL: function(t) {
             this._set = 0;
@@ -118,7 +118,7 @@
             return this._dat[34] = n(t), this._dat[35] = n(e), this._set |= 8388608, this;
         },
         enablePolygonOffset: function(t) {
-            return this._dat[33] = 0 | t, this._set |= 16, this;
+            return void 0 === t && (t = !0), this._dat[33] = 0 | t, this._set |= 16, this;
         },
         enableScissor: function(t) {
             return void 0 === t && (t = !0), this._dat[27] = 0 | t, this._set |= 128, this;

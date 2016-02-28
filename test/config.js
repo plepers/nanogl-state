@@ -1147,6 +1147,25 @@ describe( "gl - GLConfig", function(){
       );
     });
 
+    it( 'enable polygonOffset', function(){
+      propertyTest( gl,
+        'enablePolygonOffset', [true],
+        gl.POLYGON_OFFSET_FILL, true
+      );
+    });
+    it( 'enable polygonOffset default', function(){
+      propertyTest( gl,
+        'enablePolygonOffset', [],
+        gl.POLYGON_OFFSET_FILL, true
+      );
+    });
+    it( 'disable polygonOffset', function(){
+      propertyTest( gl,
+        'enablePolygonOffset', [false],
+        gl.POLYGON_OFFSET_FILL, false
+      );
+    });
+
     it( 'scissor', function(){
       propertyTest( gl,
         'scissor', [10, 20, 30, 40],

@@ -14,11 +14,6 @@ function GLState( gl ){
 }
 
 
-GLState.config = function(){
-  return new GLConfig();
-};
-
-
 GLState.prototype = {
 
 
@@ -57,7 +52,6 @@ GLState.prototype = {
 
 }
 
-
 /**
  * LocalConfig
  *
@@ -73,6 +67,11 @@ LocalConfig.prototype.constructor = LocalConfig;
 
 LocalConfig.prototype.apply = function(){
   this.state.now( this );
+};
+
+
+GLState.config = function(){
+  return new GLConfig();
 };
 
 
