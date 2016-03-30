@@ -135,6 +135,11 @@ const GL_BLEND                          = 0x0BE2,
       GL_FRONT_FACE                     = 0x0B46;
 
 
+// half float encode/decode
+var EHBuffer = new Float32Array( 1 );
+var EHIBuffer = new Uint32Array( EHBuffer.buffer );
+
+
 var DAT_MASKS = [
       BLEND_ENABLE_SET|0,
       BLEND_EQ_SET|0,
@@ -285,7 +290,7 @@ var DAT_MASKS = [
       encodeClampedFloat(1),
 
       // lineWidth
-      encodeClampedFloat(1),
+      encodeHalf(1),
 
     ]);
 
@@ -335,8 +340,7 @@ function decodeHalf (u16) {
 
 // http://stackoverflow.com/questions/3026441/float32-to-float16
 //
-var EHBuffer = new Float32Array( 1 );
-var EHIBuffer = new Uint32Array( EHBuffer.buffer );
+
 
 function encodeHalf(f32){
   EHBuffer[0] = f32;
@@ -485,6 +489,11 @@ GLConfig.prototype = {
     // face direction (cw/ccw)
     if ( (set & ~~FACE_DIR_SET) !== 0 ){
       gl.frontFace( dat[ 0|FACE_DIR ] );
+    }
+
+        // face direction (cw/ccw)
+    if ( (set & ~~LINE_WIDTH_SET) !== 0 ){
+      gl.lineWidth( decodeHalf( dat[ 0|LINE_WIDTH ] ) );
     }
 
 
@@ -923,7 +932,7 @@ GLConfig.prototype = {
   },
 
   lineWidth: function( w ){
-    this._dat[ 0|LINE_WIDTH ] = encodeClampedFloat( w );
+    this._dat[ 0|LINE_WIDTH ] = encodeHalf( w );
     this._set |= LINE_WIDTH_SET|0;
     return this;
   },

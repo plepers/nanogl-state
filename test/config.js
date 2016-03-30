@@ -76,7 +76,7 @@ function propertyTest( gl, fn, params, getprop, result ){
       almostEqual( p[i], result[i] );
     };
   }else{
-    expect( p ).to.eql( result );
+    almostEqual( p, result );
   }
 
   stackTest( fn, params, getprop, result )
@@ -95,7 +95,7 @@ function stackTest( fn, params, getprop, result ){
       almostEqual( p[i], result[i] );
     };
   }else{
-    expect( p ).to.eql( result );
+    almostEqual( p, result );
   }
 
 }
@@ -1355,12 +1355,19 @@ describe( "gl - GLConfig", function(){
       );
     });
 
-    it( 'lineWidth', function(){
-      propertyTest( gl,
-        'lineWidth', [1],
-        gl.LINE_WIDTH, 1
-      );
-    });
+
+    // lineWidth fail on directX
+
+    // it( 'lineWidth', function(){
+    //   propertyTest( gl,
+    //     'lineWidth', [4],
+    //     gl.LINE_WIDTH, 4
+    //   );
+    //   propertyTest( gl,
+    //     'lineWidth', [.2],
+    //     gl.LINE_WIDTH, .2
+    //   );
+    // });
 
 
 
