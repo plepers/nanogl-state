@@ -36,8 +36,8 @@
             return t._dat.set(this._dat), t._set = this._set, t;
         },
         patch: function(e, s) {
-            for (var i, n = this._dat, a = this._set, h = e._dat, r = e._set, c = s._dat, d = 0, o = 0; 51 > o; o++) i = u[o], 
-            0 !== (a & i) && ((0 === (r & i) || n[o] !== h[o]) && (d |= i), h[o] = n[o]);
+            for (var i, n = this._dat, a = this._set, h = e._dat, r = e._set, c = s._dat, d = 0, o = 0; o < 51; o++) i = u[o], 
+            0 !== (a & i) && (0 !== (r & i) && n[o] === h[o] || (d |= i), h[o] = n[o]);
             c.set(h), e._set |= a, s._set = t(d);
         },
         setupGL: function(t) {
@@ -79,7 +79,7 @@
             return void 0 === t && (t = !0), this._dat[0] = 0 | t, this._set |= 1, this;
         },
         blendFunc: function(t, e) {
-            return this._dat[3] = t, this._dat[2] = e, this._set = -4097 & this._set | 1024, 
+            return this._dat[3] = t, this._dat[2] = e, this._set = this._set & -4097 | 1024, 
             this;
         },
         blendFuncSeparate: function(t, e, s, i) {
@@ -87,7 +87,7 @@
             this;
         },
         blendEquation: function(t) {
-            return this._dat[1] = t, this._set = -2049 & this._set | 512, this;
+            return this._dat[1] = t, this._set = this._set & -2049 | 512, this;
         },
         blendEquationSeparate: function(t, e) {
             return this._dat[1] = t, this._dat[4] = e, this._set |= 2560, this;
@@ -148,15 +148,15 @@
             return void 0 === t && (t = !0), this._dat[12] = 0 | t, this._set |= 256, this;
         },
         stencilFunc: function(t, e, s) {
-            return this._dat[13] = t, this._dat[14] = e, this._dat[15] = s, this._set = -524289 & this._set | 65536, 
+            return this._dat[13] = t, this._dat[14] = e, this._dat[15] = s, this._set = this._set & -524289 | 65536, 
             this;
         },
         stencilOp: function(t, e, s) {
-            return this._dat[17] = t, this._dat[18] = e, this._dat[19] = s, this._set = -1048577 & this._set | 131072, 
+            return this._dat[17] = t, this._dat[18] = e, this._dat[19] = s, this._set = this._set & -1048577 | 131072, 
             this;
         },
         stencilMask: function(t) {
-            return this._dat[16] = t, this._set = -2097153 & this._set | 262144, this;
+            return this._dat[16] = t, this._set = this._set & -2097153 | 262144, this;
         },
         stencilFuncSeparate: function(t, e, s, i, n, a) {
             var h = this._dat;

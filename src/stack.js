@@ -23,7 +23,6 @@ const MIN_ALLOC = 16,
 function ConfigStack(){
   this._stack = new Uint32Array( ( (LEN|0) * MIN_ALLOC)|0 );
   this._sets  = new Uint32Array( MIN_ALLOC|0 );
-  this._tmpDat = new Uint32Array( LEN|0 );
   this._size  = MIN_ALLOC|0;
   this._ptr   = 0;
 
@@ -48,9 +47,9 @@ ConfigStack.prototype = {
     var ptr = this._ptr,
         sset = this._sets[ptr++],
         lset=  cfg._set,
-        sptr, sdat, ldat, hdat, i, sbit, val;
+        sptr, sdat, ldat, i, sbit, val;
 
-    if( ptr == this._size ){
+    if( ptr === this._size ){
       this._grow();
     }
 
@@ -61,7 +60,6 @@ ConfigStack.prototype = {
 
     sdat = this._stack;
     ldat = cfg._dat;
-    hdat = this._tmpDat;
 
 
     for( i = 0; i < (LEN|0); i++ )
@@ -73,10 +71,8 @@ ConfigStack.prototype = {
       else {
         val = sdat[ sptr+i-(0|LEN) ];
       }
-      hdat[ i ] = val;
+      sdat[ sptr+i ] = val;
     }
-
-    sdat.set( hdat, sptr );
 
   },
 
@@ -106,7 +102,9 @@ ConfigStack.prototype = {
     this.copyConfig( ptr, patch );
 
     this._headPos = ptr;
-    this._sets[ ptr-1 ] |= this._sets[ ptr ];
+    if( ptr > 0 ) { 
+      this._sets[ ptr-1 ] |= this._sets[ ptr ];
+    }
     this._sets[ ptr ] = 0;
 
   },
@@ -120,8 +118,14 @@ ConfigStack.prototype = {
 
   copyConfig : function( at, cfg )
   {
-    var range = new Uint32Array( this._stack.buffer, at*(LEN<<2),  (0|LEN));
-    cfg._dat.set( range );
+    var cdat = cfg._dat,
+        sdat = this._stack,
+        off  = 0|(at*(LEN|0));
+
+    for( var i = 0; i < (LEN|0); i++ )
+    {
+      cdat[i] = sdat[off+i];
+    }
     cfg._set = this._sets[at];
   },
 

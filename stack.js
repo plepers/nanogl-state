@@ -1,7 +1,7 @@
 !function() {
     function t() {
-        this._stack = new Uint32Array(816), this._sets = new Uint32Array(16), this._tmpDat = new Uint32Array(51), 
-        this._size = 16, this._ptr = 0, this._headPos = 0, this._wcfg = new s();
+        this._stack = new Uint32Array(816), this._sets = new Uint32Array(16), this._size = 16, 
+        this._ptr = 0, this._headPos = 0, this._wcfg = new s();
     }
     var s = require("./config"), i = s.DAT_MASKS;
     t.prototype = {
@@ -9,11 +9,10 @@
             this._ptr = 0, this._wcfg.fromGL(t), this._sets[0] = 0, this._stack.set(this._wcfg._dat);
         },
         push: function(t) {
-            var s, h, _, e, n, r, o, a = this._ptr, c = this._sets[a++], f = t._set;
-            for (a == this._size && this._grow(), c |= f, this._sets[a] = c, this._ptr = a, 
-            s = 51 * a, h = this._stack, _ = t._dat, e = this._tmpDat, n = 0; 51 > n; n++) r = i[n], 
-            o = 0 !== (f & r) ? _[n] : h[s + n - 51], e[n] = o;
-            h.set(e, s);
+            var s, h, _, e, o, n, r = this._ptr, c = this._sets[r++], a = t._set;
+            for (r === this._size && this._grow(), c |= a, this._sets[r] = c, this._ptr = r, 
+            s = 51 * r, h = this._stack, _ = t._dat, e = 0; e < 51; e++) o = i[e], n = 0 !== (a & o) ? _[e] : h[s + e - 51], 
+            h[s + e] = n;
         },
         pop: function() {
             var t = --this._ptr;
@@ -24,14 +23,15 @@
         },
         commit: function(t) {
             var s = this._ptr;
-            this.copyConfig(s, t), this._headPos = s, this._sets[s - 1] |= this._sets[s], this._sets[s] = 0;
+            this.copyConfig(s, t), this._headPos = s, s > 0 && (this._sets[s - 1] |= this._sets[s]), 
+            this._sets[s] = 0;
         },
         patch: function(t, s) {
             this.copyConfig(this._ptr, this._wcfg), this._wcfg.patch(t, s);
         },
         copyConfig: function(t, s) {
-            var i = new Uint32Array(this._stack.buffer, 204 * t, 51);
-            s._dat.set(i), s._set = this._sets[t];
+            for (var i = s._dat, h = this._stack, _ = 0 | 51 * t, e = 0; e < 51; e++) i[e] = h[_ + e];
+            s._set = this._sets[t];
         },
         _grow: function() {
             var t = this._size << 1, s = new Uint32Array(51 * t), i = new Uint32Array(t);
