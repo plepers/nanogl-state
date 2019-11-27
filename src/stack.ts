@@ -1,5 +1,5 @@
 
-import GLConfig from './config'
+import GLConfig = require('./config')
 
 const DAT_MASKS = GLConfig.DAT_MASKS;
 
@@ -18,7 +18,7 @@ const MIN_ALLOC = 16,
 //
 
 
-export default class ConfigStack {
+export = class ConfigStack {
 
   private _stack  : Uint32Array;
   private _sets   : Uint32Array;

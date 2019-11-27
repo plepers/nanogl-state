@@ -1,138 +1,146 @@
 
 /*
  * All following contstants should be inlined by uglify js
- * use  0|CONST  or  ~~CONTS to force constants evaluation and inline exp by uglifyjs2
+ * use  CONST  or  CONTS to force constants evaluation and inline exp by uglifyjs2
  */
-const BLEND_ENABLE          = 0 ,
-      BLEND_EQ_C            = 1 ,    // BlendingFactorDest
-      BLEND_FUNC_C_DST      = 2 ,    // Separate Blend Functions
-      BLEND_FUNC_C_SRC      = 3 ,
-      BLEND_EQ_A            = 4 ,    // BlendingFactorSrc   //
-      BLEND_FUNC_A_DST      = 5 ,
-      BLEND_FUNC_A_SRC      = 6 ,
-      DEPTH_ENABLE          = 7 ,
-      DEPTH_FUNC            = 8 ,    // DepthFunction
-      CULL_FACE_ENABLE      = 9 ,
-      CULL_MODE             = 10,    // CullFaceMode
-      FACE_DIR              = 11,    // FrontFaceDirection
-      STENCIL_ENABLE        = 12,
-      STENCIL_FUNC          = 13,
-      STENCIL_REF           = 14,
-      STENCIL_VALUE_MASK    = 15,
-      STENCIL_WRITEMASK     = 16,
-      STENCIL_OP_FAIL       = 17,
-      STENCIL_OP_ZFAIL      = 18,
-      STENCIL_OP_ZPASS      = 19,
-      STENCIL_B_FUNC        = 20,
-      STENCIL_B_REF         = 21,
-      STENCIL_B_VALUE_MASK  = 22,
-      STENCIL_B_WRITEMASK   = 23,
-      STENCIL_B_OP_FAIL     = 24,
-      STENCIL_B_OP_ZFAIL    = 25,
-      STENCIL_B_OP_ZPASS    = 26,
-      SCISSOR_ENABLE        = 27,
-      SCISSOR_TEST_X        = 28,    // SCISSOR_TEST
-      SCISSOR_TEST_Y        = 29,    // SCISSOR_TEST
-      SCISSOR_TEST_W        = 30,    // SCISSOR_TEST
-      SCISSOR_TEST_H        = 31,    // SCISSOR_TEST
-      DITHER_ENABLE         = 32,    //
-      POLYOFF_ENABLE        = 33,
-      POLYOFF_FACTOR        = 34,
-      POLYOFF_UNITS         = 35,
-      // COVERAGE_ENABLE       = 36,
-      // ACOVERAGE_ENABLE      = 37,
-      COLOR_MASK            = 38,
-      DEPTH_MASK            = 39,
-      BLEND_COLOR_R         = 40,
-      BLEND_COLOR_G         = 41,
-      BLEND_COLOR_B         = 42,
-      BLEND_COLOR_A         = 43,
-      VIEWPORT_X            = 44,
-      VIEWPORT_Y            = 45,
-      VIEWPORT_W            = 46,
-      VIEWPORT_H            = 47,
-      DEPTH_RANGE_NEAR      = 48,
-      DEPTH_RANGE_FAR       = 49,
-      LINE_WIDTH            = 50,
 
-      LEN = 51,
+const enum Slots {
 
+  BLEND_ENABLE          = 0 ,
+  BLEND_EQ_C            = 1 ,    // BlendingFactorDest
+  BLEND_FUNC_C_DST      = 2 ,    // Separate Blend Functions
+  BLEND_FUNC_C_SRC      = 3 ,
+  BLEND_EQ_A            = 4 ,    // BlendingFactorSrc   //
+  BLEND_FUNC_A_DST      = 5 ,
+  BLEND_FUNC_A_SRC      = 6 ,
+  DEPTH_ENABLE          = 7 ,
+  DEPTH_FUNC            = 8 ,    // DepthFunction
+  CULL_FACE_ENABLE      = 9 ,
+  CULL_MODE             = 10,    // CullFaceMode
+  FACE_DIR              = 11,    // FrontFaceDirection
+  STENCIL_ENABLE        = 12,
+  STENCIL_FUNC          = 13,
+  STENCIL_REF           = 14,
+  STENCIL_VALUE_MASK    = 15,
+  STENCIL_WRITEMASK     = 16,
+  STENCIL_OP_FAIL       = 17,
+  STENCIL_OP_ZFAIL      = 18,
+  STENCIL_OP_ZPASS      = 19,
+  STENCIL_B_FUNC        = 20,
+  STENCIL_B_REF         = 21,
+  STENCIL_B_VALUE_MASK  = 22,
+  STENCIL_B_WRITEMASK   = 23,
+  STENCIL_B_OP_FAIL     = 24,
+  STENCIL_B_OP_ZFAIL    = 25,
+  STENCIL_B_OP_ZPASS    = 26,
+  SCISSOR_ENABLE        = 27,
+  SCISSOR_TEST_X        = 28,    // SCISSOR_TEST
+  SCISSOR_TEST_Y        = 29,    // SCISSOR_TEST
+  SCISSOR_TEST_W        = 30,    // SCISSOR_TEST
+  SCISSOR_TEST_H        = 31,    // SCISSOR_TEST
+  DITHER_ENABLE         = 32,    //
+  POLYOFF_ENABLE        = 33,
+  POLYOFF_FACTOR        = 34,
+  POLYOFF_UNITS         = 35,
+  // COVERAGE_ENABLE       = 36,
+  // ACOVERAGE_ENABLE      = 37,
+  COLOR_MASK            = 38,
+  DEPTH_MASK            = 39,
+  BLEND_COLOR_R         = 40,
+  BLEND_COLOR_G         = 41,
+  BLEND_COLOR_B         = 42,
+  BLEND_COLOR_A         = 43,
+  VIEWPORT_X            = 44,
+  VIEWPORT_Y            = 45,
+  VIEWPORT_W            = 46,
+  VIEWPORT_H            = 47,
+  DEPTH_RANGE_NEAR      = 48,
+  DEPTH_RANGE_FAR       = 49,
+  LINE_WIDTH            = 50,
+  
+  LEN = 51,
+}
 
-      BLEND_ENABLE_SET       = 1 << 0 ,
-      CULL_FACE_ENABLE_SET   = 1 << 1 ,
-      DEPTH_ENABLE_SET       = 1 << 2 ,
-      DITHER_ENABLE_SET      = 1 << 3 ,
-      POLYOFF_ENABLE_SET     = 1 << 4 ,
-      COVERAGE_ENABLE_SET    = 1 << 5 ,
-      ACOVERAGE_ENABLE_SET   = 1 << 6 ,
-      SCISSOR_ENABLE_SET     = 1 << 7 ,
-      STENCIL_ENABLE_SET     = 1 << 8 ,
-      BLEND_EQ_SET           = 1 << 9 ,
-      BLEND_FUNC_SET         = 1 << 10,
-      BLEND_EQ_A_SET         = 1 << 11,
-      BLEND_FUNC_A_SET       = 1 << 12,
-      DEPTH_FUNC_SET         = 1 << 13,
-      CULL_MODE_SET          = 1 << 14,
-      FACE_DIR_SET           = 1 << 15,
-      STENCIL_FUNC_SET       = 1 << 16,
-      STENCIL_OP_SET         = 1 << 17,
-      STENCIL_MASK_SET       = 1 << 18,
-      STENCIL_B_FUNC_SET     = 1 << 19,
-      STENCIL_B_OP_SET       = 1 << 20,
-      STENCIL_B_MASK_SET     = 1 << 21,
-      SCISSOR_TEST_SET       = 1 << 22,
-      POLYOFF_SET            = 1 << 23,
-      COLOR_MASK_SET         = 1 << 24,
-      DEPTH_MASK_SET         = 1 << 25,
-      BLEND_COLOR_SET        = 1 << 26,
-      VIEWPORT_SET           = 1 << 27,
-      DEPTH_RANGE_SET        = 1 << 28,
-      LINE_WIDTH_SET         = 1 << 29;
+const enum SetsBits {
 
+  BLEND_ENABLE_SET       = 1 << 0 ,
+  CULL_FACE_ENABLE_SET   = 1 << 1 ,
+  DEPTH_ENABLE_SET       = 1 << 2 ,
+  DITHER_ENABLE_SET      = 1 << 3 ,
+  POLYOFF_ENABLE_SET     = 1 << 4 ,
+  COVERAGE_ENABLE_SET    = 1 << 5 ,
+  ACOVERAGE_ENABLE_SET   = 1 << 6 ,
+  SCISSOR_ENABLE_SET     = 1 << 7 ,
+  STENCIL_ENABLE_SET     = 1 << 8 ,
+  BLEND_EQ_SET           = 1 << 9 ,
+  BLEND_FUNC_SET         = 1 << 10,
+  BLEND_EQ_A_SET         = 1 << 11,
+  BLEND_FUNC_A_SET       = 1 << 12,
+  DEPTH_FUNC_SET         = 1 << 13,
+  CULL_MODE_SET          = 1 << 14,
+  FACE_DIR_SET           = 1 << 15,
+  STENCIL_FUNC_SET       = 1 << 16,
+  STENCIL_OP_SET         = 1 << 17,
+  STENCIL_MASK_SET       = 1 << 18,
+  STENCIL_B_FUNC_SET     = 1 << 19,
+  STENCIL_B_OP_SET       = 1 << 20,
+  STENCIL_B_MASK_SET     = 1 << 21,
+  SCISSOR_TEST_SET       = 1 << 22,
+  POLYOFF_SET            = 1 << 23,
+  COLOR_MASK_SET         = 1 << 24,
+  DEPTH_MASK_SET         = 1 << 25,
+  BLEND_COLOR_SET        = 1 << 26,
+  VIEWPORT_SET           = 1 << 27,
+  DEPTH_RANGE_SET        = 1 << 28,
+  LINE_WIDTH_SET         = 1 << 29,
+    
+}
 
-const GL_BLEND                          = 0x0BE2,
-      GL_CULL_FACE                      = 0x0B44,
-      GL_DEPTH_TEST                     = 0x0B71,
-      GL_DITHER                         = 0x0BD0,
-      GL_POLYGON_OFFSET_FILL            = 0x8037,
-      GL_SCISSOR_TEST                   = 0x0C11,
-      GL_STENCIL_TEST                   = 0x0B90,
-      GL_BLEND_SRC_RGB                  = 0x80C9,
-      GL_BLEND_DST_RGB                  = 0x80C8,
-      GL_BLEND_SRC_ALPHA                = 0x80CB,
-      GL_BLEND_DST_ALPHA                = 0x80CA,
-      GL_BLEND_EQUATION_RGB             = 0x8009,
-      GL_BLEND_EQUATION_ALPHA           = 0x883D,
-      GL_STENCIL_FUNC                   = 0x0B92,
-      GL_STENCIL_REF                    = 0x0B97,
-      GL_STENCIL_VALUE_MASK             = 0x0B93,
-      GL_STENCIL_WRITEMASK              = 0x0B98,
-      GL_STENCIL_FAIL                   = 0x0B94,
-      GL_STENCIL_PASS_DEPTH_FAIL        = 0x0B95,
-      GL_STENCIL_PASS_DEPTH_PASS        = 0x0B96,
-      GL_STENCIL_BACK_FUNC              = 0x8800,
-      GL_STENCIL_BACK_REF               = 0x8CA3,
-      GL_STENCIL_BACK_VALUE_MASK        = 0x8CA4,
-      GL_STENCIL_BACK_WRITEMASK         = 0x8CA5,
-      GL_STENCIL_BACK_FAIL              = 0x8801,
-      GL_STENCIL_BACK_PASS_DEPTH_FAIL   = 0x8802,
-      GL_STENCIL_BACK_PASS_DEPTH_PASS   = 0x8803,
-      GL_POLYGON_OFFSET_FACTOR          = 0x8038,
-      GL_POLYGON_OFFSET_UNITS           = 0x2A00,
-      GL_SCISSOR_BOX                    = 0x0C10,
-      GL_COLOR_WRITEMASK                = 0x0C23,
-      GL_DEPTH_WRITEMASK                = 0x0B72,
-      GL_BLEND_COLOR                    = 0x8005,
-      GL_VIEWPORT                       = 0x0BA2,
-      GL_DEPTH_RANGE                    = 0x0B70,
-      GL_LINE_WIDTH                     = 0x0B21,
-      // GL_SAMPLE_ALPHA_TO_COVERAGE       = 0x809E,
-      // GL_SAMPLE_COVERAGE                = 0x80A0,
-      GL_FRONT                          = 0x0404,
-      GL_BACK                           = 0x0405,
-      GL_DEPTH_FUNC                     = 0x0B74,
-      GL_CULL_FACE_MODE                 = 0x0B45,
-      GL_FRONT_FACE                     = 0x0B46;
+const enum GL {
+  BLEND                          = 0x0BE2,
+  CULL_FACE                      = 0x0B44,
+  DEPTH_TEST                     = 0x0B71,
+  DITHER                         = 0x0BD0,
+  POLYGON_OFFSET_FILL            = 0x8037,
+  SCISSOR_TEST                   = 0x0C11,
+  STENCIL_TEST                   = 0x0B90,
+  BLEND_SRC_RGB                  = 0x80C9,
+  BLEND_DST_RGB                  = 0x80C8,
+  BLEND_SRC_ALPHA                = 0x80CB,
+  BLEND_DST_ALPHA                = 0x80CA,
+  BLEND_EQUATION_RGB             = 0x8009,
+  BLEND_EQUATION_ALPHA           = 0x883D,
+  STENCIL_FUNC                   = 0x0B92,
+  STENCIL_REF                    = 0x0B97,
+  STENCIL_VALUE_MASK             = 0x0B93,
+  STENCIL_WRITEMASK              = 0x0B98,
+  STENCIL_FAIL                   = 0x0B94,
+  STENCIL_PASS_DEPTH_FAIL        = 0x0B95,
+  STENCIL_PASS_DEPTH_PASS        = 0x0B96,
+  STENCIL_BACK_FUNC              = 0x8800,
+  STENCIL_BACK_REF               = 0x8CA3,
+  STENCIL_BACK_VALUE_MASK        = 0x8CA4,
+  STENCIL_BACK_WRITEMASK         = 0x8CA5,
+  STENCIL_BACK_FAIL              = 0x8801,
+  STENCIL_BACK_PASS_DEPTH_FAIL   = 0x8802,
+  STENCIL_BACK_PASS_DEPTH_PASS   = 0x8803,
+  POLYGON_OFFSET_FACTOR          = 0x8038,
+  POLYGON_OFFSET_UNITS           = 0x2A00,
+  SCISSOR_BOX                    = 0x0C10,
+  COLOR_WRITEMASK                = 0x0C23,
+  DEPTH_WRITEMASK                = 0x0B72,
+  BLEND_COLOR                    = 0x8005,
+  VIEWPORT                       = 0x0BA2,
+  DEPTH_RANGE                    = 0x0B70,
+  LINE_WIDTH                     = 0x0B21,
+  // SAMPLE_ALPHA_TO_COVERAGE       = 0x809E,
+  // SAMPLE_COVERAGE                = 0x80A0,
+  FRONT                          = 0x0404,
+  BACK                           = 0x0405,
+  DEPTH_FUNC                     = 0x0B74,
+  CULL_FACE_MODE                 = 0x0B45,
+  FRONT_FACE                     = 0x0B46,
+}
 
 
 // half float encode/decode
@@ -140,98 +148,98 @@ const EHBuffer = new Float32Array( 1 );
 const EHIBuffer = new Uint32Array( EHBuffer.buffer );
 
 
-const DAT_MASKS = [
-      BLEND_ENABLE_SET|0,
-      BLEND_EQ_SET|0,
-      BLEND_FUNC_SET|0,
-      BLEND_FUNC_SET|0,
-      BLEND_EQ_A_SET|0,
-      BLEND_FUNC_A_SET|0,
-      BLEND_FUNC_A_SET|0,
+const DAT_MASKS : number[] = [
+      SetsBits.BLEND_ENABLE_SET,
+      SetsBits.BLEND_EQ_SET,
+      SetsBits.BLEND_FUNC_SET,
+      SetsBits.BLEND_FUNC_SET,
+      SetsBits.BLEND_EQ_A_SET,
+      SetsBits.BLEND_FUNC_A_SET,
+      SetsBits.BLEND_FUNC_A_SET,
 
-      DEPTH_ENABLE_SET|0,
-      DEPTH_FUNC_SET|0,
+      SetsBits.DEPTH_ENABLE_SET,
+      SetsBits.DEPTH_FUNC_SET,
 
-      CULL_FACE_ENABLE_SET|0,
-      CULL_MODE_SET|0,
-      FACE_DIR_SET|0,
+      SetsBits.CULL_FACE_ENABLE_SET,
+      SetsBits.CULL_MODE_SET,
+      SetsBits.FACE_DIR_SET,
 
-      STENCIL_ENABLE_SET|0,
-      STENCIL_FUNC_SET|0,
-      STENCIL_FUNC_SET|0,
-      STENCIL_FUNC_SET|0,
-      STENCIL_MASK_SET|0,
-      STENCIL_OP_SET|0,
-      STENCIL_OP_SET|0,
-      STENCIL_OP_SET|0,
-      STENCIL_B_FUNC_SET|0,
-      STENCIL_B_FUNC_SET|0,
-      STENCIL_B_FUNC_SET|0,
-      STENCIL_B_MASK_SET|0,
-      STENCIL_B_OP_SET|0,
-      STENCIL_B_OP_SET|0,
-      STENCIL_B_OP_SET|0,
+      SetsBits.STENCIL_ENABLE_SET,
+      SetsBits.STENCIL_FUNC_SET,
+      SetsBits.STENCIL_FUNC_SET,
+      SetsBits.STENCIL_FUNC_SET,
+      SetsBits.STENCIL_MASK_SET,
+      SetsBits.STENCIL_OP_SET,
+      SetsBits.STENCIL_OP_SET,
+      SetsBits.STENCIL_OP_SET,
+      SetsBits.STENCIL_B_FUNC_SET,
+      SetsBits.STENCIL_B_FUNC_SET,
+      SetsBits.STENCIL_B_FUNC_SET,
+      SetsBits.STENCIL_B_MASK_SET,
+      SetsBits.STENCIL_B_OP_SET,
+      SetsBits.STENCIL_B_OP_SET,
+      SetsBits.STENCIL_B_OP_SET,
 
-      SCISSOR_ENABLE_SET|0,
-      SCISSOR_TEST_SET|0,
-      SCISSOR_TEST_SET|0,
-      SCISSOR_TEST_SET|0,
-      SCISSOR_TEST_SET|0,
+      SetsBits.SCISSOR_ENABLE_SET,
+      SetsBits.SCISSOR_TEST_SET,
+      SetsBits.SCISSOR_TEST_SET,
+      SetsBits.SCISSOR_TEST_SET,
+      SetsBits.SCISSOR_TEST_SET,
 
-      DITHER_ENABLE_SET|0,
+      SetsBits.DITHER_ENABLE_SET,
 
-      POLYOFF_ENABLE_SET|0,
-      POLYOFF_SET|0,
-      POLYOFF_SET|0,
+      SetsBits.POLYOFF_ENABLE_SET,
+      SetsBits.POLYOFF_SET,
+      SetsBits.POLYOFF_SET,
 
-      COVERAGE_ENABLE_SET|0,
-      ACOVERAGE_ENABLE_SET|0,
+      SetsBits.COVERAGE_ENABLE_SET,
+      SetsBits.ACOVERAGE_ENABLE_SET,
 
-      COLOR_MASK_SET|0,
-      DEPTH_MASK_SET|0,
+      SetsBits.COLOR_MASK_SET,
+      SetsBits.DEPTH_MASK_SET,
 
-      BLEND_COLOR_SET|0,
-      BLEND_COLOR_SET|0,
-      BLEND_COLOR_SET|0,
-      BLEND_COLOR_SET|0,
+      SetsBits.BLEND_COLOR_SET,
+      SetsBits.BLEND_COLOR_SET,
+      SetsBits.BLEND_COLOR_SET,
+      SetsBits.BLEND_COLOR_SET,
 
-      VIEWPORT_SET|0,
-      VIEWPORT_SET|0,
-      VIEWPORT_SET|0,
-      VIEWPORT_SET|0,
+      SetsBits.VIEWPORT_SET,
+      SetsBits.VIEWPORT_SET,
+      SetsBits.VIEWPORT_SET,
+      SetsBits.VIEWPORT_SET,
 
-      DEPTH_RANGE_SET|0,
-      DEPTH_RANGE_SET|0,
+      SetsBits.DEPTH_RANGE_SET,
+      SetsBits.DEPTH_RANGE_SET,
 
-      LINE_WIDTH_SET|0
+      SetsBits.LINE_WIDTH_SET
     ],
 
 
     //            <b >< enab  >
     // b 0001111110011000000000
-    _DEFAULT_SET = (
-      0|BLEND_ENABLE_SET      |
-      0|CULL_FACE_ENABLE_SET  |
-      0|DEPTH_ENABLE_SET      |
-      0|DITHER_ENABLE_SET     |
-      0|POLYOFF_ENABLE_SET    |
-      0|SCISSOR_ENABLE_SET    |
-      0|STENCIL_ENABLE_SET    |
-      0|BLEND_EQ_SET          |
-      0|BLEND_FUNC_SET        |
-      0|DEPTH_FUNC_SET        |
-      0|CULL_MODE_SET         |
-      0|FACE_DIR_SET          |
-      0|STENCIL_FUNC_SET      |
-      0|STENCIL_OP_SET        |
-      0|STENCIL_MASK_SET      |
-      0|SCISSOR_TEST_SET      |
-      0|POLYOFF_SET           |
-      0|COLOR_MASK_SET        |
-      0|DEPTH_MASK_SET        |
-      0|BLEND_COLOR_SET       |
-      0|DEPTH_RANGE_SET       |
-      0|LINE_WIDTH_SET
+    _DEFAULT_SET : number = (
+      SetsBits.BLEND_ENABLE_SET      |
+      SetsBits.CULL_FACE_ENABLE_SET  |
+      SetsBits.DEPTH_ENABLE_SET      |
+      SetsBits.DITHER_ENABLE_SET     |
+      SetsBits.POLYOFF_ENABLE_SET    |
+      SetsBits.SCISSOR_ENABLE_SET    |
+      SetsBits.STENCIL_ENABLE_SET    |
+      SetsBits.BLEND_EQ_SET          |
+      SetsBits.BLEND_FUNC_SET        |
+      SetsBits.DEPTH_FUNC_SET        |
+      SetsBits.CULL_MODE_SET         |
+      SetsBits.FACE_DIR_SET          |
+      SetsBits.STENCIL_FUNC_SET      |
+      SetsBits.STENCIL_OP_SET        |
+      SetsBits.STENCIL_MASK_SET      |
+      SetsBits.SCISSOR_TEST_SET      |
+      SetsBits.POLYOFF_SET           |
+      SetsBits.COLOR_MASK_SET        |
+      SetsBits.DEPTH_MASK_SET        |
+      SetsBits.BLEND_COLOR_SET       |
+      SetsBits.DEPTH_RANGE_SET       |
+      SetsBits.LINE_WIDTH_SET
     ),
 
 
@@ -300,11 +308,11 @@ const DAT_MASKS = [
 // avoid set inconsistency for '*separate' configs
 function _fixSet( set:number ):number{
   return (set |
-      (( set & ~~BLEND_FUNC_A_SET   ) >>> 2 ) |
-      (( set & ~~BLEND_EQ_A_SET     ) >>> 2 ) |
-      (( set & ~~STENCIL_B_FUNC_SET ) >>> 3 ) |
-      (( set & ~~STENCIL_B_OP_SET   ) >>> 3 ) |
-      (( set & ~~STENCIL_B_MASK_SET ) >>> 3 )
+      (( set & SetsBits.BLEND_FUNC_A_SET   ) >>> 2 ) |
+      (( set & SetsBits.BLEND_EQ_A_SET     ) >>> 2 ) |
+      (( set & SetsBits.STENCIL_B_FUNC_SET ) >>> 3 ) |
+      (( set & SetsBits.STENCIL_B_OP_SET   ) >>> 3 ) |
+      (( set & SetsBits.STENCIL_B_MASK_SET ) >>> 3 )
     );
 }
 
@@ -361,7 +369,7 @@ var getP = function( gl:WebGLRenderingContext, p:GLenum ){
 
 
 
-export default class GLConfig{
+export = class GLConfig{
 
   static DAT_MASKS = DAT_MASKS;
 
@@ -378,7 +386,7 @@ export default class GLConfig{
   _set: number;
 
   constructor(){
-    this._dat = new Uint16Array( 0|LEN );
+    this._dat = new Uint16Array( Slots.LEN );
     this._set = 0;
   }
   
@@ -412,7 +420,7 @@ export default class GLConfig{
         oset = 0,
         sbit;
 
-    for( var i = 0; i < (LEN|0); i++ )
+    for( var i = 0; i < (Slots.LEN|0); i++ )
     {
       sbit = DAT_MASKS[ i ];
       // data is marked as set
@@ -438,114 +446,114 @@ export default class GLConfig{
 
     // blend enabled
 
-    if ( (set & ~~BLEND_ENABLE_SET) !== 0 ) {
-      dat[ 0|BLEND_ENABLE ] ? gl.enable( ~~GL_BLEND ) : gl.disable( ~~GL_BLEND );
+    if ( (set & SetsBits.BLEND_ENABLE_SET) !== 0 ) {
+      dat[ Slots.BLEND_ENABLE ] ? gl.enable( GL.BLEND ) : gl.disable( GL.BLEND );
     }
 
 
     // Blend Equation
 
-    i = set & (BLEND_EQ_SET|BLEND_EQ_A_SET);
+    i = set & (SetsBits.BLEND_EQ_SET|SetsBits.BLEND_EQ_A_SET);
 
     if ( i !== 0 ) {
-      if( i === (BLEND_EQ_SET|BLEND_EQ_A_SET) )
-        gl.blendEquationSeparate( dat[ 0|BLEND_EQ_C ], dat[ 0|BLEND_EQ_A ] );
+      if( i === (SetsBits.BLEND_EQ_SET|SetsBits.BLEND_EQ_A_SET) )
+        gl.blendEquationSeparate( dat[ Slots.BLEND_EQ_C ], dat[ Slots.BLEND_EQ_A ] );
       else
-        gl.blendEquation( dat[ 0|BLEND_EQ_C ] );
+        gl.blendEquation( dat[ Slots.BLEND_EQ_C ] );
     }
 
 
     // Blend Function
 
 
-    i = set & (BLEND_FUNC_SET|BLEND_FUNC_A_SET);
+    i = set & (SetsBits.BLEND_FUNC_SET|SetsBits.BLEND_FUNC_A_SET);
 
     if ( i !== 0 ){
-      if( i === (BLEND_FUNC_SET|BLEND_FUNC_A_SET) )
-        gl.blendFuncSeparate( dat[ 0|BLEND_FUNC_C_SRC ], dat[ 0|BLEND_FUNC_C_DST ], dat[ 0|BLEND_FUNC_A_SRC ], dat[ 0|BLEND_FUNC_A_DST ] );
+      if( i === (SetsBits.BLEND_FUNC_SET|SetsBits.BLEND_FUNC_A_SET) )
+        gl.blendFuncSeparate( dat[ Slots.BLEND_FUNC_C_SRC ], dat[ Slots.BLEND_FUNC_C_DST ], dat[ Slots.BLEND_FUNC_A_SRC ], dat[ Slots.BLEND_FUNC_A_DST ] );
       else
-        gl.blendFunc( dat[ 0|BLEND_FUNC_C_SRC ], dat[ 0|BLEND_FUNC_C_DST ] );
+        gl.blendFunc( dat[ Slots.BLEND_FUNC_C_SRC ], dat[ Slots.BLEND_FUNC_C_DST ] );
     }
 
 
     // depth Function
 
-    if ( (set & ~~DEPTH_ENABLE_SET) !== 0 ){
-      dat[ 0|DEPTH_ENABLE ] ? gl.enable( ~~GL_DEPTH_TEST ) : gl.disable( ~~GL_DEPTH_TEST );
+    if ( (set & SetsBits.DEPTH_ENABLE_SET) !== 0 ){
+      dat[ Slots.DEPTH_ENABLE ] ? gl.enable( GL.DEPTH_TEST ) : gl.disable( GL.DEPTH_TEST );
     }
 
-    if ( (set & ~~DEPTH_FUNC_SET) !== 0 ){
-      gl.depthFunc( dat[ 0|DEPTH_FUNC ] );
+    if ( (set & SetsBits.DEPTH_FUNC_SET) !== 0 ){
+      gl.depthFunc( dat[ Slots.DEPTH_FUNC ] );
     }
 
 
     // culling mode (front/back/front_and_back)
 
 
-    if ( (set & ~~CULL_FACE_ENABLE_SET) !== 0 ){
-      dat[ 0|CULL_FACE_ENABLE ] ? gl.enable( ~~GL_CULL_FACE ) : gl.disable( ~~GL_CULL_FACE );
+    if ( (set & SetsBits.CULL_FACE_ENABLE_SET) !== 0 ){
+      dat[ Slots.CULL_FACE_ENABLE ] ? gl.enable( GL.CULL_FACE ) : gl.disable( GL.CULL_FACE );
     }
-    if ( (set & ~~CULL_MODE_SET) !== 0 ){
-      gl.cullFace( dat[ 0|CULL_MODE ] );
+    if ( (set & SetsBits.CULL_MODE_SET) !== 0 ){
+      gl.cullFace( dat[ Slots.CULL_MODE ] );
     }
 
     // face direction (cw/ccw)
-    if ( (set & ~~FACE_DIR_SET) !== 0 ){
-      gl.frontFace( dat[ 0|FACE_DIR ] );
+    if ( (set & SetsBits.FACE_DIR_SET) !== 0 ){
+      gl.frontFace( dat[ Slots.FACE_DIR ] );
     }
 
         // face direction (cw/ccw)
-    if ( (set & ~~LINE_WIDTH_SET) !== 0 ){
-      gl.lineWidth( decodeHalf( dat[ 0|LINE_WIDTH ] ) );
+    if ( (set & SetsBits.LINE_WIDTH_SET) !== 0 ){
+      gl.lineWidth( decodeHalf( dat[ Slots.LINE_WIDTH ] ) );
     }
 
 
     // Stencil enabled
 
-    if ( (set & ~~STENCIL_ENABLE_SET) !== 0 ){
-      dat[ 0|STENCIL_ENABLE ] ? gl.enable( ~~GL_STENCIL_TEST ) : gl.disable( ~~GL_STENCIL_TEST );
+    if ( (set & SetsBits.STENCIL_ENABLE_SET) !== 0 ){
+      dat[ Slots.STENCIL_ENABLE ] ? gl.enable( GL.STENCIL_TEST ) : gl.disable( GL.STENCIL_TEST );
     }
 
    // Stencil Function
-    i = set & (STENCIL_FUNC_SET|STENCIL_B_FUNC_SET);
+    i = set & (SetsBits.STENCIL_FUNC_SET|SetsBits.STENCIL_B_FUNC_SET);
 
     if ( i !== 0 )  {
-      if( i === (STENCIL_FUNC_SET|STENCIL_B_FUNC_SET) ){
-        gl.stencilFuncSeparate( ~~GL_FRONT, dat[ 0|STENCIL_FUNC ], dat[ 0|STENCIL_REF ], dat[ 0|STENCIL_VALUE_MASK ] );
-        gl.stencilFuncSeparate( ~~GL_BACK, dat[ 0|STENCIL_B_FUNC ], dat[ 0|STENCIL_B_REF ], dat[ 0|STENCIL_B_VALUE_MASK ] );
+      if( i === (SetsBits.STENCIL_FUNC_SET|SetsBits.STENCIL_B_FUNC_SET) ){
+        gl.stencilFuncSeparate( GL.FRONT, dat[ Slots.STENCIL_FUNC ], dat[ Slots.STENCIL_REF ], dat[ Slots.STENCIL_VALUE_MASK ] );
+        gl.stencilFuncSeparate( GL.BACK, dat[ Slots.STENCIL_B_FUNC ], dat[ Slots.STENCIL_B_REF ], dat[ Slots.STENCIL_B_VALUE_MASK ] );
       } else {
-        gl.stencilFunc( dat[ 0|STENCIL_FUNC ], dat[ 0|STENCIL_REF ], dat[ 0|STENCIL_VALUE_MASK ] );
+        gl.stencilFunc( dat[ Slots.STENCIL_FUNC ], dat[ Slots.STENCIL_REF ], dat[ Slots.STENCIL_VALUE_MASK ] );
       }
     }
 
     // Stencil Op
-    i = set & (STENCIL_OP_SET|STENCIL_B_OP_SET);
+    i = set & (SetsBits.STENCIL_OP_SET|SetsBits.STENCIL_B_OP_SET);
 
     if ( i !== 0 ){
-      if( i === (STENCIL_OP_SET|STENCIL_B_OP_SET) ){
-        gl.stencilOpSeparate( ~~GL_FRONT, dat[ 0|STENCIL_OP_FAIL ], dat[ 0|STENCIL_OP_ZFAIL ], dat[ 0|STENCIL_OP_ZPASS ] );
-        gl.stencilOpSeparate( ~~GL_BACK, dat[ 0|STENCIL_B_OP_FAIL ], dat[ 0|STENCIL_B_OP_ZFAIL ], dat[ 0|STENCIL_B_OP_ZPASS ]  );
+      if( i === (SetsBits.STENCIL_OP_SET|SetsBits.STENCIL_B_OP_SET) ){
+        gl.stencilOpSeparate( GL.FRONT, dat[ Slots.STENCIL_OP_FAIL ], dat[ Slots.STENCIL_OP_ZFAIL ], dat[ Slots.STENCIL_OP_ZPASS ] );
+        gl.stencilOpSeparate( GL.BACK, dat[ Slots.STENCIL_B_OP_FAIL ], dat[ Slots.STENCIL_B_OP_ZFAIL ], dat[ Slots.STENCIL_B_OP_ZPASS ]  );
       } else {
-        gl.stencilOp( dat[ 0|STENCIL_OP_FAIL ], dat[ 0|STENCIL_OP_ZFAIL ], dat[ 0|STENCIL_OP_ZPASS ] );
+        gl.stencilOp( dat[ Slots.STENCIL_OP_FAIL ], dat[ Slots.STENCIL_OP_ZFAIL ], dat[ Slots.STENCIL_OP_ZPASS ] );
       }
     }
 
 
     // Stencil Op
-    i = set & (STENCIL_MASK_SET|STENCIL_B_MASK_SET);
+    i = set & (SetsBits.STENCIL_MASK_SET|SetsBits.STENCIL_B_MASK_SET);
 
     if ( i !== 0 ){
 
-      if( i === (STENCIL_MASK_SET|STENCIL_B_MASK_SET) ){
-        gl.stencilMaskSeparate( ~~GL_FRONT, dat[ 0|STENCIL_WRITEMASK ] );
-        gl.stencilMaskSeparate( ~~GL_BACK, dat[ 0|STENCIL_B_WRITEMASK] );
+      if( i === (SetsBits.STENCIL_MASK_SET|SetsBits.STENCIL_B_MASK_SET) ){
+        gl.stencilMaskSeparate( GL.FRONT, dat[ Slots.STENCIL_WRITEMASK ] );
+        gl.stencilMaskSeparate( GL.BACK, dat[ Slots.STENCIL_B_WRITEMASK] );
       } else {
-        gl.stencilMask( dat[ 0|STENCIL_WRITEMASK ] );
+        gl.stencilMask( dat[ Slots.STENCIL_WRITEMASK ] );
       }
     }
 
-    if ( (set & ~~COLOR_MASK_SET) !== 0 ){
-      var flags = dat[ 0|COLOR_MASK ];
+    if ( (set & SetsBits.COLOR_MASK_SET) !== 0 ){
+      var flags = dat[ Slots.COLOR_MASK ];
       gl.colorMask(
         (flags & 1) === 1,
         (flags & 2) === 2,
@@ -554,60 +562,60 @@ export default class GLConfig{
       );
     }
 
-    if ( (set & ~~DEPTH_MASK_SET) !== 0 ){
-      gl.depthMask( dat[ 0|DEPTH_MASK ] === 1 );
+    if ( (set & SetsBits.DEPTH_MASK_SET) !== 0 ){
+      gl.depthMask( dat[ Slots.DEPTH_MASK ] === 1 );
     }
 
 
 
-    if ( (set & ~~BLEND_COLOR_SET) !== 0 ){
+    if ( (set & SetsBits.BLEND_COLOR_SET) !== 0 ){
       gl.blendColor(
-        decodeHalf( dat[ 0|BLEND_COLOR_R ] ),
-        decodeHalf( dat[ 0|BLEND_COLOR_G ] ),
-        decodeHalf( dat[ 0|BLEND_COLOR_B ] ),
-        decodeHalf( dat[ 0|BLEND_COLOR_A ] )
+        decodeHalf( dat[ Slots.BLEND_COLOR_R ] ),
+        decodeHalf( dat[ Slots.BLEND_COLOR_G ] ),
+        decodeHalf( dat[ Slots.BLEND_COLOR_B ] ),
+        decodeHalf( dat[ Slots.BLEND_COLOR_A ] )
       );
     }
 
-    if ( (set & ~~SCISSOR_ENABLE_SET) !== 0 ){
-      dat[ 0|SCISSOR_ENABLE ] ? gl.enable( ~~GL_SCISSOR_TEST ) : gl.disable( ~~GL_SCISSOR_TEST );
+    if ( (set & SetsBits.SCISSOR_ENABLE_SET) !== 0 ){
+      dat[ Slots.SCISSOR_ENABLE ] ? gl.enable( GL.SCISSOR_TEST ) : gl.disable( GL.SCISSOR_TEST );
     }
 
-    if ( (set & ~~SCISSOR_TEST_SET) !== 0 ){
+    if ( (set & SetsBits.SCISSOR_TEST_SET) !== 0 ){
       gl.scissor(
-        dat[ 0|SCISSOR_TEST_X ],
-        dat[ 0|SCISSOR_TEST_Y ],
-        dat[ 0|SCISSOR_TEST_W ],
-        dat[ 0|SCISSOR_TEST_H ]
+        dat[ Slots.SCISSOR_TEST_X ],
+        dat[ Slots.SCISSOR_TEST_Y ],
+        dat[ Slots.SCISSOR_TEST_W ],
+        dat[ Slots.SCISSOR_TEST_H ]
       );
     }
 
-    if ( (set & ~~VIEWPORT_SET) !== 0 ){
+    if ( (set & SetsBits.VIEWPORT_SET) !== 0 ){
       gl.viewport(
-        dat[ 0|VIEWPORT_X ],
-        dat[ 0|VIEWPORT_Y ],
-        dat[ 0|VIEWPORT_W ],
-        dat[ 0|VIEWPORT_H ]
+        dat[ Slots.VIEWPORT_X ],
+        dat[ Slots.VIEWPORT_Y ],
+        dat[ Slots.VIEWPORT_W ],
+        dat[ Slots.VIEWPORT_H ]
       );
     }
 
 
-    if ( (set & ~~POLYOFF_ENABLE_SET) !== 0 ){
-      dat[ 0|POLYOFF_ENABLE ] ? gl.enable( ~~GL_POLYGON_OFFSET_FILL ) : gl.disable( ~~GL_POLYGON_OFFSET_FILL );
+    if ( (set & SetsBits.POLYOFF_ENABLE_SET) !== 0 ){
+      dat[ Slots.POLYOFF_ENABLE ] ? gl.enable( GL.POLYGON_OFFSET_FILL ) : gl.disable( GL.POLYGON_OFFSET_FILL );
     }
 
-    if ( (set & ~~POLYOFF_SET) !== 0 ){
+    if ( (set & SetsBits.POLYOFF_SET) !== 0 ){
       gl.polygonOffset(
-        decodeHalf( dat[ 0|POLYOFF_FACTOR ] ),
-        decodeHalf( dat[ 0|POLYOFF_UNITS ] )
+        decodeHalf( dat[ Slots.POLYOFF_FACTOR ] ),
+        decodeHalf( dat[ Slots.POLYOFF_UNITS ] )
       );
     }
 
 
-    if ( (set & ~~DEPTH_RANGE_SET) !== 0 ){
+    if ( (set & SetsBits.DEPTH_RANGE_SET) !== 0 ){
       gl.depthRange(
-        decodeClampedFloat( dat[ 0|DEPTH_RANGE_NEAR ] ),
-        decodeClampedFloat( dat[ 0|DEPTH_RANGE_FAR ] )
+        decodeClampedFloat( dat[ Slots.DEPTH_RANGE_NEAR ] ),
+        decodeClampedFloat( dat[ Slots.DEPTH_RANGE_FAR ] )
       );
     }
 
@@ -624,46 +632,46 @@ export default class GLConfig{
   fromGL( gl : WebGLRenderingContext ){
     this._set = 0;
 
-    const enableBlend       = getP( gl, ~~GL_BLEND ),
-          enableCullface    = getP( gl, ~~GL_CULL_FACE ),
-          enableDepthTest   = getP( gl, ~~GL_DEPTH_TEST ),
-          enableDither      = getP( gl, ~~GL_DITHER ),
-          enablePolyOffset  = getP( gl, ~~GL_POLYGON_OFFSET_FILL ),
-          // enableACoverage   = getP( gl, ~~GL_SAMPLE_ALPHA_TO_COVERAGE ),
-          // enableCoverage    = getP( gl, ~~GL_SAMPLE_COVERAGE ),
-          enableScissor     = getP( gl, ~~GL_SCISSOR_TEST ),
-          enableStencil     = getP( gl, ~~GL_STENCIL_TEST ),
+    const enableBlend       = getP( gl, GL.BLEND ),
+          enableCullface    = getP( gl, GL.CULL_FACE ),
+          enableDepthTest   = getP( gl, GL.DEPTH_TEST ),
+          enableDither      = getP( gl, GL.DITHER ),
+          enablePolyOffset  = getP( gl, GL.POLYGON_OFFSET_FILL ),
+          // enableACoverage   = getP( gl, GL.SAMPLE_ALPHA_TO_COVERAGE ),
+          // enableCoverage    = getP( gl, GL.SAMPLE_COVERAGE ),
+          enableScissor     = getP( gl, GL.SCISSOR_TEST ),
+          enableStencil     = getP( gl, GL.STENCIL_TEST ),
 
-          blendSrcRGB       = getP( gl, ~~GL_BLEND_SRC_RGB ),
-          blendDstRGB       = getP( gl, ~~GL_BLEND_DST_RGB ),
-          blendSrcAlpha     = getP( gl, ~~GL_BLEND_SRC_ALPHA ),
-          blendDstAlpha     = getP( gl, ~~GL_BLEND_DST_ALPHA ),
-          blendEqRgb        = getP( gl, ~~GL_BLEND_EQUATION_RGB ),
-          blendEqAlpha      = getP( gl, ~~GL_BLEND_EQUATION_ALPHA ),
-          stencilFunc       = getP( gl, ~~GL_STENCIL_FUNC ),
-          stencilRef        = getP( gl, ~~GL_STENCIL_REF ),
-          stencilValueMask  = getP( gl, ~~GL_STENCIL_VALUE_MASK ),
-          stencilWriteMask  = getP( gl, ~~GL_STENCIL_WRITEMASK ),
-          stencilOpFail     = getP( gl, ~~GL_STENCIL_FAIL ),
-          stencilOpZfail    = getP( gl, ~~GL_STENCIL_PASS_DEPTH_FAIL ),
-          stencilOpZpass    = getP( gl, ~~GL_STENCIL_PASS_DEPTH_PASS ),
-          stencilBFunc      = getP( gl, ~~GL_STENCIL_BACK_FUNC ),
-          stencilBRef       = getP( gl, ~~GL_STENCIL_BACK_REF ),
-          stencilBValueMask = getP( gl, ~~GL_STENCIL_BACK_VALUE_MASK ),
-          stencilBWriteMask = getP( gl, ~~GL_STENCIL_BACK_WRITEMASK ),
-          stencilBOpFail    = getP( gl, ~~GL_STENCIL_BACK_FAIL ),
-          stencilBOpZfail   = getP( gl, ~~GL_STENCIL_BACK_PASS_DEPTH_FAIL ),
-          stencilBOpZpass   = getP( gl, ~~GL_STENCIL_BACK_PASS_DEPTH_PASS ),
+          blendSrcRGB       = getP( gl, GL.BLEND_SRC_RGB ),
+          blendDstRGB       = getP( gl, GL.BLEND_DST_RGB ),
+          blendSrcAlpha     = getP( gl, GL.BLEND_SRC_ALPHA ),
+          blendDstAlpha     = getP( gl, GL.BLEND_DST_ALPHA ),
+          blendEqRgb        = getP( gl, GL.BLEND_EQUATION_RGB ),
+          blendEqAlpha      = getP( gl, GL.BLEND_EQUATION_ALPHA ),
+          stencilFunc       = getP( gl, GL.STENCIL_FUNC ),
+          stencilRef        = getP( gl, GL.STENCIL_REF ),
+          stencilValueMask  = getP( gl, GL.STENCIL_VALUE_MASK ),
+          stencilWriteMask  = getP( gl, GL.STENCIL_WRITEMASK ),
+          stencilOpFail     = getP( gl, GL.STENCIL_FAIL ),
+          stencilOpZfail    = getP( gl, GL.STENCIL_PASS_DEPTH_FAIL ),
+          stencilOpZpass    = getP( gl, GL.STENCIL_PASS_DEPTH_PASS ),
+          stencilBFunc      = getP( gl, GL.STENCIL_BACK_FUNC ),
+          stencilBRef       = getP( gl, GL.STENCIL_BACK_REF ),
+          stencilBValueMask = getP( gl, GL.STENCIL_BACK_VALUE_MASK ),
+          stencilBWriteMask = getP( gl, GL.STENCIL_BACK_WRITEMASK ),
+          stencilBOpFail    = getP( gl, GL.STENCIL_BACK_FAIL ),
+          stencilBOpZfail   = getP( gl, GL.STENCIL_BACK_PASS_DEPTH_FAIL ),
+          stencilBOpZpass   = getP( gl, GL.STENCIL_BACK_PASS_DEPTH_PASS ),
 
-          polyOffsetFactor  = getP( gl, ~~GL_POLYGON_OFFSET_FACTOR ),
-          polyOffsetUnits   = getP( gl, ~~GL_POLYGON_OFFSET_UNITS ),
-          scissorBox        = getP( gl, ~~GL_SCISSOR_BOX ),
-          colorMaskArray    = getP( gl, ~~GL_COLOR_WRITEMASK ),
-          depthWriteMask    = getP( gl, ~~GL_DEPTH_WRITEMASK ),
-          blendColor        = getP( gl, ~~GL_BLEND_COLOR ),
-          viewport          = getP( gl, ~~GL_VIEWPORT ),
-          depthRange        = getP( gl, ~~GL_DEPTH_RANGE ),
-          lineWidth         = getP( gl, ~~GL_LINE_WIDTH );
+          polyOffsetFactor  = getP( gl, GL.POLYGON_OFFSET_FACTOR ),
+          polyOffsetUnits   = getP( gl, GL.POLYGON_OFFSET_UNITS ),
+          scissorBox        = getP( gl, GL.SCISSOR_BOX ),
+          colorMaskArray    = getP( gl, GL.COLOR_WRITEMASK ),
+          depthWriteMask    = getP( gl, GL.DEPTH_WRITEMASK ),
+          blendColor        = getP( gl, GL.BLEND_COLOR ),
+          viewport          = getP( gl, GL.VIEWPORT ),
+          depthRange        = getP( gl, GL.DEPTH_RANGE ),
+          lineWidth         = getP( gl, GL.LINE_WIDTH );
 
 
 
@@ -748,7 +756,7 @@ export default class GLConfig{
     // -----
 
     this.depthFunc(
-      gl.getParameter( ~~GL_DEPTH_FUNC )
+      gl.getParameter( GL.DEPTH_FUNC )
     );
 
     this.enableDepthTest( enableDepthTest );
@@ -756,13 +764,13 @@ export default class GLConfig{
     // FACE CULLING
     // ------------
     this.cullFace(
-      gl.getParameter( ~~GL_CULL_FACE_MODE )
+      gl.getParameter( GL.CULL_FACE_MODE )
     );
 
     this.enableCullface( enableCullface );
 
     this.frontFace(
-      gl.getParameter( ~~GL_FRONT_FACE )
+      gl.getParameter( GL.FRONT_FACE )
     );
 
 
@@ -817,8 +825,8 @@ export default class GLConfig{
 
 
   enableBlend( flag : boolean = true ): this {
-    this._dat[ 0|BLEND_ENABLE ] = +flag;
-    this._set |= BLEND_ENABLE_SET|0;
+    this._dat[ Slots.BLEND_ENABLE ] = +flag;
+    this._set |= SetsBits.BLEND_ENABLE_SET|0;
     return this;
   }
 
@@ -837,9 +845,9 @@ export default class GLConfig{
       SRC_ALPHA_SATURATE
   */
   blendFunc( src:GLenum, dst:GLenum ) : this {
-    this._dat[ 0|BLEND_FUNC_C_SRC ] = src;
-    this._dat[ 0|BLEND_FUNC_C_DST ] = dst;
-    this._set = this._set & ~BLEND_FUNC_A_SET | (~~BLEND_FUNC_SET);
+    this._dat[ Slots.BLEND_FUNC_C_SRC ] = src;
+    this._dat[ Slots.BLEND_FUNC_C_DST ] = dst;
+    this._set = this._set & ~SetsBits.BLEND_FUNC_A_SET | (SetsBits.BLEND_FUNC_SET);
     return this;
   }
 
@@ -858,17 +866,17 @@ export default class GLConfig{
       SRC_ALPHA_SATURATE
   */
   blendFuncSeparate( srcRgb : GLenum, dstRgb : GLenum, srcAlpha : GLenum, dstAlpha : GLenum ) : this {
-    this._dat[ 0|BLEND_FUNC_C_SRC ] = srcRgb;
-    this._dat[ 0|BLEND_FUNC_C_DST ] = dstRgb;
-    this._dat[ 0|BLEND_FUNC_A_SRC ] = srcAlpha;
-    this._dat[ 0|BLEND_FUNC_A_DST ] = dstAlpha;
-    this._set |= BLEND_FUNC_SET | BLEND_FUNC_A_SET;
+    this._dat[ Slots.BLEND_FUNC_C_SRC ] = srcRgb;
+    this._dat[ Slots.BLEND_FUNC_C_DST ] = dstRgb;
+    this._dat[ Slots.BLEND_FUNC_A_SRC ] = srcAlpha;
+    this._dat[ Slots.BLEND_FUNC_A_DST ] = dstAlpha;
+    this._set |= SetsBits.BLEND_FUNC_SET | SetsBits.BLEND_FUNC_A_SET;
     return this;
   }
 
   blendEquation( eq : GLenum ) : this {
-    this._dat[ 0|BLEND_EQ_C ] = eq;
-    this._set = this._set & ~BLEND_EQ_A_SET | (~~BLEND_EQ_SET);
+    this._dat[ Slots.BLEND_EQ_C ] = eq;
+    this._set = this._set & ~SetsBits.BLEND_EQ_A_SET | (SetsBits.BLEND_EQ_SET);
     return this;
   }
 
@@ -879,9 +887,9 @@ export default class GLConfig{
       FUNC_REVERSE_SUBTRACT
   */
   blendEquationSeparate ( rgbEq : GLenum, alphaEq : GLenum ) : this {
-    this._dat[ 0|BLEND_EQ_C] = rgbEq;
-    this._dat[ 0|BLEND_EQ_A ] = alphaEq;
-    this._set |= BLEND_EQ_SET | BLEND_EQ_A_SET;
+    this._dat[ Slots.BLEND_EQ_C] = rgbEq;
+    this._dat[ Slots.BLEND_EQ_A ] = alphaEq;
+    this._set |= SetsBits.BLEND_EQ_SET | SetsBits.BLEND_EQ_A_SET;
     return this;
   }
 
@@ -890,11 +898,11 @@ export default class GLConfig{
       r g b a  as Float [0.0, 1.0]
   */
   blendColor( r:number, g:number, b:number, a:number ) : this {
-    this._dat[ 0|BLEND_COLOR_R ] = encodeHalf( r );
-    this._dat[ 0|BLEND_COLOR_G ] = encodeHalf( g );
-    this._dat[ 0|BLEND_COLOR_B ] = encodeHalf( b );
-    this._dat[ 0|BLEND_COLOR_A ] = encodeHalf( a );
-    this._set |= BLEND_COLOR_SET|0;
+    this._dat[ Slots.BLEND_COLOR_R ] = encodeHalf( r );
+    this._dat[ Slots.BLEND_COLOR_G ] = encodeHalf( g );
+    this._dat[ Slots.BLEND_COLOR_B ] = encodeHalf( b );
+    this._dat[ Slots.BLEND_COLOR_A ] = encodeHalf( a );
+    this._set |= SetsBits.BLEND_COLOR_SET|0;
     return this;
   }
 
@@ -913,28 +921,28 @@ export default class GLConfig{
 
   */
   depthFunc( func : GLenum ) : this {
-    this._dat[ 0|DEPTH_FUNC ] = func;
-    this._set |= DEPTH_FUNC_SET|0;
+    this._dat[ Slots.DEPTH_FUNC ] = func;
+    this._set |= SetsBits.DEPTH_FUNC_SET|0;
     return this;
   }
 
 
   enableDepthTest( flag : boolean = true ) : this {
-    this._dat[ 0|DEPTH_ENABLE ] = +flag;
-    this._set |= DEPTH_ENABLE_SET|0;
+    this._dat[ Slots.DEPTH_ENABLE ] = +flag;
+    this._set |= SetsBits.DEPTH_ENABLE_SET|0;
     return this;
   }
 
   depthRange ( near : number, far : number ) : this {
-    this._dat[ 0|DEPTH_RANGE_NEAR ] = encodeClampedFloat( near );
-    this._dat[ 0|DEPTH_RANGE_FAR ]  = encodeClampedFloat( far );
-    this._set |= DEPTH_RANGE_SET|0;
+    this._dat[ Slots.DEPTH_RANGE_NEAR ] = encodeClampedFloat( near );
+    this._dat[ Slots.DEPTH_RANGE_FAR ]  = encodeClampedFloat( far );
+    this._set |= SetsBits.DEPTH_RANGE_SET|0;
     return this;
   }
 
   lineWidth( w : number ) : this {
-    this._dat[ 0|LINE_WIDTH ] = encodeHalf( w );
-    this._set |= LINE_WIDTH_SET|0;
+    this._dat[ Slots.LINE_WIDTH ] = encodeHalf( w );
+    this._set |= SetsBits.LINE_WIDTH_SET|0;
     return this;
   }
 
@@ -947,15 +955,15 @@ export default class GLConfig{
       FRONT_AND_BACK
   */
   cullFace ( mode : GLenum ) : this {
-    this._dat[ 0|CULL_MODE ] = mode;
-    this._set |= CULL_MODE_SET|0;
+    this._dat[ Slots.CULL_MODE ] = mode;
+    this._set |= SetsBits.CULL_MODE_SET|0;
     return this;
   }
 
   enableCullface( flag : boolean ) : this {
     if( flag === undefined ) flag = true;
-    this._dat[ 0|CULL_FACE_ENABLE ] = +flag;
-    this._set |= CULL_FACE_ENABLE_SET|0;
+    this._dat[ Slots.CULL_FACE_ENABLE ] = +flag;
+    this._set |= SetsBits.CULL_FACE_ENABLE_SET|0;
     return this;
   }
 
@@ -964,15 +972,15 @@ export default class GLConfig{
   // polygon offset
   //
   polygonOffset( polyOffsetFactor : number, polyOffsetUnits : number ) : this {
-    this._dat[ 0|POLYOFF_FACTOR] = encodeHalf( polyOffsetFactor );
-    this._dat[ 0|POLYOFF_UNITS ] = encodeHalf( polyOffsetUnits );
-    this._set |= POLYOFF_SET|0;
+    this._dat[ Slots.POLYOFF_FACTOR] = encodeHalf( polyOffsetFactor );
+    this._dat[ Slots.POLYOFF_UNITS ] = encodeHalf( polyOffsetUnits );
+    this._set |= SetsBits.POLYOFF_SET|0;
     return this;
   }
 
   enablePolygonOffset( flag : boolean = true ) : this {
-    this._dat[ 0|POLYOFF_ENABLE ] = +flag;
-    this._set |= POLYOFF_ENABLE_SET|0;
+    this._dat[ Slots.POLYOFF_ENABLE ] = +flag;
+    this._set |= SetsBits.POLYOFF_ENABLE_SET|0;
     return this;
   }
 
@@ -982,17 +990,17 @@ export default class GLConfig{
   // --------
 
   enableScissor   ( flag : boolean = true ) : this {
-    this._dat[ 0|SCISSOR_ENABLE ] = +flag;
-    this._set |= SCISSOR_ENABLE_SET|0;
+    this._dat[ Slots.SCISSOR_ENABLE ] = +flag;
+    this._set |= SetsBits.SCISSOR_ENABLE_SET|0;
     return this;
   }
 
   scissor( x : number, y : number, w : number, h : number ) : this {
-    this._dat[ 0|SCISSOR_TEST_X ] = x;
-    this._dat[ 0|SCISSOR_TEST_Y ] = y;
-    this._dat[ 0|SCISSOR_TEST_W ] = w;
-    this._dat[ 0|SCISSOR_TEST_H ] = h;
-    this._set |= SCISSOR_TEST_SET|0;
+    this._dat[ Slots.SCISSOR_TEST_X ] = x;
+    this._dat[ Slots.SCISSOR_TEST_Y ] = y;
+    this._dat[ Slots.SCISSOR_TEST_W ] = w;
+    this._dat[ Slots.SCISSOR_TEST_H ] = h;
+    this._set |= SetsBits.SCISSOR_TEST_SET|0;
     return this;
   }
 
@@ -1000,24 +1008,24 @@ export default class GLConfig{
   // --------
 
   viewport( x : number, y : number, w : number, h : number ) : this {
-    this._dat[ 0|VIEWPORT_X ] = x;
-    this._dat[ 0|VIEWPORT_Y ] = y;
-    this._dat[ 0|VIEWPORT_W ] = w;
-    this._dat[ 0|VIEWPORT_H ] = h;
-    this._set |= VIEWPORT_SET|0;
+    this._dat[ Slots.VIEWPORT_X ] = x;
+    this._dat[ Slots.VIEWPORT_Y ] = y;
+    this._dat[ Slots.VIEWPORT_W ] = w;
+    this._dat[ Slots.VIEWPORT_H ] = h;
+    this._set |= SetsBits.VIEWPORT_SET|0;
     return this;
   }
 
 
   enableDither( flag : boolean = true ) : this {
-    this._dat[ 0|DITHER_ENABLE ] = +flag;
-    this._set |= DITHER_ENABLE_SET|0;
+    this._dat[ Slots.DITHER_ENABLE ] = +flag;
+    this._set |= SetsBits.DITHER_ENABLE_SET|0;
     return this;
   }
 
   depthMask( flag : boolean ) : this {
-    this._dat[ 0|DEPTH_MASK ] = +flag;
-    this._set |= DEPTH_MASK_SET|0;
+    this._dat[ Slots.DEPTH_MASK ] = +flag;
+    this._set |= SetsBits.DEPTH_MASK_SET|0;
     return this;
   }
 
@@ -1028,19 +1036,19 @@ export default class GLConfig{
       ((b|0)<<2) |
       ((a|0)<<3);
 
-    this._dat[ 0|COLOR_MASK ] = mask;
-    this._set |= COLOR_MASK_SET|0;
+    this._dat[ Slots.COLOR_MASK ] = mask;
+    this._set |= SetsBits.COLOR_MASK_SET|0;
     return this;
   }
 
 
   // enableACoverage ( flag ){
-  //   this._dat[ 0|ACOVERAGE_ENABLE ] = flag|0;
+  //   this._dat[ ACOVERAGE_ENABLE ] = flag|0;
   //   this._set |= ACOVERAGE_ENABLE_SET|0;
   // }
 
   // enableCoverage  ( flag ){
-  //   this._dat[ 0|COVERAGE_ENABLE ] = flag|0;
+  //   this._dat[ COVERAGE_ENABLE ] = flag|0;
   //   this._set |= COVERAGE_ENABLE_SET|0;
   // }
 
@@ -1055,8 +1063,8 @@ export default class GLConfig{
       CCW
   */
   frontFace ( dir : GLenum ) : this {
-    this._dat[ 0|FACE_DIR ] = dir;
-    this._set |= FACE_DIR_SET|0;
+    this._dat[ Slots.FACE_DIR ] = dir;
+    this._set |= SetsBits.FACE_DIR_SET|0;
     return this;
   }
 
@@ -1065,30 +1073,30 @@ export default class GLConfig{
   */
 
   enableStencil( flag : boolean = true ) : this {
-    this._dat[ 0|STENCIL_ENABLE ] = +flag;
-    this._set |= STENCIL_ENABLE_SET|0;
+    this._dat[ Slots.STENCIL_ENABLE ] = +flag;
+    this._set |= SetsBits.STENCIL_ENABLE_SET|0;
     return this;
   }
 
   stencilFunc ( func : GLenum, ref : number, mask : number ) : this {
-    this._dat[ 0|STENCIL_FUNC       ] = func;
-    this._dat[ 0|STENCIL_REF        ] = ref;
-    this._dat[ 0|STENCIL_VALUE_MASK ] = mask;
-    this._set = this._set & ~STENCIL_B_FUNC_SET | (~~STENCIL_FUNC_SET);
+    this._dat[ Slots.STENCIL_FUNC       ] = func;
+    this._dat[ Slots.STENCIL_REF        ] = ref;
+    this._dat[ Slots.STENCIL_VALUE_MASK ] = mask;
+    this._set = this._set & ~SetsBits.STENCIL_B_FUNC_SET | (SetsBits.STENCIL_FUNC_SET);
     return this;
   }
 
   stencilOp ( sfail : GLenum, dpfail : GLenum, dppass : GLenum ) : this {
-    this._dat[ 0|STENCIL_OP_FAIL ] = sfail;
-    this._dat[ 0|STENCIL_OP_ZFAIL] = dpfail;
-    this._dat[ 0|STENCIL_OP_ZPASS ] = dppass;
-    this._set = this._set & ~STENCIL_B_OP_SET | (~~STENCIL_OP_SET);
+    this._dat[ Slots.STENCIL_OP_FAIL ] = sfail;
+    this._dat[ Slots.STENCIL_OP_ZFAIL] = dpfail;
+    this._dat[ Slots.STENCIL_OP_ZPASS ] = dppass;
+    this._set = this._set & ~SetsBits.STENCIL_B_OP_SET | (SetsBits.STENCIL_OP_SET);
     return this;
   }
 
   stencilMask ( mask : number ) : this {
-    this._dat[ 0|STENCIL_WRITEMASK ] = mask;
-    this._set = (this._set & ~STENCIL_B_MASK_SET) | (~~STENCIL_MASK_SET);
+    this._dat[ Slots.STENCIL_WRITEMASK ] = mask;
+    this._set = (this._set & ~SetsBits.STENCIL_B_MASK_SET) | (SetsBits.STENCIL_MASK_SET);
     return this;
   }
 
@@ -1096,32 +1104,32 @@ export default class GLConfig{
 
   stencilFuncSeparate ( func : GLenum, ref : number, mask : number, funcback : GLenum, refback : number, maskback : number ) : this {
     var dat = this._dat;
-    dat[ 0|STENCIL_FUNC         ] = func;
-    dat[ 0|STENCIL_REF          ] = ref;
-    dat[ 0|STENCIL_VALUE_MASK   ] = mask;
-    dat[ 0|STENCIL_B_FUNC       ] = funcback;
-    dat[ 0|STENCIL_B_REF        ] = refback;
-    dat[ 0|STENCIL_B_VALUE_MASK ] = maskback;
-    this._set |= STENCIL_B_FUNC_SET | STENCIL_FUNC_SET;
+    dat[ Slots.STENCIL_FUNC         ] = func;
+    dat[ Slots.STENCIL_REF          ] = ref;
+    dat[ Slots.STENCIL_VALUE_MASK   ] = mask;
+    dat[ Slots.STENCIL_B_FUNC       ] = funcback;
+    dat[ Slots.STENCIL_B_REF        ] = refback;
+    dat[ Slots.STENCIL_B_VALUE_MASK ] = maskback;
+    this._set |= SetsBits.STENCIL_B_FUNC_SET | SetsBits.STENCIL_FUNC_SET;
     return this;
   }
 
   stencilOpSeparate ( sfail : GLenum, dpfail : GLenum, dppass : GLenum, sfailback : GLenum, dpfailback : GLenum, dppassback : GLenum ) : this {
     var dat = this._dat;
-    dat[ 0|STENCIL_OP_FAIL    ] = sfail;
-    dat[ 0|STENCIL_OP_ZFAIL   ] = dpfail;
-    dat[ 0|STENCIL_OP_ZPASS   ] = dppass;
-    dat[ 0|STENCIL_B_OP_FAIL  ] = sfailback;
-    dat[ 0|STENCIL_B_OP_ZFAIL ] = dpfailback;
-    dat[ 0|STENCIL_B_OP_ZPASS ] = dppassback;
-    this._set |= STENCIL_B_OP_SET | STENCIL_OP_SET;
+    dat[ Slots.STENCIL_OP_FAIL    ] = sfail;
+    dat[ Slots.STENCIL_OP_ZFAIL   ] = dpfail;
+    dat[ Slots.STENCIL_OP_ZPASS   ] = dppass;
+    dat[ Slots.STENCIL_B_OP_FAIL  ] = sfailback;
+    dat[ Slots.STENCIL_B_OP_ZFAIL ] = dpfailback;
+    dat[ Slots.STENCIL_B_OP_ZPASS ] = dppassback;
+    this._set |= SetsBits.STENCIL_B_OP_SET | SetsBits.STENCIL_OP_SET;
     return this;
   }
 
   stencilMaskSeparate ( mask : number, maskback : number ) : this {
-    this._dat[ 0|STENCIL_WRITEMASK   ] = mask;
-    this._dat[ 0|STENCIL_B_WRITEMASK ] = maskback;
-    this._set |= STENCIL_B_MASK_SET | STENCIL_MASK_SET;
+    this._dat[ Slots.STENCIL_WRITEMASK   ] = mask;
+    this._dat[ Slots.STENCIL_B_WRITEMASK ] = maskback;
+    this._set |= SetsBits.STENCIL_B_MASK_SET | SetsBits.STENCIL_MASK_SET;
     return this;
   }
 

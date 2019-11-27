@@ -1,19 +1,19 @@
-import GLConfig from "./config";
-import GLStack from "./stack";
+import GLConfig = require("./config");
+import GLStack  = require("./stack");
 
 
 
 const _patch = new GLConfig();
 
 
-export default class GLState {
+class GLState {
   
   gl: WebGLRenderingContext;
   cfgStack: GLStack;
   _validCfg: boolean;
 
 
-  static config(){
+  static config() : GLConfig {
     return new GLConfig();
   }
 
@@ -85,5 +85,7 @@ class LocalConfig extends GLConfig {
   
 }
 
+
+export = GLState;
 
 
