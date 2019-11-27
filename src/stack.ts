@@ -18,7 +18,7 @@ const MIN_ALLOC = 16,
 //
 
 
-export = class ConfigStack {
+class ConfigStack {
 
   private _stack  : Uint32Array;
   private _sets   : Uint32Array;
@@ -150,4 +150,4 @@ export = class ConfigStack {
 
 };
 
-
+export = ConfigStack;

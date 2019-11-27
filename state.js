@@ -3,14 +3,14 @@ const GLConfig = require("./config");
 const GLStack = require("./stack");
 const _patch = new GLConfig();
 class GLState {
-    static config() {
-        return new GLConfig();
-    }
     constructor(gl) {
         this.gl = gl;
         this.cfgStack = new GLStack();
         this.cfgStack.initFromGL(gl);
         this._validCfg = false;
+    }
+    static config() {
+        return new GLConfig();
     }
     push(cfg) {
         this.cfgStack.push(cfg);

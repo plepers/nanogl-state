@@ -1,20 +1,19 @@
 import GLConfig = require('./config');
-declare const _default: {
-    new (): {
-        _stack: Uint32Array;
-        _sets: Uint32Array;
-        _size: number;
-        _ptr: number;
-        _headPos: number;
-        _wcfg: GLConfig;
-        initFromGL(gl: WebGLRenderingContext): void;
-        push(cfg: GLConfig): void;
-        pop(): void;
-        flush(): void;
-        commit(patch: GLConfig): void;
-        patch(cfg: GLConfig, out: GLConfig): void;
-        copyConfig(at: number, cfg: GLConfig): void;
-        _grow(): void;
-    };
-};
-export = _default;
+declare class ConfigStack {
+    private _stack;
+    private _sets;
+    private _size;
+    private _ptr;
+    private _headPos;
+    private _wcfg;
+    constructor();
+    initFromGL(gl: WebGLRenderingContext): void;
+    push(cfg: GLConfig): void;
+    pop(): void;
+    flush(): void;
+    commit(patch: GLConfig): void;
+    patch(cfg: GLConfig, out: GLConfig): void;
+    copyConfig(at: number, cfg: GLConfig): void;
+    private _grow;
+}
+export = ConfigStack;

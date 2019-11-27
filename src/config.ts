@@ -369,7 +369,7 @@ var getP = function( gl:WebGLRenderingContext, p:GLenum ){
 
 
 
-export = class GLConfig{
+class GLConfig{
 
   static DAT_MASKS = DAT_MASKS;
 
@@ -1134,3 +1134,5 @@ export = class GLConfig{
   }
 
 };
+
+export = GLConfig

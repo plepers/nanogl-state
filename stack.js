@@ -2,7 +2,7 @@
 const GLConfig = require("./config");
 const DAT_MASKS = GLConfig.DAT_MASKS;
 const MIN_ALLOC = 16, LEN = 51;
-module.exports = class ConfigStack {
+class ConfigStack {
     constructor() {
         this._stack = new Uint32Array(((LEN | 0) * MIN_ALLOC) | 0);
         this._sets = new Uint32Array(MIN_ALLOC | 0);
@@ -79,4 +79,6 @@ module.exports = class ConfigStack {
         this._sets = sets;
         this._size = s;
     }
-};
+}
+;
+module.exports = ConfigStack;
