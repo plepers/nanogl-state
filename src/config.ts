@@ -1,4 +1,4 @@
-(function(){
+
 /*
  * All following contstants should be inlined by uglify js
  * use  0|CONST  or  ~~CONTS to force constants evaluation and inline exp by uglifyjs2
@@ -136,11 +136,11 @@ const GL_BLEND                          = 0x0BE2,
 
 
 // half float encode/decode
-var EHBuffer = new Float32Array( 1 );
-var EHIBuffer = new Uint32Array( EHBuffer.buffer );
+const EHBuffer = new Float32Array( 1 );
+const EHIBuffer = new Uint32Array( EHBuffer.buffer );
 
 
-var DAT_MASKS = [
+const DAT_MASKS = [
       BLEND_ENABLE_SET|0,
       BLEND_EQ_SET|0,
       BLEND_FUNC_SET|0,
@@ -298,7 +298,7 @@ var DAT_MASKS = [
 
 
 // avoid set inconsistency for '*separate' configs
-function _fixSet( set ){
+function _fixSet( set:number ):number{
   return (set |
       (( set & ~~BLEND_FUNC_A_SET   ) >>> 2 ) |
       (( set & ~~BLEND_EQ_A_SET     ) >>> 2 ) |
@@ -310,18 +310,18 @@ function _fixSet( set ){
 
 
 
-function encodeClampedFloat(f){
+function encodeClampedFloat(f:number):number{
   return Math.round(f*0xFFFF)|0;
 }
 
-function decodeClampedFloat(s){
+function decodeClampedFloat(s:number):number{
   return (s/(+0xFFFF));
 }
 
 
 // http://stackoverflow.com/questions/5678432/decompressing-half-precision-floats-in-javascript
 //
-function decodeHalf (u16) {
+function decodeHalf (u16:number):number {
     var exponent = (u16 & 0x7C00) >> 10,
         fraction = u16 & 0x03FF;
     return (u16 >> 15 ? -1 : 1) * (
@@ -342,7 +342,7 @@ function decodeHalf (u16) {
 //
 
 
-function encodeHalf(f32){
+function encodeHalf(f32:number){
   EHBuffer[0] = f32;
   var fltInt32 = EHIBuffer[0];
 
@@ -355,52 +355,55 @@ function encodeHalf(f32){
 }
 
 
-var getP = function( gl, p ){
+var getP = function( gl:WebGLRenderingContext, p:GLenum ){
   return gl.getParameter( p );
 };
 
 
 
-function GLConfig()
-{
-  this._dat = new Uint16Array( 0|LEN );
-  this._set = 0;
-}
+export default class GLConfig{
 
-GLConfig.DAT_MASKS = DAT_MASKS;
+  static DAT_MASKS = DAT_MASKS;
 
-
-GLConfig.encodeHalf = function(f32){
-  return encodeHalf(f32);
-};
-
-GLConfig.decodeHalf = function(u16){
-  return decodeHalf(u16);
-};
+  static encodeHalf(f32:number) : number{
+    return encodeHalf(f32);
+  }
+  
+  static decodeHalf(u16:number) : number{
+    return decodeHalf(u16);
+  }
 
 
-GLConfig.prototype = {
+  _dat: Uint16Array;
+  _set: number;
 
-
-  toDefault: function(){
+  constructor(){
+    this._dat = new Uint16Array( 0|LEN );
+    this._set = 0;
+  }
+  
+  
+  
+    
+  toDefault(){
     this._dat.set( _DEFAULT_STATE );
     this._set = _DEFAULT_SET|0;
-  },
+  }
 
 
-  clone: function(){
+  clone(){
     var res = new GLConfig();
     res._dat.set( this._dat );
     res._set = this._set;
     return res;
-  },
+  }
 
   /*
   patch
   ============
   Apply this config on top of cfg input.
   */
-  patch: function( cfg, out ){
+  patch( cfg:GLConfig, out:GLConfig ){
     var ldat = this._dat,
         lset = this._set,
         sdat = cfg._dat,
@@ -424,13 +427,13 @@ GLConfig.prototype = {
     odat.set( sdat );
     cfg._set |= lset;
     out._set = _fixSet( oset );
-  },
+  }
 
 
-  setupGL: function( gl ){
-    var set = this._set,
-        dat = this._dat,
-        i;
+  setupGL( gl:WebGLRenderingContext ){
+    const set = this._set,
+          dat = this._dat;
+    let i : number;
 
 
     // blend enabled
@@ -610,7 +613,7 @@ GLConfig.prototype = {
 
 
 
-  },
+  }
 
 
 
@@ -618,49 +621,49 @@ GLConfig.prototype = {
 
 
   // todo refator -> straight copy to dat and set
-  fromGL: function( gl ){
+  fromGL( gl : WebGLRenderingContext ){
     this._set = 0;
 
-    var enableBlend       = getP( gl, ~~GL_BLEND ),
-        enableCullface    = getP( gl, ~~GL_CULL_FACE ),
-        enableDepthTest   = getP( gl, ~~GL_DEPTH_TEST ),
-        enableDither      = getP( gl, ~~GL_DITHER ),
-        enablePolyOffset  = getP( gl, ~~GL_POLYGON_OFFSET_FILL ),
-        // enableACoverage   = getP( gl, ~~GL_SAMPLE_ALPHA_TO_COVERAGE ),
-        // enableCoverage    = getP( gl, ~~GL_SAMPLE_COVERAGE ),
-        enableScissor     = getP( gl, ~~GL_SCISSOR_TEST ),
-        enableStencil     = getP( gl, ~~GL_STENCIL_TEST ),
+    const enableBlend       = getP( gl, ~~GL_BLEND ),
+          enableCullface    = getP( gl, ~~GL_CULL_FACE ),
+          enableDepthTest   = getP( gl, ~~GL_DEPTH_TEST ),
+          enableDither      = getP( gl, ~~GL_DITHER ),
+          enablePolyOffset  = getP( gl, ~~GL_POLYGON_OFFSET_FILL ),
+          // enableACoverage   = getP( gl, ~~GL_SAMPLE_ALPHA_TO_COVERAGE ),
+          // enableCoverage    = getP( gl, ~~GL_SAMPLE_COVERAGE ),
+          enableScissor     = getP( gl, ~~GL_SCISSOR_TEST ),
+          enableStencil     = getP( gl, ~~GL_STENCIL_TEST ),
 
-        blendSrcRGB       = getP( gl, ~~GL_BLEND_SRC_RGB ),
-        blendDstRGB       = getP( gl, ~~GL_BLEND_DST_RGB ),
-        blendSrcAlpha     = getP( gl, ~~GL_BLEND_SRC_ALPHA ),
-        blendDstAlpha     = getP( gl, ~~GL_BLEND_DST_ALPHA ),
-        blendEqRgb        = getP( gl, ~~GL_BLEND_EQUATION_RGB ),
-        blendEqAlpha      = getP( gl, ~~GL_BLEND_EQUATION_ALPHA ),
-        stencilFunc       = getP( gl, ~~GL_STENCIL_FUNC ),
-        stencilRef        = getP( gl, ~~GL_STENCIL_REF ),
-        stencilValueMask  = getP( gl, ~~GL_STENCIL_VALUE_MASK ),
-        stencilWriteMask  = getP( gl, ~~GL_STENCIL_WRITEMASK ),
-        stencilOpFail     = getP( gl, ~~GL_STENCIL_FAIL ),
-        stencilOpZfail    = getP( gl, ~~GL_STENCIL_PASS_DEPTH_FAIL ),
-        stencilOpZpass    = getP( gl, ~~GL_STENCIL_PASS_DEPTH_PASS ),
-        stencilBFunc      = getP( gl, ~~GL_STENCIL_BACK_FUNC ),
-        stencilBRef       = getP( gl, ~~GL_STENCIL_BACK_REF ),
-        stencilBValueMask = getP( gl, ~~GL_STENCIL_BACK_VALUE_MASK ),
-        stencilBWriteMask = getP( gl, ~~GL_STENCIL_BACK_WRITEMASK ),
-        stencilBOpFail    = getP( gl, ~~GL_STENCIL_BACK_FAIL ),
-        stencilBOpZfail   = getP( gl, ~~GL_STENCIL_BACK_PASS_DEPTH_FAIL ),
-        stencilBOpZpass   = getP( gl, ~~GL_STENCIL_BACK_PASS_DEPTH_PASS ),
+          blendSrcRGB       = getP( gl, ~~GL_BLEND_SRC_RGB ),
+          blendDstRGB       = getP( gl, ~~GL_BLEND_DST_RGB ),
+          blendSrcAlpha     = getP( gl, ~~GL_BLEND_SRC_ALPHA ),
+          blendDstAlpha     = getP( gl, ~~GL_BLEND_DST_ALPHA ),
+          blendEqRgb        = getP( gl, ~~GL_BLEND_EQUATION_RGB ),
+          blendEqAlpha      = getP( gl, ~~GL_BLEND_EQUATION_ALPHA ),
+          stencilFunc       = getP( gl, ~~GL_STENCIL_FUNC ),
+          stencilRef        = getP( gl, ~~GL_STENCIL_REF ),
+          stencilValueMask  = getP( gl, ~~GL_STENCIL_VALUE_MASK ),
+          stencilWriteMask  = getP( gl, ~~GL_STENCIL_WRITEMASK ),
+          stencilOpFail     = getP( gl, ~~GL_STENCIL_FAIL ),
+          stencilOpZfail    = getP( gl, ~~GL_STENCIL_PASS_DEPTH_FAIL ),
+          stencilOpZpass    = getP( gl, ~~GL_STENCIL_PASS_DEPTH_PASS ),
+          stencilBFunc      = getP( gl, ~~GL_STENCIL_BACK_FUNC ),
+          stencilBRef       = getP( gl, ~~GL_STENCIL_BACK_REF ),
+          stencilBValueMask = getP( gl, ~~GL_STENCIL_BACK_VALUE_MASK ),
+          stencilBWriteMask = getP( gl, ~~GL_STENCIL_BACK_WRITEMASK ),
+          stencilBOpFail    = getP( gl, ~~GL_STENCIL_BACK_FAIL ),
+          stencilBOpZfail   = getP( gl, ~~GL_STENCIL_BACK_PASS_DEPTH_FAIL ),
+          stencilBOpZpass   = getP( gl, ~~GL_STENCIL_BACK_PASS_DEPTH_PASS ),
 
-        polyOffsetFactor  = getP( gl, ~~GL_POLYGON_OFFSET_FACTOR ),
-        polyOffsetUnits   = getP( gl, ~~GL_POLYGON_OFFSET_UNITS ),
-        scissorBox        = getP( gl, ~~GL_SCISSOR_BOX ),
-        colorMaskArray    = getP( gl, ~~GL_COLOR_WRITEMASK ),
-        depthWriteMask    = getP( gl, ~~GL_DEPTH_WRITEMASK ),
-        blendColor        = getP( gl, ~~GL_BLEND_COLOR ),
-        viewport          = getP( gl, ~~GL_VIEWPORT ),
-        depthRange        = getP( gl, ~~GL_DEPTH_RANGE ),
-        lineWidth         = getP( gl, ~~GL_LINE_WIDTH );
+          polyOffsetFactor  = getP( gl, ~~GL_POLYGON_OFFSET_FACTOR ),
+          polyOffsetUnits   = getP( gl, ~~GL_POLYGON_OFFSET_UNITS ),
+          scissorBox        = getP( gl, ~~GL_SCISSOR_BOX ),
+          colorMaskArray    = getP( gl, ~~GL_COLOR_WRITEMASK ),
+          depthWriteMask    = getP( gl, ~~GL_DEPTH_WRITEMASK ),
+          blendColor        = getP( gl, ~~GL_BLEND_COLOR ),
+          viewport          = getP( gl, ~~GL_VIEWPORT ),
+          depthRange        = getP( gl, ~~GL_DEPTH_RANGE ),
+          lineWidth         = getP( gl, ~~GL_LINE_WIDTH );
 
 
 
@@ -810,15 +813,14 @@ GLConfig.prototype = {
 
     this.lineWidth( lineWidth );
 
-  },
+  }
 
 
-  enableBlend: function( flag ){
-    if( flag === undefined ) flag = true;
-    this._dat[ 0|BLEND_ENABLE ] = flag|0;
+  enableBlend( flag : boolean = true ): this {
+    this._dat[ 0|BLEND_ENABLE ] = +flag;
     this._set |= BLEND_ENABLE_SET|0;
     return this;
-  },
+  }
 
   /*
     enums
@@ -834,12 +836,12 @@ GLConfig.prototype = {
       ONE_MINUS_DST_COLOR
       SRC_ALPHA_SATURATE
   */
-  blendFunc: function( src, dst ){
+  blendFunc( src:GLenum, dst:GLenum ) : this {
     this._dat[ 0|BLEND_FUNC_C_SRC ] = src;
     this._dat[ 0|BLEND_FUNC_C_DST ] = dst;
     this._set = this._set & ~BLEND_FUNC_A_SET | (~~BLEND_FUNC_SET);
     return this;
-  },
+  }
 
   /*
     enums
@@ -855,20 +857,20 @@ GLConfig.prototype = {
       ONE_MINUS_DST_COLOR
       SRC_ALPHA_SATURATE
   */
-  blendFuncSeparate: function( srcRgb, dstRgb, srcAlpha, dstAlpha ){
+  blendFuncSeparate( srcRgb : GLenum, dstRgb : GLenum, srcAlpha : GLenum, dstAlpha : GLenum ) : this {
     this._dat[ 0|BLEND_FUNC_C_SRC ] = srcRgb;
     this._dat[ 0|BLEND_FUNC_C_DST ] = dstRgb;
     this._dat[ 0|BLEND_FUNC_A_SRC ] = srcAlpha;
     this._dat[ 0|BLEND_FUNC_A_DST ] = dstAlpha;
     this._set |= BLEND_FUNC_SET | BLEND_FUNC_A_SET;
     return this;
-  },
+  }
 
-  blendEquation: function( eq ){
+  blendEquation( eq : GLenum ) : this {
     this._dat[ 0|BLEND_EQ_C ] = eq;
     this._set = this._set & ~BLEND_EQ_A_SET | (~~BLEND_EQ_SET);
     return this;
-  },
+  }
 
   /*
     enums
@@ -876,25 +878,25 @@ GLConfig.prototype = {
       FUNC_SUBTRACT
       FUNC_REVERSE_SUBTRACT
   */
-  blendEquationSeparate : function( rgbEq, alphaEq ){
+  blendEquationSeparate ( rgbEq : GLenum, alphaEq : GLenum ) : this {
     this._dat[ 0|BLEND_EQ_C] = rgbEq;
     this._dat[ 0|BLEND_EQ_A ] = alphaEq;
     this._set |= BLEND_EQ_SET | BLEND_EQ_A_SET;
     return this;
-  },
+  }
 
   /*
     blendColor
       r g b a  as Float [0.0, 1.0]
   */
-  blendColor: function( r, g, b, a ){
+  blendColor( r:number, g:number, b:number, a:number ) : this {
     this._dat[ 0|BLEND_COLOR_R ] = encodeHalf( r );
     this._dat[ 0|BLEND_COLOR_G ] = encodeHalf( g );
     this._dat[ 0|BLEND_COLOR_B ] = encodeHalf( b );
     this._dat[ 0|BLEND_COLOR_A ] = encodeHalf( a );
     this._set |= BLEND_COLOR_SET|0;
     return this;
-  },
+  }
 
 
 
@@ -910,32 +912,31 @@ GLConfig.prototype = {
       ALWAYS
 
   */
-  depthFunc: function( func ){
+  depthFunc( func : GLenum ) : this {
     this._dat[ 0|DEPTH_FUNC ] = func;
     this._set |= DEPTH_FUNC_SET|0;
     return this;
-  },
+  }
 
 
-  enableDepthTest: function( flag ){
-    if( flag === undefined ) flag = true;
-    this._dat[ 0|DEPTH_ENABLE ] = flag|0;
+  enableDepthTest( flag : boolean = true ) : this {
+    this._dat[ 0|DEPTH_ENABLE ] = +flag;
     this._set |= DEPTH_ENABLE_SET|0;
     return this;
-  },
+  }
 
-  depthRange : function( near, far ){
+  depthRange ( near : number, far : number ) : this {
     this._dat[ 0|DEPTH_RANGE_NEAR ] = encodeClampedFloat( near );
     this._dat[ 0|DEPTH_RANGE_FAR ]  = encodeClampedFloat( far );
     this._set |= DEPTH_RANGE_SET|0;
     return this;
-  },
+  }
 
-  lineWidth: function( w ){
+  lineWidth( w : number ) : this {
     this._dat[ 0|LINE_WIDTH ] = encodeHalf( w );
     this._set |= LINE_WIDTH_SET|0;
     return this;
-  },
+  }
 
 
 
@@ -945,87 +946,82 @@ GLConfig.prototype = {
       BACK
       FRONT_AND_BACK
   */
-  cullFace : function( mode ){
+  cullFace ( mode : GLenum ) : this {
     this._dat[ 0|CULL_MODE ] = mode;
     this._set |= CULL_MODE_SET|0;
     return this;
-  },
+  }
 
-  enableCullface: function( flag ){
+  enableCullface( flag : boolean ) : this {
     if( flag === undefined ) flag = true;
-    this._dat[ 0|CULL_FACE_ENABLE ] = flag|0;
+    this._dat[ 0|CULL_FACE_ENABLE ] = +flag;
     this._set |= CULL_FACE_ENABLE_SET|0;
     return this;
-  },
+  }
 
 
 
   // polygon offset
   //
-  polygonOffset: function( polyOffsetFactor, polyOffsetUnits )
-  {
+  polygonOffset( polyOffsetFactor : number, polyOffsetUnits : number ) : this {
     this._dat[ 0|POLYOFF_FACTOR] = encodeHalf( polyOffsetFactor );
     this._dat[ 0|POLYOFF_UNITS ] = encodeHalf( polyOffsetUnits );
     this._set |= POLYOFF_SET|0;
     return this;
-  },
+  }
 
-  enablePolygonOffset: function( flag ){
-    if( flag === undefined ) flag = true;
-    this._dat[ 0|POLYOFF_ENABLE ] = flag|0;
+  enablePolygonOffset( flag : boolean = true ) : this {
+    this._dat[ 0|POLYOFF_ENABLE ] = +flag;
     this._set |= POLYOFF_ENABLE_SET|0;
     return this;
-  },
+  }
 
 
 
   // SCISSOR
   // --------
 
-  enableScissor : function  ( flag ){
-    if( flag === undefined ) flag = true;
-    this._dat[ 0|SCISSOR_ENABLE ] = flag|0;
+  enableScissor   ( flag : boolean = true ) : this {
+    this._dat[ 0|SCISSOR_ENABLE ] = +flag;
     this._set |= SCISSOR_ENABLE_SET|0;
     return this;
-  },
+  }
 
-  scissor: function( x, y, w, h )
-  {
+  scissor( x : number, y : number, w : number, h : number ) : this {
     this._dat[ 0|SCISSOR_TEST_X ] = x;
     this._dat[ 0|SCISSOR_TEST_Y ] = y;
     this._dat[ 0|SCISSOR_TEST_W ] = w;
     this._dat[ 0|SCISSOR_TEST_H ] = h;
     this._set |= SCISSOR_TEST_SET|0;
     return this;
-  },
+  }
 
   // VIEWPORT
   // --------
 
-  viewport: function( x, y, w, h ){
+  viewport( x : number, y : number, w : number, h : number ) : this {
     this._dat[ 0|VIEWPORT_X ] = x;
     this._dat[ 0|VIEWPORT_Y ] = y;
     this._dat[ 0|VIEWPORT_W ] = w;
     this._dat[ 0|VIEWPORT_H ] = h;
     this._set |= VIEWPORT_SET|0;
     return this;
-  },
+  }
 
 
-  enableDither: function( flag ){
-    if( flag === undefined ) flag = true;
-    this._dat[ 0|DITHER_ENABLE ] = flag|0;
+  enableDither( flag : boolean = true ) : this {
+    this._dat[ 0|DITHER_ENABLE ] = +flag;
     this._set |= DITHER_ENABLE_SET|0;
     return this;
-  },
+  }
 
-  depthMask: function( flag ){
-    this._dat[ 0|DEPTH_MASK ] = flag|0;
+  depthMask( flag : boolean ) : this {
+    this._dat[ 0|DEPTH_MASK ] = +flag;
     this._set |= DEPTH_MASK_SET|0;
     return this;
-  },
+  }
 
-  colorMask: function( r, g, b, a ){
+  colorMask( r : number, g : number, b : number, a : number ) : this {
     var mask =
       (r|0) |
       ((g|0)<<1) |
@@ -1035,18 +1031,18 @@ GLConfig.prototype = {
     this._dat[ 0|COLOR_MASK ] = mask;
     this._set |= COLOR_MASK_SET|0;
     return this;
-  },
+  }
 
 
-  // enableACoverage: function ( flag ){
+  // enableACoverage ( flag ){
   //   this._dat[ 0|ACOVERAGE_ENABLE ] = flag|0;
   //   this._set |= ACOVERAGE_ENABLE_SET|0;
-  // },
+  // }
 
-  // enableCoverage  : function( flag ){
+  // enableCoverage  ( flag ){
   //   this._dat[ 0|COVERAGE_ENABLE ] = flag|0;
   //   this._set |= COVERAGE_ENABLE_SET|0;
-  // },
+  // }
 
 
 
@@ -1058,48 +1054,47 @@ GLConfig.prototype = {
       CW
       CCW
   */
-  frontFace : function( dir ){
+  frontFace ( dir : GLenum ) : this {
     this._dat[ 0|FACE_DIR ] = dir;
     this._set |= FACE_DIR_SET|0;
     return this;
-  },
+  }
 
   /*
     Stencils
   */
 
-  enableStencil: function( flag ){
-    if( flag === undefined ) flag = true;
-    this._dat[ 0|STENCIL_ENABLE ] = flag|0;
+  enableStencil( flag : boolean = true ) : this {
+    this._dat[ 0|STENCIL_ENABLE ] = +flag;
     this._set |= STENCIL_ENABLE_SET|0;
     return this;
-  },
+  }
 
-  stencilFunc: function ( func, ref, mask ){
+  stencilFunc ( func : GLenum, ref : number, mask : number ) : this {
     this._dat[ 0|STENCIL_FUNC       ] = func;
     this._dat[ 0|STENCIL_REF        ] = ref;
     this._dat[ 0|STENCIL_VALUE_MASK ] = mask;
     this._set = this._set & ~STENCIL_B_FUNC_SET | (~~STENCIL_FUNC_SET);
     return this;
-  },
+  }
 
-  stencilOp : function( sfail, dpfail, dppass ){
+  stencilOp ( sfail : GLenum, dpfail : GLenum, dppass : GLenum ) : this {
     this._dat[ 0|STENCIL_OP_FAIL ] = sfail;
     this._dat[ 0|STENCIL_OP_ZFAIL] = dpfail;
     this._dat[ 0|STENCIL_OP_ZPASS ] = dppass;
     this._set = this._set & ~STENCIL_B_OP_SET | (~~STENCIL_OP_SET);
     return this;
-  },
+  }
 
-  stencilMask : function( mask ){
+  stencilMask ( mask : number ) : this {
     this._dat[ 0|STENCIL_WRITEMASK ] = mask;
     this._set = (this._set & ~STENCIL_B_MASK_SET) | (~~STENCIL_MASK_SET);
     return this;
-  },
+  }
 
 
 
-  stencilFuncSeparate: function ( func, ref, mask, funcback, refback, maskback ){
+  stencilFuncSeparate ( func : GLenum, ref : number, mask : number, funcback : GLenum, refback : number, maskback : number ) : this {
     var dat = this._dat;
     dat[ 0|STENCIL_FUNC         ] = func;
     dat[ 0|STENCIL_REF          ] = ref;
@@ -1109,9 +1104,9 @@ GLConfig.prototype = {
     dat[ 0|STENCIL_B_VALUE_MASK ] = maskback;
     this._set |= STENCIL_B_FUNC_SET | STENCIL_FUNC_SET;
     return this;
-  },
+  }
 
-  stencilOpSeparate: function ( sfail, dpfail, dppass, sfailback, dpfailback, dppassback ){
+  stencilOpSeparate ( sfail : GLenum, dpfail : GLenum, dppass : GLenum, sfailback : GLenum, dpfailback : GLenum, dppassback : GLenum ) : this {
     var dat = this._dat;
     dat[ 0|STENCIL_OP_FAIL    ] = sfail;
     dat[ 0|STENCIL_OP_ZFAIL   ] = dpfail;
@@ -1121,9 +1116,9 @@ GLConfig.prototype = {
     dat[ 0|STENCIL_B_OP_ZPASS ] = dppassback;
     this._set |= STENCIL_B_OP_SET | STENCIL_OP_SET;
     return this;
-  },
+  }
 
-  stencilMaskSeparate: function ( mask, maskback ){
+  stencilMaskSeparate ( mask : number, maskback : number ) : this {
     this._dat[ 0|STENCIL_WRITEMASK   ] = mask;
     this._dat[ 0|STENCIL_B_WRITEMASK ] = maskback;
     this._set |= STENCIL_B_MASK_SET | STENCIL_MASK_SET;
@@ -1131,7 +1126,3 @@ GLConfig.prototype = {
   }
 
 };
-
-module.exports = GLConfig;
-
-})();

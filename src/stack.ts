@@ -1,8 +1,7 @@
-(function(){
 
-var GLConfig = require( './config' );
+import GLConfig from './config'
 
-var DAT_MASKS = GLConfig.DAT_MASKS;
+const DAT_MASKS = GLConfig.DAT_MASKS;
 
 const MIN_ALLOC = 16,
       LEN = 51;
@@ -19,31 +18,38 @@ const MIN_ALLOC = 16,
 //
 
 
+export default class ConfigStack {
 
-function ConfigStack(){
-  this._stack = new Uint32Array( ( (LEN|0) * MIN_ALLOC)|0 );
-  this._sets  = new Uint32Array( MIN_ALLOC|0 );
-  this._size  = MIN_ALLOC|0;
-  this._ptr   = 0;
+  private _stack  : Uint32Array;
+  private _sets   : Uint32Array;
+  private _size   : number     ;
+  private _ptr    : number     ;
+  private _headPos: number     ;
+  private _wcfg   : GLConfig   ;
 
-  this._headPos = 0;
-  this._wcfg = new GLConfig();
-}
+  constructor(){
+    this._stack = new Uint32Array( ( (LEN|0) * MIN_ALLOC)|0 );
+    this._sets  = new Uint32Array( MIN_ALLOC|0 );
+    this._size  = MIN_ALLOC|0;
+    this._ptr   = 0;
+
+    this._headPos = 0;
+    this._wcfg = new GLConfig();
+  }
 
 
-ConfigStack.prototype = {
 
 
-  initFromGL : function( gl )
+  initFromGL( gl : WebGLRenderingContext )
   {
     this._ptr = 0;
     this._wcfg.fromGL( gl );
     this._sets[0] = 0;
     this._stack.set( this._wcfg._dat );
-  },
+  }
 
 
-  push : function( cfg ){
+  push( cfg : GLConfig ){
     var ptr = this._ptr,
         sset = this._sets[ptr++],
         lset=  cfg._set,
@@ -74,10 +80,10 @@ ConfigStack.prototype = {
       sdat[ sptr+i ] = val;
     }
 
-  },
+  }
 
 
-  pop : function() {
+  pop() {
     var ptr = --this._ptr;
 
     if( this._headPos > ptr ){
@@ -85,18 +91,17 @@ ConfigStack.prototype = {
       this._headPos = ptr;
     }
 
+  }
 
-  },
 
-
-  flush : function(){
+  flush(){
     while( this._ptr>0 ){
       this.pop();
     }
-  },
+  }
 
 
-  commit : function( patch ){
+  commit( patch : GLConfig ){
     var ptr = this._ptr;
 
     this.copyConfig( ptr, patch );
@@ -107,16 +112,16 @@ ConfigStack.prototype = {
     }
     this._sets[ ptr ] = 0;
 
-  },
+  }
 
 
-  patch : function( cfg, out ){
+  patch( cfg : GLConfig, out : GLConfig ){
     this.copyConfig( this._ptr, this._wcfg );
     this._wcfg.patch( cfg, out );
-  },
+  }
 
 
-  copyConfig : function( at, cfg )
+  copyConfig( at : number, cfg : GLConfig )
   {
     var cdat = cfg._dat,
         sdat = this._stack,
@@ -127,10 +132,10 @@ ConfigStack.prototype = {
       cdat[i] = sdat[off+i];
     }
     cfg._set = this._sets[at];
-  },
+  }
 
 
-  _grow : function(){
+  private _grow(){
     var s      = this._size << 1,
         stack  = new Uint32Array( s * (0|LEN) ),
         sets   = new Uint32Array( s );
@@ -145,7 +150,4 @@ ConfigStack.prototype = {
 
 };
 
-module.exports = ConfigStack;
 
-
-})();
