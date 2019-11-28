@@ -30,13 +30,13 @@ describe( "GLState", function(){
 
 
   it( " makeConfig", function(){
-    var cfg = new GLState.config();
+    var cfg = GLState.config();
     assertNoError();
     expect( cfg ).to.be.ok()
   });
 
   it( " push", function(){
-    var cfg = new GLState.config();
+    var cfg = GLState.config();
     var state = new GLState( gl );
     state.push( cfg );
     assertNoError();
@@ -44,7 +44,7 @@ describe( "GLState", function(){
 
 
   it( " apply", function(){
-    var cfg = new GLState.config().enableBlend();
+    var cfg = GLState.config().enableBlend();
     var state = new GLState( gl );
     state.push( cfg );
     state.apply();
@@ -53,7 +53,7 @@ describe( "GLState", function(){
 
 
   it( " pop", function(){
-    var cfg = new GLState.config().enableBlend();
+    var cfg = GLState.config().enableBlend();
     var state = new GLState( gl );
     state.push( cfg );
     state.pop();
@@ -61,7 +61,7 @@ describe( "GLState", function(){
   });
 
   it( " now", function(){
-    var cfg = new GLState.config().enableBlend();
+    var cfg = GLState.config().enableBlend();
     var state = new GLState( gl );
     state.now( cfg );
     assertNoError();
