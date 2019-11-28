@@ -13,10 +13,18 @@ cache:
   directories:
   - node_modules
 deploy:
-  provider: npm
-  email: contact@makemepulse.com
-  api_key:
-    secure: amXG/RTH0SjSGiQiNvfVe48v3T0KpBkUOX0F4qJg+4CkC4UQpj8J+89T7pOhjAqugcTuFHepMGr9G+9yXlxOfrFBZP85QVLcDQSkujuI/BWDBAPw51SgHp51nb8d+z8aEcikS9Jr95E6Fa8gG6MCj3HGowXrRhPLsEvR+EV93Z3IBIHRIYgX8tPiT/eJXw1aNJzcDaiUZZUK3rQqf2DK5XixF5BfyPf3ISq8/R7wDkv9uXfBlCxRe4rLjJBjqkrw72csxyPya5zqZSKlwoK9+Mm2aBu0OkdfK7a3lxST5qjk+HVrfh9wXHYybfxu8Pp0EC73nYL+6xVHpJE7oU1N/70WndiWDmSxcyVN1M21L+SrIYrUt6tu4Pw8tf1psbndxZvfLcha6A260UxYsm4UwhhbJx/bc9Vhw9KpTZeuWYeU3dilu+4iHywpDR31pw0B5wSNBv1Uz3xWNoT4zl/XxhiDRO2eXSl0LVfBY5glh1uCjQE8wzV9BqJ1W9/YD0W/Y9KIM33kIaLBGph1oKa7nZVXSYB+hFOP2YMFxQLckfGPPajHQkYYfjU8aVo7xaQlON93ZD3UGOQHT7QUjYkg4qMhaY+kZ9eRjvLY5gsvAbwke7GSeJVTCR0X/chK/jbEvwhf1MGC61BOJnJntN3Z9kwBd0XXtta1bNxR6/91CK0=
-  on:
-    branch: master
-    repo: plepers/nanogl-state
+  - provider: npm
+    email: pierre.lepers@gmail.com
+    api_key:
+      secure: QY0ZEjlCMlw90IPSxL7NXWotgGE4adxZ8wLgKrQFpj/dzLxU0wvit9w9Uvboeni40o0psW5T9LRX5yNsno9eNuPrcddtQNsqDcU3WVbcfI6bKRmOd3rqjKRO/yLoTCpMDgphG+n/p54ZF9pNStwNfb/T6lsWGGRvBitOnCG0EkdnefTwsRn3YuHMFmRuHdH1YlZBLzyNEXBEqg+l9vTsbclCD7gAQR8QB8MrNoWDYtCG0fpGkJL15tay2UIhkzwxZL3RuSzbBpJ+j7lQ9aK9L5cPiDaYWGCmjvDllL11d4oGgtiEuUejStkuJOBSIsSZo02IiaQ67A9CKS91ajho/ZbVQIAf/YsrypLrAaU9pAbABMTNAS9Xrei35fkeKXB92J6gnayfFochKno2NLvWgB+GR8W2iqHNbwPJKXDuct9tkjvdvUyWZ128wiX30wbgaPMvOuPVWD/QN20wnJa1Ki22uBYZV8IXCWBaT0QtGsEc48U6Nt456ug7AxIikg48JjazcyQiraKouPvCPRK0Q81oZSt6iuUvx5GSrtwP3u4dm+3GJ8+TKbydsNcvQJsjQAyjJlYUrH2UCXS/sLoPK7b1idmjZa3s55MIjVFCgohO/a07h5nTjRYLv/RAY/Di/y7T1tytDQXCNsO4gxR5p/E4Hc/YJy+dU2DMTX8rQgY=
+    on:
+      branch: master
+      repo: plepers/nanogl-state
+  - provider: npm
+    email: pierre.lepers@gmail.com
+    dry_run: true
+    api_key:
+      secure: QY0ZEjlCMlw90IPSxL7NXWotgGE4adxZ8wLgKrQFpj/dzLxU0wvit9w9Uvboeni40o0psW5T9LRX5yNsno9eNuPrcddtQNsqDcU3WVbcfI6bKRmOd3rqjKRO/yLoTCpMDgphG+n/p54ZF9pNStwNfb/T6lsWGGRvBitOnCG0EkdnefTwsRn3YuHMFmRuHdH1YlZBLzyNEXBEqg+l9vTsbclCD7gAQR8QB8MrNoWDYtCG0fpGkJL15tay2UIhkzwxZL3RuSzbBpJ+j7lQ9aK9L5cPiDaYWGCmjvDllL11d4oGgtiEuUejStkuJOBSIsSZo02IiaQ67A9CKS91ajho/ZbVQIAf/YsrypLrAaU9pAbABMTNAS9Xrei35fkeKXB92J6gnayfFochKno2NLvWgB+GR8W2iqHNbwPJKXDuct9tkjvdvUyWZ128wiX30wbgaPMvOuPVWD/QN20wnJa1Ki22uBYZV8IXCWBaT0QtGsEc48U6Nt456ug7AxIikg48JjazcyQiraKouPvCPRK0Q81oZSt6iuUvx5GSrtwP3u4dm+3GJ8+TKbydsNcvQJsjQAyjJlYUrH2UCXS/sLoPK7b1idmjZa3s55MIjVFCgohO/a07h5nTjRYLv/RAY/Di/y7T1tytDQXCNsO4gxR5p/E4Hc/YJy+dU2DMTX8rQgY=
+    on:
+      branch: develop
+      repo: plepers/nanogl-state
