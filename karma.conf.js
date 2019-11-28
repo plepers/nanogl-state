@@ -113,18 +113,18 @@ module.exports = function (config) {
         webgl2: true
       },
 
-      'SL_win10_Edge': {
-        base: 'SauceLabs',
-        browserName: 'MicrosoftEdge',
-        platform: 'Windows 10',
-        version: '18.17763'
-      },
-      'SL_win10_FF': {
-        base: 'SauceLabs',
-        browserName: 'firefox',
-        platform: 'Windows 10',
-        version: '70.0'
-      },
+      // 'SL_win10_Edge': {
+      //   base: 'SauceLabs',
+      //   browserName: 'MicrosoftEdge',
+      //   platform: 'Windows 10',
+      //   version: '18.17763'
+      // },
+      // 'SL_win10_FF': {
+      //   base: 'SauceLabs',
+      //   browserName: 'firefox',
+      //   platform: 'Windows 10',
+      //   version: '70.0'
+      // },
     },
   });
 
