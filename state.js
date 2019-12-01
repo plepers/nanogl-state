@@ -1,8 +1,7 @@
-"use strict";
-const GLConfig = require("./config");
-const GLStack = require("./stack");
+import GLConfig from './config';
+import GLStack from './stack';
 const _patch = new GLConfig();
-class GLState {
+export default class GLState {
     constructor(gl) {
         this.gl = gl;
         this.cfgStack = new GLStack();
@@ -36,7 +35,7 @@ class GLState {
         return new LocalConfig(this);
     }
 }
-class LocalConfig extends GLConfig {
+export class LocalConfig extends GLConfig {
     constructor(state) {
         super();
         this.state = state;
@@ -44,6 +43,4 @@ class LocalConfig extends GLConfig {
     apply() {
         this.state.now(this);
     }
-    ;
 }
-module.exports = GLState;

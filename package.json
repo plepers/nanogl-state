@@ -3,8 +3,9 @@
   "version": "1.0.1",
   "description": "Efficient webgl context state management",
   "main": "state.js",
+  "type": "state.d.ts",
   "scripts": {
-    "test": "tsc && karma start"
+    "test": "tsc && karma start && karma start --webgl-version=2"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,22 @@
     "url": "https://github.com/plepers/nanogl-state/issues"
   },
   "homepage": "https://github.com/plepers/nanogl-state#readme",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "@babel/preset-env"
+          ]
+        }
+      ]
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babelify": "^10.0.0",
     "expect.js": "^0.3.1",
     "karma": "^4.4.1",
     "karma-browserify": "^6.1.0",

@@ -1,5 +1,5 @@
-var GLConfig = require( '../config' ),
-    GLStack = require( '../stack' );
+import GLConfig from '../config'
+import GLStack from '../stack'
 
 var expect = require( 'expect.js' ),
     aequal = require( './utils/aequal.js' ),
@@ -57,10 +57,18 @@ function getHead( stack ){
 
 describe( "gl - GLConfigStack", function(){
 
+  var stack;
+
   beforeEach(function(){
 
     var cvs = document.createElement( 'canvas' );
-    gl = cvs.getContext( 'webgl' ) || cvs.getContext( 'experimental-webgl' );
+    
+    if( __karma__.config.webgl_version===2 ){
+      gl = cvs.getContext( 'webgl2' )
+    }
+    else
+      gl = cvs.getContext( 'webgl') || cvs.getContext( 'experimental-webgl' );
+    
     gl.scissor( 0, 0, 0, 0 ); // normalize
 
     stack = new GLStack();

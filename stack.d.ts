@@ -1,4 +1,4 @@
-import GLConfig = require('./config');
+import GLConfig from './config';
 declare class ConfigStack {
     private _stack;
     private _sets;
@@ -16,4 +16,4 @@ declare class ConfigStack {
     copyConfig(at: number, cfg: GLConfig): void;
     private _grow;
 }
-export = ConfigStack;
+export default ConfigStack;

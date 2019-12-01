@@ -1,5 +1,4 @@
-"use strict";
-const GLConfig = require("./config");
+import GLConfig from './config';
 const DAT_MASKS = GLConfig.DAT_MASKS;
 const MIN_ALLOC = 16, LEN = 51;
 class ConfigStack {
@@ -81,4 +80,4 @@ class ConfigStack {
     }
 }
 ;
-module.exports = ConfigStack;
+export default ConfigStack;

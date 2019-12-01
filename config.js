@@ -1,4 +1,3 @@
-"use strict";
 const EHBuffer = new Float32Array(1);
 const EHIBuffer = new Uint32Array(EHBuffer.buffer);
 const DAT_MASKS = [
@@ -150,9 +149,10 @@ function encodeHalf(f32) {
     fltInt16 |= (fltInt32 >> 13) & 0x3ff;
     return fltInt16;
 }
-var getP = function (gl, p) {
+function getGlParameter(gl, p) {
     return gl.getParameter(p);
-};
+}
+;
 class GLConfig {
     constructor() {
         this._dat = new Uint16Array(51);
@@ -291,7 +291,7 @@ class GLConfig {
     }
     fromGL(gl) {
         this._set = 0;
-        const enableBlend = getP(gl, 3042), enableCullface = getP(gl, 2884), enableDepthTest = getP(gl, 2929), enableDither = getP(gl, 3024), enablePolyOffset = getP(gl, 32823), enableScissor = getP(gl, 3089), enableStencil = getP(gl, 2960), blendSrcRGB = getP(gl, 32969), blendDstRGB = getP(gl, 32968), blendSrcAlpha = getP(gl, 32971), blendDstAlpha = getP(gl, 32970), blendEqRgb = getP(gl, 32777), blendEqAlpha = getP(gl, 34877), stencilFunc = getP(gl, 2962), stencilRef = getP(gl, 2967), stencilValueMask = getP(gl, 2963), stencilWriteMask = getP(gl, 2968), stencilOpFail = getP(gl, 2964), stencilOpZfail = getP(gl, 2965), stencilOpZpass = getP(gl, 2966), stencilBFunc = getP(gl, 34816), stencilBRef = getP(gl, 36003), stencilBValueMask = getP(gl, 36004), stencilBWriteMask = getP(gl, 36005), stencilBOpFail = getP(gl, 34817), stencilBOpZfail = getP(gl, 34818), stencilBOpZpass = getP(gl, 34819), polyOffsetFactor = getP(gl, 32824), polyOffsetUnits = getP(gl, 10752), scissorBox = getP(gl, 3088), colorMaskArray = getP(gl, 3107), depthWriteMask = getP(gl, 2930), blendColor = getP(gl, 32773), viewport = getP(gl, 2978), depthRange = getP(gl, 2928), lineWidth = getP(gl, 2849);
+        const enableBlend = getGlParameter(gl, 3042), enableCullface = getGlParameter(gl, 2884), enableDepthTest = getGlParameter(gl, 2929), enableDither = getGlParameter(gl, 3024), enablePolyOffset = getGlParameter(gl, 32823), enableScissor = getGlParameter(gl, 3089), enableStencil = getGlParameter(gl, 2960), blendSrcRGB = getGlParameter(gl, 32969), blendDstRGB = getGlParameter(gl, 32968), blendSrcAlpha = getGlParameter(gl, 32971), blendDstAlpha = getGlParameter(gl, 32970), blendEqRgb = getGlParameter(gl, 32777), blendEqAlpha = getGlParameter(gl, 34877), stencilFunc = getGlParameter(gl, 2962), stencilRef = getGlParameter(gl, 2967), stencilValueMask = getGlParameter(gl, 2963), stencilWriteMask = getGlParameter(gl, 2968), stencilOpFail = getGlParameter(gl, 2964), stencilOpZfail = getGlParameter(gl, 2965), stencilOpZpass = getGlParameter(gl, 2966), stencilBFunc = getGlParameter(gl, 34816), stencilBRef = getGlParameter(gl, 36003), stencilBValueMask = getGlParameter(gl, 36004), stencilBWriteMask = getGlParameter(gl, 36005), stencilBOpFail = getGlParameter(gl, 34817), stencilBOpZfail = getGlParameter(gl, 34818), stencilBOpZpass = getGlParameter(gl, 34819), polyOffsetFactor = getGlParameter(gl, 32824), polyOffsetUnits = getGlParameter(gl, 10752), scissorBox = getGlParameter(gl, 3088), colorMaskArray = getGlParameter(gl, 3107), depthWriteMask = getGlParameter(gl, 2930), blendColor = getGlParameter(gl, 32773), viewport = getGlParameter(gl, 2978), depthRange = getGlParameter(gl, 2928), lineWidth = getGlParameter(gl, 2849);
         this.enableBlend(enableBlend);
         if (blendSrcRGB !== blendSrcAlpha || blendDstRGB !== blendDstAlpha) {
             this.blendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
@@ -527,4 +527,4 @@ class GLConfig {
 }
 GLConfig.DAT_MASKS = DAT_MASKS;
 ;
-module.exports = GLConfig;
+export default GLConfig;

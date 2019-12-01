@@ -39,4 +39,4 @@ declare class GLConfig {
     stencilOpSeparate(sfail: GLenum, dpfail: GLenum, dppass: GLenum, sfailback: GLenum, dpfailback: GLenum, dppassback: GLenum): this;
     stencilMaskSeparate(mask: number, maskback: number): this;
 }
-export = GLConfig;
+export default GLConfig;
