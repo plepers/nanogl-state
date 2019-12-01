@@ -1,5 +1,5 @@
 
-import GLConfig = require('./config')
+import GLConfig from './config'
 
 const DAT_MASKS = GLConfig.DAT_MASKS;
 
@@ -150,4 +150,4 @@ class ConfigStack {
 
 };
 
-export = ConfigStack;
+export default ConfigStack

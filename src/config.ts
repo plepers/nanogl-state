@@ -363,7 +363,7 @@ function encodeHalf(f32:number){
 }
 
 
-var getP = function( gl:WebGLRenderingContext, p:GLenum ){
+function getGlParameter( gl:WebGLRenderingContext, p:GLenum ){
   return gl.getParameter( p );
 };
 
@@ -632,46 +632,46 @@ class GLConfig{
   fromGL( gl : WebGLRenderingContext ){
     this._set = 0;
 
-    const enableBlend       = getP( gl, GL.BLEND ),
-          enableCullface    = getP( gl, GL.CULL_FACE ),
-          enableDepthTest   = getP( gl, GL.DEPTH_TEST ),
-          enableDither      = getP( gl, GL.DITHER ),
-          enablePolyOffset  = getP( gl, GL.POLYGON_OFFSET_FILL ),
+    const enableBlend       = getGlParameter( gl, GL.BLEND ),
+          enableCullface    = getGlParameter( gl, GL.CULL_FACE ),
+          enableDepthTest   = getGlParameter( gl, GL.DEPTH_TEST ),
+          enableDither      = getGlParameter( gl, GL.DITHER ),
+          enablePolyOffset  = getGlParameter( gl, GL.POLYGON_OFFSET_FILL ),
           // enableACoverage   = getP( gl, GL.SAMPLE_ALPHA_TO_COVERAGE ),
           // enableCoverage    = getP( gl, GL.SAMPLE_COVERAGE ),
-          enableScissor     = getP( gl, GL.SCISSOR_TEST ),
-          enableStencil     = getP( gl, GL.STENCIL_TEST ),
+          enableScissor     = getGlParameter( gl, GL.SCISSOR_TEST ),
+          enableStencil     = getGlParameter( gl, GL.STENCIL_TEST ),
 
-          blendSrcRGB       = getP( gl, GL.BLEND_SRC_RGB ),
-          blendDstRGB       = getP( gl, GL.BLEND_DST_RGB ),
-          blendSrcAlpha     = getP( gl, GL.BLEND_SRC_ALPHA ),
-          blendDstAlpha     = getP( gl, GL.BLEND_DST_ALPHA ),
-          blendEqRgb        = getP( gl, GL.BLEND_EQUATION_RGB ),
-          blendEqAlpha      = getP( gl, GL.BLEND_EQUATION_ALPHA ),
-          stencilFunc       = getP( gl, GL.STENCIL_FUNC ),
-          stencilRef        = getP( gl, GL.STENCIL_REF ),
-          stencilValueMask  = getP( gl, GL.STENCIL_VALUE_MASK ),
-          stencilWriteMask  = getP( gl, GL.STENCIL_WRITEMASK ),
-          stencilOpFail     = getP( gl, GL.STENCIL_FAIL ),
-          stencilOpZfail    = getP( gl, GL.STENCIL_PASS_DEPTH_FAIL ),
-          stencilOpZpass    = getP( gl, GL.STENCIL_PASS_DEPTH_PASS ),
-          stencilBFunc      = getP( gl, GL.STENCIL_BACK_FUNC ),
-          stencilBRef       = getP( gl, GL.STENCIL_BACK_REF ),
-          stencilBValueMask = getP( gl, GL.STENCIL_BACK_VALUE_MASK ),
-          stencilBWriteMask = getP( gl, GL.STENCIL_BACK_WRITEMASK ),
-          stencilBOpFail    = getP( gl, GL.STENCIL_BACK_FAIL ),
-          stencilBOpZfail   = getP( gl, GL.STENCIL_BACK_PASS_DEPTH_FAIL ),
-          stencilBOpZpass   = getP( gl, GL.STENCIL_BACK_PASS_DEPTH_PASS ),
+          blendSrcRGB       = getGlParameter( gl, GL.BLEND_SRC_RGB ),
+          blendDstRGB       = getGlParameter( gl, GL.BLEND_DST_RGB ),
+          blendSrcAlpha     = getGlParameter( gl, GL.BLEND_SRC_ALPHA ),
+          blendDstAlpha     = getGlParameter( gl, GL.BLEND_DST_ALPHA ),
+          blendEqRgb        = getGlParameter( gl, GL.BLEND_EQUATION_RGB ),
+          blendEqAlpha      = getGlParameter( gl, GL.BLEND_EQUATION_ALPHA ),
+          stencilFunc       = getGlParameter( gl, GL.STENCIL_FUNC ),
+          stencilRef        = getGlParameter( gl, GL.STENCIL_REF ),
+          stencilValueMask  = getGlParameter( gl, GL.STENCIL_VALUE_MASK ),
+          stencilWriteMask  = getGlParameter( gl, GL.STENCIL_WRITEMASK ),
+          stencilOpFail     = getGlParameter( gl, GL.STENCIL_FAIL ),
+          stencilOpZfail    = getGlParameter( gl, GL.STENCIL_PASS_DEPTH_FAIL ),
+          stencilOpZpass    = getGlParameter( gl, GL.STENCIL_PASS_DEPTH_PASS ),
+          stencilBFunc      = getGlParameter( gl, GL.STENCIL_BACK_FUNC ),
+          stencilBRef       = getGlParameter( gl, GL.STENCIL_BACK_REF ),
+          stencilBValueMask = getGlParameter( gl, GL.STENCIL_BACK_VALUE_MASK ),
+          stencilBWriteMask = getGlParameter( gl, GL.STENCIL_BACK_WRITEMASK ),
+          stencilBOpFail    = getGlParameter( gl, GL.STENCIL_BACK_FAIL ),
+          stencilBOpZfail   = getGlParameter( gl, GL.STENCIL_BACK_PASS_DEPTH_FAIL ),
+          stencilBOpZpass   = getGlParameter( gl, GL.STENCIL_BACK_PASS_DEPTH_PASS ),
 
-          polyOffsetFactor  = getP( gl, GL.POLYGON_OFFSET_FACTOR ),
-          polyOffsetUnits   = getP( gl, GL.POLYGON_OFFSET_UNITS ),
-          scissorBox        = getP( gl, GL.SCISSOR_BOX ),
-          colorMaskArray    = getP( gl, GL.COLOR_WRITEMASK ),
-          depthWriteMask    = getP( gl, GL.DEPTH_WRITEMASK ),
-          blendColor        = getP( gl, GL.BLEND_COLOR ),
-          viewport          = getP( gl, GL.VIEWPORT ),
-          depthRange        = getP( gl, GL.DEPTH_RANGE ),
-          lineWidth         = getP( gl, GL.LINE_WIDTH );
+          polyOffsetFactor  = getGlParameter( gl, GL.POLYGON_OFFSET_FACTOR ),
+          polyOffsetUnits   = getGlParameter( gl, GL.POLYGON_OFFSET_UNITS ),
+          scissorBox        = getGlParameter( gl, GL.SCISSOR_BOX ),
+          colorMaskArray    = getGlParameter( gl, GL.COLOR_WRITEMASK ),
+          depthWriteMask    = getGlParameter( gl, GL.DEPTH_WRITEMASK ),
+          blendColor        = getGlParameter( gl, GL.BLEND_COLOR ),
+          viewport          = getGlParameter( gl, GL.VIEWPORT ),
+          depthRange        = getGlParameter( gl, GL.DEPTH_RANGE ),
+          lineWidth         = getGlParameter( gl, GL.LINE_WIDTH );
 
 
 
@@ -1135,4 +1135,4 @@ class GLConfig{
 
 };
 
-export = GLConfig
+export default GLConfig

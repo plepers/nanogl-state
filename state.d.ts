@@ -1,6 +1,6 @@
-import GLConfig = require("./config");
-import GLStack = require("./stack");
-declare class GLState {
+import GLConfig from './config';
+import GLStack from './stack';
+export default class GLState {
     gl: WebGLRenderingContext;
     cfgStack: GLStack;
     _validCfg: boolean;
@@ -12,9 +12,8 @@ declare class GLState {
     now(cfg: GLConfig): void;
     config(): LocalConfig;
 }
-declare class LocalConfig extends GLConfig {
+export declare class LocalConfig extends GLConfig {
     state: GLState;
     constructor(state: GLState);
     apply(): void;
 }
-export = GLState;

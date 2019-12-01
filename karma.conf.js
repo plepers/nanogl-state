@@ -2,6 +2,23 @@
 // Generated on Sat Dec 19 2015 12:50:43 GMT+0100 (CET)
 
 module.exports = function (config) {
+
+  var glversion = 1;
+
+
+  if( config.webglVersion !== undefined ){
+    glversion = config.webglVersion;
+  }
+
+  
+  var invgrep;
+  if( glversion === 1 ){
+    invgrep = '@WEBGL2';
+  }
+  else {
+    invgrep = '@WEBGL1';
+  }
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -38,6 +55,7 @@ module.exports = function (config) {
     browserify: {
       debug: true,
       transform: [
+        ["babelify", { "presets": ["@babel/preset-env"] }],
         ['stringify', { 'extensions': ['.vert', '.frag'] }]
       ]
     },
@@ -128,12 +146,19 @@ module.exports = function (config) {
     },
   });
 
-  if (process.env.TRAVIS) {
+  if( process.env.TRAVIS ) {
 
     var browsers = [];
-    for (var browser in config.customLaunchers) {
-      browsers.push(browser);
+    for( var browser in config.customLaunchers ){
+      
+      // skip browser not supporting webgl2
+      var bdata = config.customLaunchers[browser];
+      if( glversion !== 1 && bdata.webgl2 !== true ) 
+        continue; 
+
+      browsers.push( browser );
     }
+    console.log( browsers );
     config.browsers = browsers;
 
     config.autoWatch = false;
