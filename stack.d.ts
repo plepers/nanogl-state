@@ -5,7 +5,7 @@ declare class ConfigStack {
     private _size;
     private _ptr;
     private _headPos;
-    private _wcfg;
+    private readonly _wcfg;
     constructor();
     initFromGL(gl: WebGLRenderingContext): void;
     push(cfg: GLConfig): void;
