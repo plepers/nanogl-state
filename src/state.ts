@@ -8,9 +8,9 @@ const _patch = new GLConfig();
 
 export default class GLState {
   
-  gl: WebGLRenderingContext;
-  cfgStack: GLStack;
-  _validCfg: boolean;
+  readonly gl: WebGLRenderingContext;
+  readonly cfgStack: GLStack;
+  private _validCfg: boolean;
 
 
   static config() : GLConfig {
@@ -72,7 +72,7 @@ export default class GLState {
 
 export class LocalConfig extends GLConfig {
 
-  state: GLState;
+  private readonly state: GLState;
 
   constructor( state : GLState ){
     super();

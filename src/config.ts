@@ -61,6 +61,8 @@ const enum Slots {
   LEN = 51,
 }
 
+export const DAT_SIZE = Slots.LEN;
+
 const enum SetsBits {
 
   BLEND_ENABLE_SET       = 1 << 0 ,
@@ -148,7 +150,7 @@ const EHBuffer = new Float32Array( 1 );
 const EHIBuffer = new Uint32Array( EHBuffer.buffer );
 
 
-const DAT_MASKS : number[] = [
+export const DAT_MASKS : readonly SetsBits[] = [
       SetsBits.BLEND_ENABLE_SET,
       SetsBits.BLEND_EQ_SET,
       SetsBits.BLEND_FUNC_SET,
@@ -212,7 +214,7 @@ const DAT_MASKS : number[] = [
       SetsBits.DEPTH_RANGE_SET,
 
       SetsBits.LINE_WIDTH_SET
-    ],
+    ] as const,
 
 
     //            <b >< enab  >
@@ -352,10 +354,10 @@ function decodeHalf (u16:number):number {
 
 function encodeHalf(f32:number){
   EHBuffer[0] = f32;
-  var fltInt32 = EHIBuffer[0];
+  const fltInt32 = EHIBuffer[0];
 
-  var fltInt16 = (fltInt32 >> 31) << 5;
-  var tmp = (fltInt32 >> 23) & 0xff;
+  let fltInt16 = (fltInt32 >> 31) << 5;
+  let tmp = (fltInt32 >> 23) & 0xff;
   tmp = (tmp - 0x70) & (( (0x70 - tmp) >> 4) >> 27);
   fltInt16 = (fltInt16 | tmp) << 10;
   fltInt16 |= (fltInt32 >> 13) & 0x3ff;
@@ -369,9 +371,7 @@ function getGlParameter( gl:WebGLRenderingContext, p:GLenum ){
 
 
 
-class GLConfig{
-
-  static DAT_MASKS = DAT_MASKS;
+export default class GLConfig {
 
   static encodeHalf(f32:number) : number{
     return encodeHalf(f32);
@@ -382,7 +382,7 @@ class GLConfig{
   }
 
 
-  _dat: Uint16Array;
+  readonly _dat: Uint16Array;
   _set: number;
 
   constructor(){
@@ -399,8 +399,8 @@ class GLConfig{
   }
 
 
-  clone(){
-    var res = new GLConfig();
+  clone() : GLConfig {
+    const res = new GLConfig();
     res._dat.set( this._dat );
     res._set = this._set;
     return res;
@@ -1030,7 +1030,7 @@ class GLConfig{
   }
 
   colorMask( r : number, g : number, b : number, a : number ) : this {
-    var mask =
+    const mask =
       (r|0) |
       ((g|0)<<1) |
       ((b|0)<<2) |
@@ -1103,7 +1103,7 @@ class GLConfig{
 
 
   stencilFuncSeparate ( func : GLenum, ref : number, mask : number, funcback : GLenum, refback : number, maskback : number ) : this {
-    var dat = this._dat;
+    const dat = this._dat;
     dat[ Slots.STENCIL_FUNC         ] = func;
     dat[ Slots.STENCIL_REF          ] = ref;
     dat[ Slots.STENCIL_VALUE_MASK   ] = mask;
@@ -1115,7 +1115,7 @@ class GLConfig{
   }
 
   stencilOpSeparate ( sfail : GLenum, dpfail : GLenum, dppass : GLenum, sfailback : GLenum, dpfailback : GLenum, dppassback : GLenum ) : this {
-    var dat = this._dat;
+    const dat = this._dat;
     dat[ Slots.STENCIL_OP_FAIL    ] = sfail;
     dat[ Slots.STENCIL_OP_ZFAIL   ] = dpfail;
     dat[ Slots.STENCIL_OP_ZPASS   ] = dppass;
@@ -1133,6 +1133,4 @@ class GLConfig{
     return this;
   }
 
-};
-
-export default GLConfig
+}

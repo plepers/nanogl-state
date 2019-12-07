@@ -1,6 +1,7 @@
+export const DAT_SIZE = 51;
 const EHBuffer = new Float32Array(1);
 const EHIBuffer = new Uint32Array(EHBuffer.buffer);
-const DAT_MASKS = [
+export const DAT_MASKS = [
     1,
     512,
     1024,
@@ -141,9 +142,9 @@ function decodeHalf(u16) {
 }
 function encodeHalf(f32) {
     EHBuffer[0] = f32;
-    var fltInt32 = EHIBuffer[0];
-    var fltInt16 = (fltInt32 >> 31) << 5;
-    var tmp = (fltInt32 >> 23) & 0xff;
+    const fltInt32 = EHIBuffer[0];
+    let fltInt16 = (fltInt32 >> 31) << 5;
+    let tmp = (fltInt32 >> 23) & 0xff;
     tmp = (tmp - 0x70) & (((0x70 - tmp) >> 4) >> 27);
     fltInt16 = (fltInt16 | tmp) << 10;
     fltInt16 |= (fltInt32 >> 13) & 0x3ff;
@@ -153,7 +154,7 @@ function getGlParameter(gl, p) {
     return gl.getParameter(p);
 }
 ;
-class GLConfig {
+export default class GLConfig {
     constructor() {
         this._dat = new Uint16Array(51);
         this._set = 0;
@@ -169,7 +170,7 @@ class GLConfig {
         this._set = _DEFAULT_SET | 0;
     }
     clone() {
-        var res = new GLConfig();
+        const res = new GLConfig();
         res._dat.set(this._dat);
         res._set = this._set;
         return res;
@@ -459,7 +460,7 @@ class GLConfig {
         return this;
     }
     colorMask(r, g, b, a) {
-        var mask = (r | 0) |
+        const mask = (r | 0) |
             ((g | 0) << 1) |
             ((b | 0) << 2) |
             ((a | 0) << 3);
@@ -497,7 +498,7 @@ class GLConfig {
         return this;
     }
     stencilFuncSeparate(func, ref, mask, funcback, refback, maskback) {
-        var dat = this._dat;
+        const dat = this._dat;
         dat[13] = func;
         dat[14] = ref;
         dat[15] = mask;
@@ -508,7 +509,7 @@ class GLConfig {
         return this;
     }
     stencilOpSeparate(sfail, dpfail, dppass, sfailback, dpfailback, dppassback) {
-        var dat = this._dat;
+        const dat = this._dat;
         dat[17] = sfail;
         dat[18] = dpfail;
         dat[19] = dppass;
@@ -525,6 +526,3 @@ class GLConfig {
         return this;
     }
 }
-GLConfig.DAT_MASKS = DAT_MASKS;
-;
-export default GLConfig;

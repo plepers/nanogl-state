@@ -1,9 +1,9 @@
 import GLConfig from './config';
 import GLStack from './stack';
 export default class GLState {
-    gl: WebGLRenderingContext;
-    cfgStack: GLStack;
-    _validCfg: boolean;
+    readonly gl: WebGLRenderingContext;
+    readonly cfgStack: GLStack;
+    private _validCfg;
     static config(): GLConfig;
     constructor(gl: WebGLRenderingContext);
     push(cfg: GLConfig): void;
@@ -13,7 +13,7 @@ export default class GLState {
     config(): LocalConfig;
 }
 export declare class LocalConfig extends GLConfig {
-    state: GLState;
+    private readonly state;
     constructor(state: GLState);
     apply(): void;
 }

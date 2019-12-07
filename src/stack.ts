@@ -1,10 +1,13 @@
 
-import GLConfig from './config'
+import GLConfig, { DAT_MASKS, DAT_SIZE } from './config'
 
-const DAT_MASKS = GLConfig.DAT_MASKS;
+
+
+
+
 
 const MIN_ALLOC = 16,
-      LEN = 51;
+      LEN = DAT_SIZE;
 
 
 //   A, B, C, D, E, F, ?   -- initial config
@@ -20,15 +23,17 @@ const MIN_ALLOC = 16,
 
 class ConfigStack {
 
-  private _stack  : Uint32Array;
+  private _stack  : Uint16Array;
   private _sets   : Uint32Array;
+
   private _size   : number     ;
   private _ptr    : number     ;
   private _headPos: number     ;
-  private _wcfg   : GLConfig   ;
+
+  private readonly _wcfg : GLConfig;
 
   constructor(){
-    this._stack = new Uint32Array( ( (LEN|0) * MIN_ALLOC)|0 );
+    this._stack = new Uint16Array( ( (LEN|0) * MIN_ALLOC)|0 );
     this._sets  = new Uint32Array( MIN_ALLOC|0 );
     this._size  = MIN_ALLOC|0;
     this._ptr   = 0;
@@ -50,27 +55,24 @@ class ConfigStack {
 
 
   push( cfg : GLConfig ){
-    var ptr = this._ptr,
-        sset = this._sets[ptr++],
-        lset=  cfg._set,
-        sptr, sdat, ldat, i, sbit, val;
 
-    if( ptr === this._size ){
+    if( this._ptr+1 === this._size ){
       this._grow();
     }
 
-    sset |= lset;
-    this._sets[ptr] = sset;
-    this._ptr = ptr;
-    sptr = ptr*(0|LEN);
+    const lset=  cfg._set,
+          ptr = ++this._ptr,
+          sptr = ptr*(0|LEN),
+          ldat = cfg._dat,
+          sdat = this._stack;
 
-    sdat = this._stack;
-    ldat = cfg._dat;
+    this._sets[ptr] = this._sets[ptr-1] | lset;
 
-
-    for( i = 0; i < (LEN|0); i++ )
+    
+    for( var i = 0; i < (LEN|0); i++ )
     {
-      sbit = DAT_MASKS[ i ];
+      var sbit = DAT_MASKS[ i ];
+      var val : number;
       if( 0 !== ( lset & sbit ) ) {
         val = ldat[ i ];
       }
@@ -84,7 +86,7 @@ class ConfigStack {
 
 
   pop() {
-    var ptr = --this._ptr;
+    const ptr = --this._ptr;
 
     if( this._headPos > ptr ){
       this._sets[ptr] |= this._sets[ptr+1];
@@ -102,7 +104,7 @@ class ConfigStack {
 
 
   commit( patch : GLConfig ){
-    var ptr = this._ptr;
+    const ptr = this._ptr;
 
     this.copyConfig( ptr, patch );
 
@@ -123,9 +125,9 @@ class ConfigStack {
 
   copyConfig( at : number, cfg : GLConfig )
   {
-    var cdat = cfg._dat,
-        sdat = this._stack,
-        off  = 0|(at*(LEN|0));
+    const cdat = cfg._dat,
+          sdat = this._stack,
+          off  = 0|(at*(LEN|0));
 
     for( var i = 0; i < (LEN|0); i++ )
     {
@@ -136,9 +138,9 @@ class ConfigStack {
 
 
   private _grow(){
-    var s      = this._size << 1,
-        stack  = new Uint32Array( s * (0|LEN) ),
-        sets   = new Uint32Array( s );
+    const s      = this._size << 1,
+          stack  = new Uint16Array( s * (0|LEN) ),
+          sets   = new Uint32Array( s );
 
     stack.set(  this._stack, 0 );
     sets.set(  this._sets, 0 );
