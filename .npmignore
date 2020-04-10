@@ -1,3 +1,5 @@
 test
 docs
 src
+.travis.yml
+tsconfig.json

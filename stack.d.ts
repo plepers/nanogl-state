@@ -1,11 +1,11 @@
-import GLConfig = require('./config');
+import GLConfig from './config';
 declare class ConfigStack {
     private _stack;
     private _sets;
     private _size;
     private _ptr;
     private _headPos;
-    private _wcfg;
+    private readonly _wcfg;
     constructor();
     initFromGL(gl: WebGLRenderingContext): void;
     push(cfg: GLConfig): void;
@@ -16,4 +16,4 @@ declare class ConfigStack {
     copyConfig(at: number, cfg: GLConfig): void;
     private _grow;
 }
-export = ConfigStack;
+export default ConfigStack;

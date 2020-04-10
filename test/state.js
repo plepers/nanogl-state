@@ -1,4 +1,4 @@
-var GLState = require( '../state' );
+import GLState from '../state'
 
 var expect  = require( 'expect.js' );
 
@@ -10,7 +10,13 @@ function assertNoError(){
 function createContext() {
   var cvs = document.createElement( 'canvas' );
   cvs.width = cvs.height = 16;
-  gl = cvs.getContext( 'webgl' ) || cvs.getContext( 'experimental-webgl' );
+  var gl;
+  if( __karma__.config.webgl_version===2 ){
+    gl = cvs.getContext( 'webgl2' )
+  }
+  else
+    gl = cvs.getContext( 'webgl') || cvs.getContext( 'experimental-webgl' );
+  
   gl.scissor( 0, 0, 0, 0 ); // normalize
   return gl;
 }

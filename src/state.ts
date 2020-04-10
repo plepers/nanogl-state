@@ -1,16 +1,16 @@
-import GLConfig = require("./config");
-import GLStack  = require("./stack");
+import GLConfig from './config'
+import GLStack  from './stack'
 
 
 
 const _patch = new GLConfig();
 
 
-class GLState {
+export default class GLState {
   
-  gl: WebGLRenderingContext;
-  cfgStack: GLStack;
-  _validCfg: boolean;
+  readonly gl: WebGLRenderingContext;
+  readonly cfgStack: GLStack;
+  private _validCfg: boolean;
 
 
   static config() : GLConfig {
@@ -70,9 +70,9 @@ class GLState {
  *
  */
 
-class LocalConfig extends GLConfig {
+export class LocalConfig extends GLConfig {
 
-  state: GLState;
+  private readonly state: GLState;
 
   constructor( state : GLState ){
     super();
@@ -81,11 +81,10 @@ class LocalConfig extends GLConfig {
   
   apply(){
     this.state.now( this );
-  };
+  }
   
 }
 
 
-export = GLState;
 
 
