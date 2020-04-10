@@ -1,6 +1,6 @@
 {
   "name": "nanogl-state",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Efficient webgl context state management",
   "main": "state.js",
   "type": "state.d.ts",
