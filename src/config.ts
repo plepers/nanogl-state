@@ -1029,12 +1029,12 @@ export default class GLConfig {
     return this;
   }
 
-  colorMask( r : number, g : number, b : number, a : number ) : this {
+  colorMask( r : boolean, g : boolean, b : boolean, a : boolean ) : this {
     const mask =
-      (r|0) |
-      ((g|0)<<1) |
-      ((b|0)<<2) |
-      ((a|0)<<3);
+      ((r?1:0)   ) |
+      ((g?1:0)<<1) |
+      ((b?1:0)<<2) |
+      ((a?1:0)<<3);
 
     this._dat[ Slots.COLOR_MASK ] = mask;
     this._set |= SetsBits.COLOR_MASK_SET|0;

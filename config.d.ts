@@ -114,7 +114,7 @@ export default class GLConfig {
     viewport(x: number, y: number, w: number, h: number): this;
     enableDither(flag?: boolean): this;
     depthMask(flag: boolean): this;
-    colorMask(r: number, g: number, b: number, a: number): this;
+    colorMask(r: boolean, g: boolean, b: boolean, a: boolean): this;
     frontFace(dir: GLenum): this;
     enableStencil(flag?: boolean): this;
     stencilFunc(func: GLenum, ref: number, mask: number): this;

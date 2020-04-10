@@ -460,10 +460,10 @@ export default class GLConfig {
         return this;
     }
     colorMask(r, g, b, a) {
-        const mask = (r | 0) |
-            ((g | 0) << 1) |
-            ((b | 0) << 2) |
-            ((a | 0) << 3);
+        const mask = ((r ? 1 : 0)) |
+            ((g ? 1 : 0) << 1) |
+            ((b ? 1 : 0) << 2) |
+            ((a ? 1 : 0) << 3);
         this._dat[38] = mask;
         this._set |= 16777216 | 0;
         return this;
