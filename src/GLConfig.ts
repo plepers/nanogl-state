@@ -960,8 +960,7 @@ export default class GLConfig {
     return this;
   }
 
-  enableCullface( flag : boolean ) : this {
-    if( flag === undefined ) flag = true;
+  enableCullface( flag : boolean = true ) : this {
     this._dat[ Slots.CULL_FACE_ENABLE ] = +flag;
     this._set |= SetsBits.CULL_FACE_ENABLE_SET|0;
     return this;
