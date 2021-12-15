@@ -1,5 +1,5 @@
-import GLConfig from './config';
-import GLStack from './stack';
+import GLConfig from './GLConfig';
+import GLStack from './ConfigStack';
 const _patch = new GLConfig();
 export default class GLState {
     constructor(gl) {
@@ -8,8 +8,13 @@ export default class GLState {
         this.cfgStack.initFromGL(gl);
         this._validCfg = false;
     }
-    static config() {
-        return new GLConfig();
+    static get(gl) {
+        let res = this._instances.get(gl);
+        if (!res) {
+            res = new GLState(gl);
+            this._instances.set(gl, res);
+        }
+        return res;
     }
     push(cfg) {
         this.cfgStack.push(cfg);
@@ -35,6 +40,7 @@ export default class GLState {
         return new LocalConfig(this);
     }
 }
+GLState._instances = new WeakMap();
 export class LocalConfig extends GLConfig {
     constructor(state) {
         super();

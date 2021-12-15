@@ -1,4 +1,5 @@
-import GLState from '../state'
+import GLConfig from '../GLConfig';
+import GLState from '../GLState'
 
 var expect  = require( 'expect.js' );
 
@@ -36,13 +37,14 @@ describe( "GLState", function(){
 
 
   it( " makeConfig", function(){
-    var cfg = GLState.config();
+    var cfg = new GLConfig();
     assertNoError();
     expect( cfg ).to.be.ok()
   });
 
+
   it( " push", function(){
-    var cfg = GLState.config();
+    var cfg =  new GLConfig();
     var state = new GLState( gl );
     state.push( cfg );
     assertNoError();
@@ -50,7 +52,7 @@ describe( "GLState", function(){
 
 
   it( " apply", function(){
-    var cfg = GLState.config().enableBlend();
+    var cfg =  new GLConfig().enableBlend();
     var state = new GLState( gl );
     state.push( cfg );
     state.apply();
@@ -59,18 +61,20 @@ describe( "GLState", function(){
 
 
   it( " pop", function(){
-    var cfg = GLState.config().enableBlend();
+    var cfg =  new GLConfig().enableBlend();
     var state = new GLState( gl );
     state.push( cfg );
     state.pop();
     assertNoError();
   });
 
+
   it( " now", function(){
-    var cfg = GLState.config().enableBlend();
+    var cfg =  new GLConfig().enableBlend();
     var state = new GLState( gl );
     state.now( cfg );
     assertNoError();
   });
 
+  
 });

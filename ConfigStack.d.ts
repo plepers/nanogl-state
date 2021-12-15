@@ -1,4 +1,4 @@
-import GLConfig from './config';
+import GLConfig from './GLConfig';
 declare class ConfigStack {
     private _stack;
     private _sets;

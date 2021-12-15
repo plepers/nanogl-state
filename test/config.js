@@ -1,5 +1,5 @@
-import GLConfig from '../config'
-import GLState from '../state'
+import GLConfig from '../GLConfig'
+import GLState from '../GLState'
 
 var expect = require( 'expect.js' ),
     aequal = require( './utils/aequal.js' ),

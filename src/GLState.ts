@@ -1,5 +1,5 @@
-import GLConfig from './config'
-import GLStack  from './stack'
+import GLConfig from './GLConfig'
+import GLStack  from './ConfigStack'
 
 
 
@@ -12,9 +12,15 @@ export default class GLState {
   readonly cfgStack: GLStack;
   private _validCfg: boolean;
 
+  private static _instances = new WeakMap<WebGLRenderingContext, GLState>()
 
-  static config() : GLConfig {
-    return new GLConfig();
+  static get( gl:WebGLRenderingContext ): GLState {
+    let res = this._instances.get( gl )
+    if( !res ){
+      res = new GLState(gl)
+      this._instances.set( gl, res )
+    }
+    return res
   }
 
 
