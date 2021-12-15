@@ -1,5 +1,5 @@
-import GLConfig from '../config'
-import GLStack from '../stack'
+import GLConfig from '../GLConfig'
+import GLStack from '../ConfigStack'
 
 var expect = require( 'expect.js' ),
     aequal = require( './utils/aequal.js' ),
@@ -261,6 +261,63 @@ describe( "gl - GLConfigStack", function(){
       expect( ena.calledOnce ).to.be( true )
 
       stack.pop();
+
+    });
+
+    it( "debugging", function(){
+
+      stack.initFromGL( gl );
+
+      console.log( "a", Array.from(stack._sets).join(',') )
+      
+      var _patch = new GLConfig();
+      
+      var blendCfg = new GLConfig();
+      blendCfg.enableBlend( true );
+      
+      var depthCfg = new GLConfig();
+      depthCfg.enableDepthTest( true );
+      
+      
+      
+      stack.push( blendCfg );
+      console.log( "b", Array.from(stack._sets).join(',') )
+      
+      stack.commit( _patch );
+      console.log( "c", Array.from(stack._sets).join(',') )
+      
+      stack.push( depthCfg );
+      console.log( "d", Array.from(stack._sets).join(',') )
+      
+      stack.commit( _patch );
+      console.log( "e", Array.from(stack._sets).join(',') )
+      
+      stack.pop( );
+      stack.pop( );
+      console.log( "f", Array.from(stack._sets).join(',') )
+
+      
+
+      stack = new GLStack();
+
+      console.log( "----------------------")
+
+      stack.push( blendCfg );
+      console.log( "a", Array.from(stack._sets).join(',') )
+      
+      stack.commit( _patch );
+      console.log( "b", Array.from(stack._sets).join(',') )
+      console.log( "-", _patch._set )
+      
+      stack.pop(  );
+      console.log( "c", Array.from(stack._sets).join(',') )
+      
+      stack.push( blendCfg );
+      console.log( "d", Array.from(stack._sets).join(',') )
+      
+      stack.commit( _patch );
+      console.log( "e", Array.from(stack._sets).join(',') )
+      console.log( "-", _patch._set )
 
     });
 

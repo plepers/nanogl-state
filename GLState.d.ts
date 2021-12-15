@@ -1,10 +1,11 @@
-import GLConfig from './config';
-import GLStack from './stack';
+import GLConfig from './GLConfig';
+import GLStack from './ConfigStack';
 export default class GLState {
     readonly gl: WebGLRenderingContext;
     readonly cfgStack: GLStack;
     private _validCfg;
-    static config(): GLConfig;
+    private static _instances;
+    static get(gl: WebGLRenderingContext): GLState;
     constructor(gl: WebGLRenderingContext);
     push(cfg: GLConfig): void;
     pop(): void;

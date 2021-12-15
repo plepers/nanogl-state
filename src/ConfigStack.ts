@@ -1,5 +1,5 @@
 
-import GLConfig, { DAT_MASKS, DAT_SIZE } from './config'
+import GLConfig, { DAT_MASKS, DAT_SIZE } from './GLConfig'
 
 
 

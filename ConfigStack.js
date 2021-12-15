@@ -1,4 +1,4 @@
-import GLConfig, { DAT_MASKS, DAT_SIZE } from './config';
+import GLConfig, { DAT_MASKS, DAT_SIZE } from './GLConfig';
 const MIN_ALLOC = 16, LEN = DAT_SIZE;
 class ConfigStack {
     constructor() {
