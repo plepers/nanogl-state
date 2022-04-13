@@ -12,7 +12,6 @@ declare class ConfigStack {
     pop(): void;
     flush(): void;
     commit(patch: GLConfig): void;
-    patch(cfg: GLConfig, out: GLConfig): void;
     copyConfig(at: number, cfg: GLConfig): void;
     private _grow;
 }

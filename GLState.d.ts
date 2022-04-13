@@ -4,6 +4,7 @@ export default class GLState {
     readonly gl: WebGLRenderingContext;
     readonly cfgStack: GLStack;
     private _validCfg;
+    private readonly _state;
     private static _instances;
     static get(gl: WebGLRenderingContext): GLState;
     constructor(gl: WebGLRenderingContext);

@@ -23,11 +23,32 @@ const MIN_ALLOC = 16,
 
 class ConfigStack {
 
+
+  /**
+   * values of the states at each position in the stack
+   */
   private _stack  : Uint16Array;
+
+
+  /**
+   * bitmask set of all the configs in the stack
+   */
   private _sets   : Uint32Array;
 
+
+  /**
+   * allocated size of the stack
+   */
   private _size   : number     ;
+
+  /**
+   * current positionin the stack
+   */
   private _ptr    : number     ;
+
+  /**
+   * position in teh stack of the last "commit"
+   */
   private _headPos: number     ;
 
   private readonly _wcfg : GLConfig;
@@ -44,7 +65,10 @@ class ConfigStack {
 
 
 
-
+  /**
+   * Fetch state from gl context and set initial set and dat
+   * @param gl 
+   */
   initFromGL( gl : WebGLRenderingContext )
   {
     this._ptr = 0;
@@ -54,6 +78,19 @@ class ConfigStack {
   }
 
 
+  /**
+   * Add a config to the stack
+   * @param cfg 
+   * 
+   * A, B, C, D, E, F, G   -- previous row in _stack
+   * 1, 0, 0, 1, 1, 1, 0   -- previous row in _sets
+   *
+   * ?, ?, X, D, E, ?, ?   -- cfg _dat
+   * 0, 0, 1, 1, 1, 0, 0   -- cfg _set
+   *
+   * A, B, X, D, E, F, G   -- new row in _stack
+   * 1, 0, 1, 1, 1, 1, 0   -- new row in _sets
+   */
   push( cfg : GLConfig ){
 
     if( this._ptr+1 === this._size ){
@@ -66,9 +103,11 @@ class ConfigStack {
           ldat = cfg._dat,
           sdat = this._stack;
 
+    // set a new row in the _sets, whitch is the unionof the previous row and the input cfg set
     this._sets[ptr] = this._sets[ptr-1] | lset;
 
-    
+    // set a new row in the _stack
+    // use input cfg data if cfg set is on for the given data, else use the data in the previous row
     for( var i = 0; i < (LEN|0); i++ )
     {
       var sbit = DAT_MASKS[ i ];
@@ -84,7 +123,10 @@ class ConfigStack {
 
   }
 
-
+  /**
+   * remove the last config from the stack
+   * if the HEAD position is ahead the new position, the new position set is unioned with the previous set
+   */
   pop() {
     const ptr = --this._ptr;
 
@@ -102,7 +144,10 @@ class ConfigStack {
     }
   }
 
-
+  /**
+   * copy current stack state to the given patch config and mark HEAD as the current position
+   * @param patch 
+   */
   commit( patch : GLConfig ){
     const ptr = this._ptr;
 
@@ -117,12 +162,16 @@ class ConfigStack {
   }
 
 
-  patch( cfg : GLConfig, out : GLConfig ){
-    this.copyConfig( this._ptr, this._wcfg );
-    this._wcfg.patch( cfg, out );
-  }
+  // patch( cfg : GLConfig, out : GLConfig ){
+  //   this.copyConfig( this._ptr, this._wcfg );
+  //   this._wcfg.patch( cfg, out );
+  // }
 
-
+  /**
+   * Copy a row in the stack and sets to the given config
+   * @param at position in the stack to copy from
+   * @param cfg config to copy to
+   */
   copyConfig( at : number, cfg : GLConfig )
   {
     const cdat = cfg._dat,

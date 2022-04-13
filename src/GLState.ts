@@ -4,6 +4,7 @@ import GLStack  from './ConfigStack'
 
 
 const _patch = new GLConfig();
+const _head = new GLConfig();
 
 
 export default class GLState {
@@ -11,7 +12,8 @@ export default class GLState {
   readonly gl: WebGLRenderingContext;
   readonly cfgStack: GLStack;
   private _validCfg: boolean;
-
+  private readonly _state = new GLConfig();
+  
   private static _instances = new WeakMap<WebGLRenderingContext, GLState>()
 
   static get( gl:WebGLRenderingContext ): GLState {
@@ -29,6 +31,7 @@ export default class GLState {
 
     this.cfgStack = new GLStack();
     this.cfgStack.initFromGL( gl );
+    this.cfgStack.copyConfig( 0, this._state );
 
     this._validCfg = false;
   }
@@ -50,7 +53,8 @@ export default class GLState {
 
   apply(){
     if( !this._validCfg ) {
-      this.cfgStack.commit( _patch );
+      this.cfgStack.commit( _head );
+      _head.patch( this._state, _patch );
       _patch.setupGL( this.gl );
       this._validCfg = true;
     }
