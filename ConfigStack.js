@@ -54,10 +54,6 @@ class ConfigStack {
         }
         this._sets[ptr] = 0;
     }
-    patch(cfg, out) {
-        this.copyConfig(this._ptr, this._wcfg);
-        this._wcfg.patch(cfg, out);
-    }
     copyConfig(at, cfg) {
         const cdat = cfg._dat, sdat = this._stack, off = 0 | (at * (LEN | 0));
         for (var i = 0; i < (LEN | 0); i++) {

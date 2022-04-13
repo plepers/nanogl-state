@@ -1,9 +1,7 @@
 {
   "name": "nanogl-state",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Efficient webgl context state management",
-  "main": "GLState.js",
-  "type": "GLState.d.ts",
   "scripts": {
     "test": "tsc && karma start && karma start --webgl-version=2"
   },

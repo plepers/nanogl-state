@@ -106,7 +106,7 @@ export default class GLConfig {
     depthRange(near: number, far: number): this;
     lineWidth(w: number): this;
     cullFace(mode: GLenum): this;
-    enableCullface(flag: boolean): this;
+    enableCullface(flag?: boolean): this;
     polygonOffset(polyOffsetFactor: number, polyOffsetUnits: number): this;
     enablePolygonOffset(flag?: boolean): this;
     enableScissor(flag?: boolean): this;

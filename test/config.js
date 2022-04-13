@@ -984,7 +984,7 @@ describe( "gl - GLConfig", function(){
     it( "should setup gl context", function(){
       var cfg = new GLConfig();
       cfg.toDefault();
-      cfg.blendColor( false  );
+      cfg.blendColor( .1, .2, .3, .4  );
       cfg.setupGL( gl );
       compareFromGl( cfg, gl );
     });

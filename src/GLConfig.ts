@@ -410,31 +410,39 @@ export default class GLConfig {
   patch
   ============
   Apply this config on top of cfg input.
+  create a out config to apply in order to go from "cfg" state to "this" state
   */
   patch( cfg:GLConfig, out:GLConfig ){
-    var ldat = this._dat,
-        lset = this._set,
-        sdat = cfg._dat,
-        sset = cfg._set,
-        odat = out._dat,
-        oset = 0,
+    var Bdat = this._dat,
+        Bset = this._set,
+        Adat = cfg._dat,
+        Aset = cfg._set,
+        Odat = out._dat,
+        Oset = 0,
         sbit;
+        
+    Odat.set( Adat );
 
     for( var i = 0; i < (Slots.LEN|0); i++ )
     {
       sbit = DAT_MASKS[ i ];
-      // data is marked as set
-      if( 0 !== ( lset & sbit ) )
+      // The target (B) config change the current prop
+      if( 0 !== ( Bset & sbit ) )
       {
-        if( (0 === ( sset & sbit )) || (ldat[ i ] !== sdat[ i ]) ) {
-          oset |= sbit;
+        // if the initial (A) config never set the prop, mark set in output
+        // if the target value is different from the initial value, mark set in output
+        if( (0 === ( Aset & sbit )) || (Bdat[ i ] !== Adat[ i ]) ) {
+          Oset |= sbit;
+          Odat[ i ] = Bdat[ i ];
         }
-        sdat[ i ] = ldat[ i ];
+
+        Aset |= sbit;
+        Adat[ i ] = Bdat[ i ];
+
       }
     }
-    odat.set( sdat );
-    cfg._set |= lset;
-    out._set = _fixSet( oset );
+    cfg._set = _fixSet( Aset );
+    out._set = _fixSet( Oset );
   }
 
 

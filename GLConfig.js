@@ -176,19 +176,21 @@ export default class GLConfig {
         return res;
     }
     patch(cfg, out) {
-        var ldat = this._dat, lset = this._set, sdat = cfg._dat, sset = cfg._set, odat = out._dat, oset = 0, sbit;
+        var Bdat = this._dat, Bset = this._set, Adat = cfg._dat, Aset = cfg._set, Odat = out._dat, Oset = 0, sbit;
+        Odat.set(Adat);
         for (var i = 0; i < (51 | 0); i++) {
             sbit = DAT_MASKS[i];
-            if (0 !== (lset & sbit)) {
-                if ((0 === (sset & sbit)) || (ldat[i] !== sdat[i])) {
-                    oset |= sbit;
+            if (0 !== (Bset & sbit)) {
+                if ((0 === (Aset & sbit)) || (Bdat[i] !== Adat[i])) {
+                    Oset |= sbit;
+                    Odat[i] = Bdat[i];
                 }
-                sdat[i] = ldat[i];
+                Aset |= sbit;
+                Adat[i] = Bdat[i];
             }
         }
-        odat.set(sdat);
-        cfg._set |= lset;
-        out._set = _fixSet(oset);
+        cfg._set = _fixSet(Aset);
+        out._set = _fixSet(Oset);
     }
     setupGL(gl) {
         const set = this._set, dat = this._dat;
@@ -410,9 +412,7 @@ export default class GLConfig {
         this._set |= 16384 | 0;
         return this;
     }
-    enableCullface(flag) {
-        if (flag === undefined)
-            flag = true;
+    enableCullface(flag = true) {
         this._dat[9] = +flag;
         this._set |= 2 | 0;
         return this;
