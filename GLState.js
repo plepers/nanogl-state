@@ -3,14 +3,6 @@ import GLStack from './ConfigStack';
 const _patch = new GLConfig();
 const _head = new GLConfig();
 export default class GLState {
-    constructor(gl) {
-        this._state = new GLConfig();
-        this.gl = gl;
-        this.cfgStack = new GLStack();
-        this.cfgStack.initFromGL(gl);
-        this.cfgStack.copyConfig(0, this._state);
-        this._validCfg = false;
-    }
     static get(gl) {
         let res = this._instances.get(gl);
         if (!res) {
@@ -18,6 +10,14 @@ export default class GLState {
             this._instances.set(gl, res);
         }
         return res;
+    }
+    constructor(gl) {
+        this._state = new GLConfig();
+        this.gl = gl;
+        this.cfgStack = new GLStack();
+        this.cfgStack.initFromGL(gl);
+        this.cfgStack.copyConfig(0, this._state);
+        this._validCfg = false;
     }
     push(cfg) {
         this.cfgStack.push(cfg);

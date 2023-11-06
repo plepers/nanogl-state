@@ -155,15 +155,15 @@ function getGlParameter(gl, p) {
 }
 ;
 export default class GLConfig {
-    constructor() {
-        this._dat = new Uint16Array(51);
-        this._set = 0;
-    }
     static encodeHalf(f32) {
         return encodeHalf(f32);
     }
     static decodeHalf(u16) {
         return decodeHalf(u16);
+    }
+    constructor() {
+        this._dat = new Uint16Array(51);
+        this._set = 0;
     }
     toDefault() {
         this._dat.set(_DEFAULT_STATE);

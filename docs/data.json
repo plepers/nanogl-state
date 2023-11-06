@@ -1,0 +1,5641 @@
+{
+	"id": 0,
+	"name": "nanogl-state",
+	"kind": 1,
+	"flags": {},
+	"originalName": "",
+	"children": [
+		{
+			"id": 1,
+			"name": "ConfigStack",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 2,
+					"name": "ConfigStack",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"originalName": "default",
+					"children": [
+						{
+							"id": 3,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 56,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L56"
+								}
+							],
+							"signatures": [
+								{
+									"id": 4,
+									"name": "new ConfigStack",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 2,
+										"name": "ConfigStack"
+									}
+								}
+							]
+						},
+						{
+							"id": 9,
+							"name": "_headPos",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "position in teh stack of the last \"commit\""
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 52,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L52"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 8,
+							"name": "_ptr",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "current positionin the stack"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 47,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L47"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 6,
+							"name": "_sets",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "bitmask set of all the configs in the stack"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 36,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L36"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Uint32Array",
+								"qualifiedName": "Uint32Array",
+								"package": "typescript"
+							}
+						},
+						{
+							"id": 7,
+							"name": "_size",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "allocated size of the stack"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 42,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L42"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 5,
+							"name": "_stack",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "values of the states at each position in the stack"
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 30,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L30"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Uint16Array",
+								"qualifiedName": "Uint16Array",
+								"package": "typescript"
+							}
+						},
+						{
+							"id": 10,
+							"name": "_wcfg",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 54,
+									"character": 19,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L54"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 35,
+								"name": "default"
+							}
+						},
+						{
+							"id": 28,
+							"name": "_grow",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isPrivate": true
+							},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 189,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L189"
+								}
+							],
+							"signatures": [
+								{
+									"id": 29,
+									"name": "_grow",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 21,
+							"name": "commit",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 151,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L151"
+								}
+							],
+							"signatures": [
+								{
+									"id": 22,
+									"name": "commit",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "copy current stack state to the given patch config and mark HEAD as the current position"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 23,
+											"name": "patch",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 24,
+							"name": "copyConfig",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 175,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L175"
+								}
+							],
+							"signatures": [
+								{
+									"id": 25,
+									"name": "copyConfig",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Copy a row in the stack and sets to the given config"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 26,
+											"name": "at",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "position in the stack to copy from"
+													}
+												]
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 27,
+											"name": "cfg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "config to copy to"
+													}
+												]
+											},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 19,
+							"name": "flush",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 141,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L141"
+								}
+							],
+							"signatures": [
+								{
+									"id": 20,
+									"name": "flush",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 11,
+							"name": "initFromGL",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 72,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L72"
+								}
+							],
+							"signatures": [
+								{
+									"id": 12,
+									"name": "initFromGL",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Fetch state from gl context and set initial set and dat"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 13,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 17,
+							"name": "pop",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 130,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L130"
+								}
+							],
+							"signatures": [
+								{
+									"id": 18,
+									"name": "pop",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "remove the last config from the stack\nif the HEAD position is ahead the new position, the new position set is unioned with the previous set"
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 14,
+							"name": "push",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "ConfigStack.ts",
+									"line": 94,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L94"
+								}
+							],
+							"signatures": [
+								{
+									"id": 15,
+									"name": "push",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Add a config to the stack"
+											}
+										]
+									},
+									"parameters": [
+										{
+											"id": 16,
+											"name": "cfg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"comment": {
+												"summary": [
+													{
+														"kind": "text",
+														"text": "A, B, C, D, E, F, G   -- previous row in _stack\n1, 0, 0, 1, 1, 1, 0   -- previous row in _sets\n\n?, ?, X, D, E, ?, ?   -- cfg _dat\n0, 0, 1, 1, 1, 0, 0   -- cfg _set\n\nA, B, X, D, E, F, G   -- new row in _stack\n1, 0, 1, 1, 1, 1, 0   -- new row in _sets"
+													}
+												]
+											},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"children": [
+								3
+							]
+						},
+						{
+							"title": "Properties",
+							"children": [
+								9,
+								8,
+								6,
+								7,
+								5,
+								10
+							]
+						},
+						{
+							"title": "Methods",
+							"children": [
+								28,
+								21,
+								24,
+								19,
+								11,
+								17,
+								14
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "ConfigStack.ts",
+							"line": 24,
+							"character": 6,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L24"
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"children": [
+						2
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "ConfigStack.ts",
+					"line": 2,
+					"character": 0,
+					"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/ConfigStack.ts#L2"
+				}
+			]
+		},
+		{
+			"id": 30,
+			"name": "GLConfig",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 35,
+					"name": "GLConfig",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"originalName": "default",
+					"children": [
+						{
+							"id": 42,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 388,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L388"
+								}
+							],
+							"signatures": [
+								{
+									"id": 43,
+									"name": "new GLConfig",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 44,
+							"name": "_dat",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 385,
+									"character": 11,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L385"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Uint16Array",
+								"qualifiedName": "Uint16Array",
+								"package": "typescript"
+							}
+						},
+						{
+							"id": 45,
+							"name": "_set",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 386,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L386"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						},
+						{
+							"id": 80,
+							"name": "blendColor",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 908,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L908"
+								}
+							],
+							"signatures": [
+								{
+									"id": 81,
+									"name": "blendColor",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 82,
+											"name": "r",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 83,
+											"name": "g",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 84,
+											"name": "b",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 85,
+											"name": "a",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 73,
+							"name": "blendEquation",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 885,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L885"
+								}
+							],
+							"signatures": [
+								{
+									"id": 74,
+									"name": "blendEquation",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 75,
+											"name": "eq",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 76,
+							"name": "blendEquationSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 897,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L897"
+								}
+							],
+							"signatures": [
+								{
+									"id": 77,
+									"name": "blendEquationSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 78,
+											"name": "rgbEq",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 79,
+											"name": "alphaEq",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 63,
+							"name": "blendFunc",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 855,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L855"
+								}
+							],
+							"signatures": [
+								{
+									"id": 64,
+									"name": "blendFunc",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 65,
+											"name": "src",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 66,
+											"name": "dst",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 67,
+							"name": "blendFuncSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 876,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L876"
+								}
+							],
+							"signatures": [
+								{
+									"id": 68,
+									"name": "blendFuncSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 69,
+											"name": "srcRgb",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 70,
+											"name": "dstRgb",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 71,
+											"name": "srcAlpha",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 72,
+											"name": "dstAlpha",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 48,
+							"name": "clone",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 402,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L402"
+								}
+							],
+							"signatures": [
+								{
+									"id": 49,
+									"name": "clone",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 133,
+							"name": "colorMask",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1039,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1039"
+								}
+							],
+							"signatures": [
+								{
+									"id": 134,
+									"name": "colorMask",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 135,
+											"name": "r",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 136,
+											"name": "g",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 137,
+											"name": "b",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 138,
+											"name": "a",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 99,
+							"name": "cullFace",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 965,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L965"
+								}
+							],
+							"signatures": [
+								{
+									"id": 100,
+									"name": "cullFace",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 101,
+											"name": "mode",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 86,
+							"name": "depthFunc",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 931,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L931"
+								}
+							],
+							"signatures": [
+								{
+									"id": 87,
+									"name": "depthFunc",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 88,
+											"name": "func",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 130,
+							"name": "depthMask",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1033,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1033"
+								}
+							],
+							"signatures": [
+								{
+									"id": 131,
+									"name": "depthMask",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 132,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 92,
+							"name": "depthRange",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 944,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L944"
+								}
+							],
+							"signatures": [
+								{
+									"id": 93,
+									"name": "depthRange",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 94,
+											"name": "near",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 95,
+											"name": "far",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 60,
+							"name": "enableBlend",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 835,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L835"
+								}
+							],
+							"signatures": [
+								{
+									"id": 61,
+									"name": "enableBlend",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 62,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 102,
+							"name": "enableCullface",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 971,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L971"
+								}
+							],
+							"signatures": [
+								{
+									"id": 103,
+									"name": "enableCullface",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 104,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 89,
+							"name": "enableDepthTest",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 938,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L938"
+								}
+							],
+							"signatures": [
+								{
+									"id": 90,
+									"name": "enableDepthTest",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 91,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 127,
+							"name": "enableDither",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1027,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1027"
+								}
+							],
+							"signatures": [
+								{
+									"id": 128,
+									"name": "enableDither",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 129,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 109,
+							"name": "enablePolygonOffset",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 988,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L988"
+								}
+							],
+							"signatures": [
+								{
+									"id": 110,
+									"name": "enablePolygonOffset",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 111,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 112,
+							"name": "enableScissor",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 999,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L999"
+								}
+							],
+							"signatures": [
+								{
+									"id": 113,
+									"name": "enableScissor",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 114,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 142,
+							"name": "enableStencil",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1082,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1082"
+								}
+							],
+							"signatures": [
+								{
+									"id": 143,
+									"name": "enableStencil",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 144,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 57,
+							"name": "fromGL",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 640,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L640"
+								}
+							],
+							"signatures": [
+								{
+									"id": 58,
+									"name": "fromGL",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 59,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 139,
+							"name": "frontFace",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1072,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1072"
+								}
+							],
+							"signatures": [
+								{
+									"id": 140,
+									"name": "frontFace",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 141,
+											"name": "dir",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 96,
+							"name": "lineWidth",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 951,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L951"
+								}
+							],
+							"signatures": [
+								{
+									"id": 97,
+									"name": "lineWidth",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 98,
+											"name": "w",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 50,
+							"name": "patch",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 415,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L415"
+								}
+							],
+							"signatures": [
+								{
+									"id": 51,
+									"name": "patch",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 52,
+											"name": "cfg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										},
+										{
+											"id": 53,
+											"name": "out",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 105,
+							"name": "polygonOffset",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 981,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L981"
+								}
+							],
+							"signatures": [
+								{
+									"id": 106,
+									"name": "polygonOffset",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 107,
+											"name": "polyOffsetFactor",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 108,
+											"name": "polyOffsetUnits",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 115,
+							"name": "scissor",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1005,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1005"
+								}
+							],
+							"signatures": [
+								{
+									"id": 116,
+									"name": "scissor",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 117,
+											"name": "x",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 118,
+											"name": "y",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 119,
+											"name": "w",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 120,
+											"name": "h",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 54,
+							"name": "setupGL",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 449,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L449"
+								}
+							],
+							"signatures": [
+								{
+									"id": 55,
+									"name": "setupGL",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 56,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 145,
+							"name": "stencilFunc",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1088,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1088"
+								}
+							],
+							"signatures": [
+								{
+									"id": 146,
+									"name": "stencilFunc",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 147,
+											"name": "func",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 148,
+											"name": "ref",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 149,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 158,
+							"name": "stencilFuncSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1112,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1112"
+								}
+							],
+							"signatures": [
+								{
+									"id": 159,
+									"name": "stencilFuncSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 160,
+											"name": "func",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 161,
+											"name": "ref",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 162,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 163,
+											"name": "funcback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 164,
+											"name": "refback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 165,
+											"name": "maskback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 155,
+							"name": "stencilMask",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1104,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1104"
+								}
+							],
+							"signatures": [
+								{
+									"id": 156,
+									"name": "stencilMask",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 157,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 174,
+							"name": "stencilMaskSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1136,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1136"
+								}
+							],
+							"signatures": [
+								{
+									"id": 175,
+									"name": "stencilMaskSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 176,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 177,
+											"name": "maskback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 150,
+							"name": "stencilOp",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1096,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1096"
+								}
+							],
+							"signatures": [
+								{
+									"id": 151,
+									"name": "stencilOp",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 152,
+											"name": "sfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 153,
+											"name": "dpfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 154,
+											"name": "dppass",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 166,
+							"name": "stencilOpSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1124,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1124"
+								}
+							],
+							"signatures": [
+								{
+									"id": 167,
+									"name": "stencilOpSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 168,
+											"name": "sfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 169,
+											"name": "dpfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 170,
+											"name": "dppass",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 171,
+											"name": "sfailback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 172,
+											"name": "dpfailback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 173,
+											"name": "dppassback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 46,
+							"name": "toDefault",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 396,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L396"
+								}
+							],
+							"signatures": [
+								{
+									"id": 47,
+									"name": "toDefault",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 121,
+							"name": "viewport",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1017,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1017"
+								}
+							],
+							"signatures": [
+								{
+									"id": 122,
+									"name": "viewport",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 123,
+											"name": "x",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 124,
+											"name": "y",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 125,
+											"name": "w",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 126,
+											"name": "h",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 39,
+							"name": "decodeHalf",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 380,
+									"character": 9,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L380"
+								}
+							],
+							"signatures": [
+								{
+									"id": 40,
+									"name": "decodeHalf",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 41,
+											"name": "u16",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							]
+						},
+						{
+							"id": 36,
+							"name": "encodeHalf",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 376,
+									"character": 9,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L376"
+								}
+							],
+							"signatures": [
+								{
+									"id": 37,
+									"name": "encodeHalf",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 38,
+											"name": "f32",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"children": [
+								42
+							]
+						},
+						{
+							"title": "Properties",
+							"children": [
+								44,
+								45
+							]
+						},
+						{
+							"title": "Methods",
+							"children": [
+								80,
+								73,
+								76,
+								63,
+								67,
+								48,
+								133,
+								99,
+								86,
+								130,
+								92,
+								60,
+								102,
+								89,
+								127,
+								109,
+								112,
+								142,
+								57,
+								139,
+								96,
+								50,
+								105,
+								115,
+								54,
+								145,
+								158,
+								155,
+								174,
+								150,
+								166,
+								46,
+								121,
+								39,
+								36
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "GLConfig.ts",
+							"line": 374,
+							"character": 21,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L374"
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"id": 179,
+							"name": "LocalConfig"
+						}
+					]
+				},
+				{
+					"id": 32,
+					"name": "DAT_MASKS",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "GLConfig.ts",
+							"line": 153,
+							"character": 13,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L153"
+						}
+					],
+					"type": {
+						"type": "typeOperator",
+						"operator": "readonly",
+						"target": {
+							"type": "array",
+							"elementType": {
+								"type": "reference",
+								"name": "SetsBits"
+							}
+						}
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 31,
+					"name": "DAT_SIZE",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "GLConfig.ts",
+							"line": 64,
+							"character": 13,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L64"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "LEN"
+					},
+					"defaultValue": "Slots.LEN"
+				},
+				{
+					"id": 33,
+					"name": "_DEFAULT_SET",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "GLConfig.ts",
+							"line": 222,
+							"character": 4,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L222"
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					},
+					"defaultValue": "..."
+				},
+				{
+					"id": 34,
+					"name": "_DEFAULT_STATE",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "GLConfig.ts",
+							"line": 248,
+							"character": 4,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L248"
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Uint16Array",
+						"qualifiedName": "Uint16Array",
+						"package": "typescript"
+					},
+					"defaultValue": "..."
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"children": [
+						35
+					]
+				},
+				{
+					"title": "Variables",
+					"children": [
+						32,
+						31,
+						33,
+						34
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "GLConfig.ts",
+					"line": 7,
+					"character": 0,
+					"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L7"
+				}
+			]
+		},
+		{
+			"id": 178,
+			"name": "GLState",
+			"kind": 2,
+			"kindString": "Module",
+			"flags": {},
+			"children": [
+				{
+					"id": 326,
+					"name": "GLState",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"originalName": "default",
+					"children": [
+						{
+							"id": 331,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 29,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L29"
+								}
+							],
+							"signatures": [
+								{
+									"id": 332,
+									"name": "new GLState",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 333,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 326,
+										"name": "default"
+									}
+								}
+							]
+						},
+						{
+							"id": 337,
+							"name": "_state",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 15,
+									"character": 19,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L15"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 35,
+								"name": "default"
+							},
+							"defaultValue": "..."
+						},
+						{
+							"id": 336,
+							"name": "_validCfg",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 14,
+									"character": 10,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L14"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						},
+						{
+							"id": 335,
+							"name": "cfgStack",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 13,
+									"character": 11,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L13"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 2,
+								"name": "ConfigStack"
+							}
+						},
+						{
+							"id": 334,
+							"name": "gl",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 12,
+									"character": 11,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L12"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "WebGLRenderingContext",
+								"qualifiedName": "WebGLRenderingContext",
+								"package": "typescript"
+							}
+						},
+						{
+							"id": 327,
+							"name": "_instances",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 17,
+									"character": 17,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L17"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "WebGLRenderingContext",
+										"qualifiedName": "WebGLRenderingContext",
+										"package": "typescript"
+									},
+									{
+										"type": "reference",
+										"id": 326,
+										"name": "default"
+									}
+								],
+								"name": "WeakMap",
+								"qualifiedName": "WeakMap",
+								"package": "typescript"
+							},
+							"defaultValue": "..."
+						},
+						{
+							"id": 343,
+							"name": "apply",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 54,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L54"
+								}
+							],
+							"signatures": [
+								{
+									"id": 344,
+									"name": "apply",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 348,
+							"name": "config",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 71,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L71"
+								}
+							],
+							"signatures": [
+								{
+									"id": 349,
+									"name": "config",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									}
+								}
+							]
+						},
+						{
+							"id": 345,
+							"name": "now",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 64,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L64"
+								}
+							],
+							"signatures": [
+								{
+									"id": 346,
+									"name": "now",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 347,
+											"name": "cfg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 341,
+							"name": "pop",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 48,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L48"
+								}
+							],
+							"signatures": [
+								{
+									"id": 342,
+									"name": "pop",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 338,
+							"name": "push",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 42,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L42"
+								}
+							],
+							"signatures": [
+								{
+									"id": 339,
+									"name": "push",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 340,
+											"name": "cfg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 328,
+							"name": "get",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 19,
+									"character": 9,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L19"
+								}
+							],
+							"signatures": [
+								{
+									"id": 329,
+									"name": "get",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 330,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 326,
+										"name": "default"
+									}
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"children": [
+								331
+							]
+						},
+						{
+							"title": "Properties",
+							"children": [
+								337,
+								336,
+								335,
+								334,
+								327
+							]
+						},
+						{
+							"title": "Methods",
+							"children": [
+								343,
+								348,
+								345,
+								341,
+								338,
+								328
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "GLState.ts",
+							"line": 10,
+							"character": 21,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L10"
+						}
+					]
+				},
+				{
+					"id": 179,
+					"name": "LocalConfig",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "LocalConfig"
+							}
+						]
+					},
+					"children": [
+						{
+							"id": 186,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 87,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L87"
+								}
+							],
+							"signatures": [
+								{
+									"id": 187,
+									"name": "new LocalConfig",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 188,
+											"name": "state",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 326,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"overwrites": {
+										"type": "reference",
+										"id": 43,
+										"name": "default.constructor"
+									}
+								}
+							],
+							"overwrites": {
+								"type": "reference",
+								"id": 42,
+								"name": "default.constructor"
+							}
+						},
+						{
+							"id": 192,
+							"name": "_dat",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 385,
+									"character": 11,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L385"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Uint16Array",
+								"qualifiedName": "Uint16Array",
+								"package": "typescript"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 44,
+								"name": "default._dat"
+							}
+						},
+						{
+							"id": 193,
+							"name": "_set",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 386,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L386"
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 45,
+								"name": "default._set"
+							}
+						},
+						{
+							"id": 189,
+							"name": "state",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isPrivate": true,
+								"isReadonly": true
+							},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 85,
+									"character": 19,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L85"
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 326,
+								"name": "default"
+							}
+						},
+						{
+							"id": 190,
+							"name": "apply",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLState.ts",
+									"line": 92,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L92"
+								}
+							],
+							"signatures": [
+								{
+									"id": 191,
+									"name": "apply",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							]
+						},
+						{
+							"id": 228,
+							"name": "blendColor",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 908,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L908"
+								}
+							],
+							"signatures": [
+								{
+									"id": 229,
+									"name": "blendColor",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 230,
+											"name": "r",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 231,
+											"name": "g",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 232,
+											"name": "b",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 233,
+											"name": "a",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 81,
+										"name": "default.blendColor"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 80,
+								"name": "default.blendColor"
+							}
+						},
+						{
+							"id": 221,
+							"name": "blendEquation",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 885,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L885"
+								}
+							],
+							"signatures": [
+								{
+									"id": 222,
+									"name": "blendEquation",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 223,
+											"name": "eq",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 74,
+										"name": "default.blendEquation"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 73,
+								"name": "default.blendEquation"
+							}
+						},
+						{
+							"id": 224,
+							"name": "blendEquationSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 897,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L897"
+								}
+							],
+							"signatures": [
+								{
+									"id": 225,
+									"name": "blendEquationSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 226,
+											"name": "rgbEq",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 227,
+											"name": "alphaEq",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 77,
+										"name": "default.blendEquationSeparate"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 76,
+								"name": "default.blendEquationSeparate"
+							}
+						},
+						{
+							"id": 211,
+							"name": "blendFunc",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 855,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L855"
+								}
+							],
+							"signatures": [
+								{
+									"id": 212,
+									"name": "blendFunc",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 213,
+											"name": "src",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 214,
+											"name": "dst",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 64,
+										"name": "default.blendFunc"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 63,
+								"name": "default.blendFunc"
+							}
+						},
+						{
+							"id": 215,
+							"name": "blendFuncSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 876,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L876"
+								}
+							],
+							"signatures": [
+								{
+									"id": 216,
+									"name": "blendFuncSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 217,
+											"name": "srcRgb",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 218,
+											"name": "dstRgb",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 219,
+											"name": "srcAlpha",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 220,
+											"name": "dstAlpha",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 68,
+										"name": "default.blendFuncSeparate"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 67,
+								"name": "default.blendFuncSeparate"
+							}
+						},
+						{
+							"id": 196,
+							"name": "clone",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 402,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L402"
+								}
+							],
+							"signatures": [
+								{
+									"id": 197,
+									"name": "clone",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"id": 35,
+										"name": "default"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 49,
+										"name": "default.clone"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 48,
+								"name": "default.clone"
+							}
+						},
+						{
+							"id": 281,
+							"name": "colorMask",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1039,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1039"
+								}
+							],
+							"signatures": [
+								{
+									"id": 282,
+									"name": "colorMask",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 283,
+											"name": "r",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 284,
+											"name": "g",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 285,
+											"name": "b",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										},
+										{
+											"id": 286,
+											"name": "a",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 134,
+										"name": "default.colorMask"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 133,
+								"name": "default.colorMask"
+							}
+						},
+						{
+							"id": 247,
+							"name": "cullFace",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 965,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L965"
+								}
+							],
+							"signatures": [
+								{
+									"id": 248,
+									"name": "cullFace",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 249,
+											"name": "mode",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 100,
+										"name": "default.cullFace"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 99,
+								"name": "default.cullFace"
+							}
+						},
+						{
+							"id": 234,
+							"name": "depthFunc",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 931,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L931"
+								}
+							],
+							"signatures": [
+								{
+									"id": 235,
+									"name": "depthFunc",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 236,
+											"name": "func",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 87,
+										"name": "default.depthFunc"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 86,
+								"name": "default.depthFunc"
+							}
+						},
+						{
+							"id": 278,
+							"name": "depthMask",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1033,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1033"
+								}
+							],
+							"signatures": [
+								{
+									"id": 279,
+									"name": "depthMask",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 280,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 131,
+										"name": "default.depthMask"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 130,
+								"name": "default.depthMask"
+							}
+						},
+						{
+							"id": 240,
+							"name": "depthRange",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 944,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L944"
+								}
+							],
+							"signatures": [
+								{
+									"id": 241,
+									"name": "depthRange",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 242,
+											"name": "near",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 243,
+											"name": "far",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 93,
+										"name": "default.depthRange"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 92,
+								"name": "default.depthRange"
+							}
+						},
+						{
+							"id": 208,
+							"name": "enableBlend",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 835,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L835"
+								}
+							],
+							"signatures": [
+								{
+									"id": 209,
+									"name": "enableBlend",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 210,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 61,
+										"name": "default.enableBlend"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 60,
+								"name": "default.enableBlend"
+							}
+						},
+						{
+							"id": 250,
+							"name": "enableCullface",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 971,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L971"
+								}
+							],
+							"signatures": [
+								{
+									"id": 251,
+									"name": "enableCullface",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 252,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 103,
+										"name": "default.enableCullface"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 102,
+								"name": "default.enableCullface"
+							}
+						},
+						{
+							"id": 237,
+							"name": "enableDepthTest",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 938,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L938"
+								}
+							],
+							"signatures": [
+								{
+									"id": 238,
+									"name": "enableDepthTest",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 239,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 90,
+										"name": "default.enableDepthTest"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 89,
+								"name": "default.enableDepthTest"
+							}
+						},
+						{
+							"id": 275,
+							"name": "enableDither",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1027,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1027"
+								}
+							],
+							"signatures": [
+								{
+									"id": 276,
+									"name": "enableDither",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 277,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 128,
+										"name": "default.enableDither"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 127,
+								"name": "default.enableDither"
+							}
+						},
+						{
+							"id": 257,
+							"name": "enablePolygonOffset",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 988,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L988"
+								}
+							],
+							"signatures": [
+								{
+									"id": 258,
+									"name": "enablePolygonOffset",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 259,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 110,
+										"name": "default.enablePolygonOffset"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 109,
+								"name": "default.enablePolygonOffset"
+							}
+						},
+						{
+							"id": 260,
+							"name": "enableScissor",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 999,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L999"
+								}
+							],
+							"signatures": [
+								{
+									"id": 261,
+									"name": "enableScissor",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 262,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 113,
+										"name": "default.enableScissor"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 112,
+								"name": "default.enableScissor"
+							}
+						},
+						{
+							"id": 290,
+							"name": "enableStencil",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1082,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1082"
+								}
+							],
+							"signatures": [
+								{
+									"id": 291,
+									"name": "enableStencil",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 292,
+											"name": "flag",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "boolean"
+											},
+											"defaultValue": "true"
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 143,
+										"name": "default.enableStencil"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 142,
+								"name": "default.enableStencil"
+							}
+						},
+						{
+							"id": 205,
+							"name": "fromGL",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 640,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L640"
+								}
+							],
+							"signatures": [
+								{
+									"id": 206,
+									"name": "fromGL",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 207,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 58,
+										"name": "default.fromGL"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 57,
+								"name": "default.fromGL"
+							}
+						},
+						{
+							"id": 287,
+							"name": "frontFace",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1072,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1072"
+								}
+							],
+							"signatures": [
+								{
+									"id": 288,
+									"name": "frontFace",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 289,
+											"name": "dir",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 140,
+										"name": "default.frontFace"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 139,
+								"name": "default.frontFace"
+							}
+						},
+						{
+							"id": 244,
+							"name": "lineWidth",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 951,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L951"
+								}
+							],
+							"signatures": [
+								{
+									"id": 245,
+									"name": "lineWidth",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 246,
+											"name": "w",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 97,
+										"name": "default.lineWidth"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 96,
+								"name": "default.lineWidth"
+							}
+						},
+						{
+							"id": 198,
+							"name": "patch",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 415,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L415"
+								}
+							],
+							"signatures": [
+								{
+									"id": 199,
+									"name": "patch",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 200,
+											"name": "cfg",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										},
+										{
+											"id": 201,
+											"name": "out",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"id": 35,
+												"name": "default"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 51,
+										"name": "default.patch"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 50,
+								"name": "default.patch"
+							}
+						},
+						{
+							"id": 253,
+							"name": "polygonOffset",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 981,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L981"
+								}
+							],
+							"signatures": [
+								{
+									"id": 254,
+									"name": "polygonOffset",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 255,
+											"name": "polyOffsetFactor",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 256,
+											"name": "polyOffsetUnits",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 106,
+										"name": "default.polygonOffset"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 105,
+								"name": "default.polygonOffset"
+							}
+						},
+						{
+							"id": 263,
+							"name": "scissor",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1005,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1005"
+								}
+							],
+							"signatures": [
+								{
+									"id": 264,
+									"name": "scissor",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 265,
+											"name": "x",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 266,
+											"name": "y",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 267,
+											"name": "w",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 268,
+											"name": "h",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 116,
+										"name": "default.scissor"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 115,
+								"name": "default.scissor"
+							}
+						},
+						{
+							"id": 202,
+							"name": "setupGL",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 449,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L449"
+								}
+							],
+							"signatures": [
+								{
+									"id": 203,
+									"name": "setupGL",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 204,
+											"name": "gl",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "WebGLRenderingContext",
+												"qualifiedName": "WebGLRenderingContext",
+												"package": "typescript"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 55,
+										"name": "default.setupGL"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 54,
+								"name": "default.setupGL"
+							}
+						},
+						{
+							"id": 293,
+							"name": "stencilFunc",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1088,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1088"
+								}
+							],
+							"signatures": [
+								{
+									"id": 294,
+									"name": "stencilFunc",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 295,
+											"name": "func",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 296,
+											"name": "ref",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 297,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 146,
+										"name": "default.stencilFunc"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 145,
+								"name": "default.stencilFunc"
+							}
+						},
+						{
+							"id": 306,
+							"name": "stencilFuncSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1112,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1112"
+								}
+							],
+							"signatures": [
+								{
+									"id": 307,
+									"name": "stencilFuncSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 308,
+											"name": "func",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 309,
+											"name": "ref",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 310,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 311,
+											"name": "funcback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 312,
+											"name": "refback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 313,
+											"name": "maskback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 159,
+										"name": "default.stencilFuncSeparate"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 158,
+								"name": "default.stencilFuncSeparate"
+							}
+						},
+						{
+							"id": 303,
+							"name": "stencilMask",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1104,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1104"
+								}
+							],
+							"signatures": [
+								{
+									"id": 304,
+									"name": "stencilMask",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 305,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 156,
+										"name": "default.stencilMask"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 155,
+								"name": "default.stencilMask"
+							}
+						},
+						{
+							"id": 322,
+							"name": "stencilMaskSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1136,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1136"
+								}
+							],
+							"signatures": [
+								{
+									"id": 323,
+									"name": "stencilMaskSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 324,
+											"name": "mask",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 325,
+											"name": "maskback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 175,
+										"name": "default.stencilMaskSeparate"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 174,
+								"name": "default.stencilMaskSeparate"
+							}
+						},
+						{
+							"id": 298,
+							"name": "stencilOp",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1096,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1096"
+								}
+							],
+							"signatures": [
+								{
+									"id": 299,
+									"name": "stencilOp",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 300,
+											"name": "sfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 301,
+											"name": "dpfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 302,
+											"name": "dppass",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 151,
+										"name": "default.stencilOp"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 150,
+								"name": "default.stencilOp"
+							}
+						},
+						{
+							"id": 314,
+							"name": "stencilOpSeparate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1124,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1124"
+								}
+							],
+							"signatures": [
+								{
+									"id": 315,
+									"name": "stencilOpSeparate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 316,
+											"name": "sfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 317,
+											"name": "dpfail",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 318,
+											"name": "dppass",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 319,
+											"name": "sfailback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 320,
+											"name": "dpfailback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 321,
+											"name": "dppassback",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 167,
+										"name": "default.stencilOpSeparate"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 166,
+								"name": "default.stencilOpSeparate"
+							}
+						},
+						{
+							"id": 194,
+							"name": "toDefault",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 396,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L396"
+								}
+							],
+							"signatures": [
+								{
+									"id": 195,
+									"name": "toDefault",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 47,
+										"name": "default.toDefault"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 46,
+								"name": "default.toDefault"
+							}
+						},
+						{
+							"id": 269,
+							"name": "viewport",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 1017,
+									"character": 2,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L1017"
+								}
+							],
+							"signatures": [
+								{
+									"id": 270,
+									"name": "viewport",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 271,
+											"name": "x",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 272,
+											"name": "y",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 273,
+											"name": "w",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 274,
+											"name": "h",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"id": 179,
+										"name": "LocalConfig"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 122,
+										"name": "default.viewport"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 121,
+								"name": "default.viewport"
+							}
+						},
+						{
+							"id": 183,
+							"name": "decodeHalf",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 380,
+									"character": 9,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L380"
+								}
+							],
+							"signatures": [
+								{
+									"id": 184,
+									"name": "decodeHalf",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 185,
+											"name": "u16",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 40,
+										"name": "default.decodeHalf"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 39,
+								"name": "default.decodeHalf"
+							}
+						},
+						{
+							"id": 180,
+							"name": "encodeHalf",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isStatic": true
+							},
+							"sources": [
+								{
+									"fileName": "GLConfig.ts",
+									"line": 376,
+									"character": 9,
+									"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLConfig.ts#L376"
+								}
+							],
+							"signatures": [
+								{
+									"id": 181,
+									"name": "encodeHalf",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 182,
+											"name": "f32",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									},
+									"inheritedFrom": {
+										"type": "reference",
+										"id": 37,
+										"name": "default.encodeHalf"
+									}
+								}
+							],
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 36,
+								"name": "default.encodeHalf"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"children": [
+								186
+							]
+						},
+						{
+							"title": "Properties",
+							"children": [
+								192,
+								193,
+								189
+							]
+						},
+						{
+							"title": "Methods",
+							"children": [
+								190,
+								228,
+								221,
+								224,
+								211,
+								215,
+								196,
+								281,
+								247,
+								234,
+								278,
+								240,
+								208,
+								250,
+								237,
+								275,
+								257,
+								260,
+								290,
+								205,
+								287,
+								244,
+								198,
+								253,
+								263,
+								202,
+								293,
+								306,
+								303,
+								322,
+								298,
+								314,
+								194,
+								269,
+								183,
+								180
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "GLState.ts",
+							"line": 83,
+							"character": 13,
+							"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L83"
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"id": 35,
+							"name": "default"
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"children": [
+						326,
+						179
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "GLState.ts",
+					"line": 1,
+					"character": 0,
+					"url": "https://github.com/evanmartiin/nanogl-state/blob/b9bb786/src/GLState.ts#L1"
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "Modules",
+			"children": [
+				1,
+				30,
+				178
+			]
+		}
+	]
+}
