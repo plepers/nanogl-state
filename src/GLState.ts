@@ -82,7 +82,8 @@ export default class GLState {
   }
 
   /**
-   * Apply a config to the webgl context immediatly.
+   * Apply a config to the webgl context immediatly,
+   * without keeping it in the stack.
    * @param {GLConfig} cfg The config to apply
    */
   now( cfg : GLConfig ){
@@ -120,6 +121,9 @@ export class LocalConfig extends GLConfig {
     this.state = state;
   }
 
+  /**
+   * Apply this config to the webgl context immediatly.
+   */
   apply(){
     this.state.now( this );
   }
