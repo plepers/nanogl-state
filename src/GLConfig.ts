@@ -4,7 +4,7 @@
  * use  CONST  or  CONTS to force constants evaluation and inline exp by uglifyjs2
  */
 
-const enum Slots {
+export const enum Slots {
 
   BLEND_ENABLE          = 0 ,
   BLEND_EQ_C            = 1 ,    // BlendingFactorDest
@@ -63,7 +63,7 @@ const enum Slots {
 
 export const DAT_SIZE = Slots.LEN;
 
-const enum SetsBits {
+export const enum SetsBits {
 
   BLEND_ENABLE_SET       = 1 << 0 ,
   CULL_FACE_ENABLE_SET   = 1 << 1 ,
