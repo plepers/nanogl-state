@@ -3,7 +3,7 @@
  * All following contstants should be inlined by uglify js
  * use  CONST  or  CONTS to force constants evaluation and inline exp by uglifyjs2
  */
-
+/** The slot number for each config data. */
 export const enum Slots {
 
   BLEND_ENABLE          = 0 ,
@@ -63,6 +63,7 @@ export const enum Slots {
 
 export const DAT_SIZE = Slots.LEN;
 
+/** The bitmask for each config set. */
 export const enum SetsBits {
 
   BLEND_ENABLE_SET       = 1 << 0 ,
