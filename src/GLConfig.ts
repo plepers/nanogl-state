@@ -3,8 +3,8 @@
  * All following contstants should be inlined by uglify js
  * use  CONST  or  CONTS to force constants evaluation and inline exp by uglifyjs2
  */
-
-const enum Slots {
+/** The slot number for each config data. */
+export const enum Slots {
 
   BLEND_ENABLE          = 0 ,
   BLEND_EQ_C            = 1 ,    // BlendingFactorDest
@@ -57,13 +57,14 @@ const enum Slots {
   DEPTH_RANGE_NEAR      = 48,
   DEPTH_RANGE_FAR       = 49,
   LINE_WIDTH            = 50,
-  
+
   LEN = 51,
 }
 
 export const DAT_SIZE = Slots.LEN;
 
-const enum SetsBits {
+/** The bitmask for each config set. */
+export const enum SetsBits {
 
   BLEND_ENABLE_SET       = 1 << 0 ,
   CULL_FACE_ENABLE_SET   = 1 << 1 ,
@@ -95,7 +96,7 @@ const enum SetsBits {
   VIEWPORT_SET           = 1 << 27,
   DEPTH_RANGE_SET        = 1 << 28,
   LINE_WIDTH_SET         = 1 << 29,
-    
+
 }
 
 const enum GL {
@@ -370,35 +371,51 @@ function getGlParameter( gl:WebGLRenderingContext, p:GLenum ){
 };
 
 
-
+/**
+ * This class manages configs for the webgl context.
+ */
 export default class GLConfig {
-
+  /**
+   * Encode float32 to Uint16
+   */
   static encodeHalf(f32:number) : number{
     return encodeHalf(f32);
   }
-  
+
+  /**
+   * Decode Uint16 to float32
+   */
   static decodeHalf(u16:number) : number{
     return decodeHalf(u16);
   }
 
-
+  /**
+   * The values of the config. Each value is stored in a specific slot of the array.
+   */
   readonly _dat: Uint16Array;
+  /**
+   * The bitmask set of the config. It indicates which values are set.
+   */
   _set: number;
 
   constructor(){
     this._dat = new Uint16Array( Slots.LEN );
     this._set = 0;
   }
-  
-  
-  
-    
+
+
+
+  /**
+   * Set this config to the default config.
+   */
   toDefault(){
     this._dat.set( _DEFAULT_STATE );
     this._set = _DEFAULT_SET|0;
   }
 
-
+  /**
+   * Returns a clone of this config.
+   */
   clone() : GLConfig {
     const res = new GLConfig();
     res._dat.set( this._dat );
@@ -406,12 +423,17 @@ export default class GLConfig {
     return res;
   }
 
-  /*
-  patch
-  ============
-  Apply this config on top of cfg input.
-  create a out config to apply in order to go from "cfg" state to "this" state
-  */
+  /**
+   * Apply this config to the input config.
+   *
+   * It creates a new config that represents the difference
+   * between the input config and this config.
+   * If applied to a webgl context matching the input config,
+   * the webgl context will now match this config.
+   *
+   * @param {GLConfig} cfg The input config to apply this config to
+   * @param {GLConfig} out The config to store the difference config in
+   */
   patch( cfg:GLConfig, out:GLConfig ){
     var Bdat = this._dat,
         Bset = this._set,
@@ -420,7 +442,7 @@ export default class GLConfig {
         Odat = out._dat,
         Oset = 0,
         sbit;
-        
+
     Odat.set( Adat );
 
     for( var i = 0; i < (Slots.LEN|0); i++ )
@@ -445,7 +467,11 @@ export default class GLConfig {
     out._set = _fixSet( Oset );
   }
 
-
+  /**
+   * Apply this config to a given webgl context.
+   *
+   * @param {WebGLRenderingContext} gl The webgl context to apply this config to
+   */
   setupGL( gl:WebGLRenderingContext ){
     const set = this._set,
           dat = this._dat;
@@ -637,6 +663,12 @@ export default class GLConfig {
 
 
   // todo refator -> straight copy to dat and set
+  /**
+   * Setup this config to match the config the
+   * given webgl context is currently in.
+   *
+   * @param {WebGLRenderingContext} gl The webgl context to match
+   */
   fromGL( gl : WebGLRenderingContext ){
     this._set = 0;
 
@@ -831,27 +863,36 @@ export default class GLConfig {
 
   }
 
-
+  /**
+   * Enable or disable blending for this config.
+   *
+   * @param {boolean} [flag=true] Whether to enable blending or not
+   */
   enableBlend( flag : boolean = true ): this {
     this._dat[ Slots.BLEND_ENABLE ] = +flag;
     this._set |= SetsBits.BLEND_ENABLE_SET|0;
     return this;
   }
 
-  /*
-    enums
-      ZERO
-      ONE
-      SRC_COLOR
-      ONE_MINUS_SRC_COLOR
-      SRC_ALPHA
-      ONE_MINUS_SRC_ALPHA
-      DST_ALPHA
-      ONE_MINUS_DST_ALPHA
-      DST_COLOR
-      ONE_MINUS_DST_COLOR
-      SRC_ALPHA_SATURATE
-  */
+  /**
+   * Set the blending function for this config.
+   *
+   * The possible params values are :
+   * - `GL_ZERO`
+   * - `GL_ONE`
+   * - `GL_SRC_COLOR`
+   * - `GL_ONE_MINUS_SRC_COLOR`
+   * - `GL_SRC_ALPHA`
+   * - `GL_ONE_MINUS_SRC_ALPHA`
+   * - `GL_DST_ALPHA`
+   * - `GL_ONE_MINUS_DST_ALPHA`
+   * - `GL_DST_COLOR`
+   * - `GL_ONE_MINUS_DST_COLOR`
+   * - `GL_SRC_ALPHA_SATURATE`
+   *
+   * @param {GLenum} src The multiplier for the source blending factors
+   * @param {GLenum} dst The multiplier for the destination blending factors
+   */
   blendFunc( src:GLenum, dst:GLenum ) : this {
     this._dat[ Slots.BLEND_FUNC_C_SRC ] = src;
     this._dat[ Slots.BLEND_FUNC_C_DST ] = dst;
@@ -859,20 +900,27 @@ export default class GLConfig {
     return this;
   }
 
-  /*
-    enums
-      ZERO
-      ONE
-      SRC_COLOR
-      ONE_MINUS_SRC_COLOR
-      SRC_ALPHA
-      ONE_MINUS_SRC_ALPHA
-      DST_ALPHA
-      ONE_MINUS_DST_ALPHA
-      DST_COLOR
-      ONE_MINUS_DST_COLOR
-      SRC_ALPHA_SATURATE
-  */
+  /**
+   * Set the blending function for RGB and alpha components separately for this config.
+   *
+   * The possible params values are :
+   * - `GL_ZERO`
+   * - `GL_ONE`
+   * - `GL_SRC_COLOR`
+   * - `GL_ONE_MINUS_SRC_COLOR`
+   * - `GL_SRC_ALPHA`
+   * - `GL_ONE_MINUS_SRC_ALPHA`
+   * - `GL_DST_ALPHA`
+   * - `GL_ONE_MINUS_DST_ALPHA`
+   * - `GL_DST_COLOR`
+   * - `GL_ONE_MINUS_DST_COLOR`
+   * - `GL_SRC_ALPHA_SATURATE`
+   *
+   * @param {GLenum} srcRgb The multiplier for the RGB source blending factors
+   * @param {GLenum} dstRgb The multiplier for the RGB destination blending factors
+   * @param {GLenum} srcAlpha The multiplier for the alpha source blending factor
+   * @param {GLenum} dstAlpha The multiplier for the alpha destination blending factor
+   */
   blendFuncSeparate( srcRgb : GLenum, dstRgb : GLenum, srcAlpha : GLenum, dstAlpha : GLenum ) : this {
     this._dat[ Slots.BLEND_FUNC_C_SRC ] = srcRgb;
     this._dat[ Slots.BLEND_FUNC_C_DST ] = dstRgb;
@@ -882,18 +930,33 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Set the blending equation for this config.
+   *
+   * The possible params values are :
+   * - `GL_FUNC_ADD`
+   * - `GL_FUNC_SUBTRACT`
+   * - `GL_FUNC_REVERSE_SUBTRACT`
+   *
+   * @param {GLenum} eq The equation to use
+   */
   blendEquation( eq : GLenum ) : this {
     this._dat[ Slots.BLEND_EQ_C ] = eq;
     this._set = this._set & ~SetsBits.BLEND_EQ_A_SET | (SetsBits.BLEND_EQ_SET);
     return this;
   }
 
-  /*
-    enums
-      FUNC_ADD
-      FUNC_SUBTRACT
-      FUNC_REVERSE_SUBTRACT
-  */
+  /**
+   * Set the blending equation for RGB and alpha components separately for this config.
+   *
+   * The possible params values are :
+   * - `GL_FUNC_ADD`
+   * - `GL_FUNC_SUBTRACT`
+   * - `GL_FUNC_REVERSE_SUBTRACT`
+   *
+   * @param {GLenum} rgbEq The equation to use for the RGB components
+   * @param {GLenum} alphaEq The equation to use for the alpha component
+   */
   blendEquationSeparate ( rgbEq : GLenum, alphaEq : GLenum ) : this {
     this._dat[ Slots.BLEND_EQ_C] = rgbEq;
     this._dat[ Slots.BLEND_EQ_A ] = alphaEq;
@@ -901,10 +964,16 @@ export default class GLConfig {
     return this;
   }
 
-  /*
-    blendColor
-      r g b a  as Float [0.0, 1.0]
-  */
+  /**
+   * Set blending color for this config.
+   *
+   * The params values should be floats between `0` and `1`.
+   *
+   * @param {number} r The value for the red component
+   * @param {number} g The value for the green component
+   * @param {number} b The value for the blue component
+   * @param {number} a The value for the alpha component
+   */
   blendColor( r:number, g:number, b:number, a:number ) : this {
     this._dat[ Slots.BLEND_COLOR_R ] = encodeHalf( r );
     this._dat[ Slots.BLEND_COLOR_G ] = encodeHalf( g );
@@ -916,31 +985,46 @@ export default class GLConfig {
 
 
 
-  /*
-    enums
-      NEVER
-      LESS
-      EQUAL
-      LEQUAL
-      GREATER
-      NOTEQUAL
-      GEQUAL
-      ALWAYS
-
-  */
+  /**
+   * Set the depth function for this config.
+   *
+   * The possible params values are :
+   * - `GL_NEVER`
+   * - `GL_LESS`
+   * - `GL_EQUAL`
+   * - `GL_LEQUAL`
+   * - `GL_GREATER`
+   * - `GL_NOTEQUAL`
+   * - `GL_GEQUAL`
+   * - `GL_ALWAYS`
+   *
+   * @param {GLenum} func The depth function to use
+   */
   depthFunc( func : GLenum ) : this {
     this._dat[ Slots.DEPTH_FUNC ] = func;
     this._set |= SetsBits.DEPTH_FUNC_SET|0;
     return this;
   }
 
-
+  /**
+   * Enable or disable depth testing for this config.
+   *
+   * @param {boolean} [flag=true] Whether to enable depth testing or not
+   */
   enableDepthTest( flag : boolean = true ) : this {
     this._dat[ Slots.DEPTH_ENABLE ] = +flag;
     this._set |= SetsBits.DEPTH_ENABLE_SET|0;
     return this;
   }
 
+  /**
+   * Set the depth range for this config.
+   *
+   * The params values should be floats between `0` and `1`.
+   *
+   * @param {number} near The near value to use
+   * @param {number} far The far value to use
+   */
   depthRange ( near : number, far : number ) : this {
     this._dat[ Slots.DEPTH_RANGE_NEAR ] = encodeClampedFloat( near );
     this._dat[ Slots.DEPTH_RANGE_FAR ]  = encodeClampedFloat( far );
@@ -948,6 +1032,11 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Set the line width of rasterized lines for this config.
+   *
+   * @param {number} w The width to use
+   */
   lineWidth( w : number ) : this {
     this._dat[ Slots.LINE_WIDTH ] = encodeHalf( w );
     this._set |= SetsBits.LINE_WIDTH_SET|0;
@@ -956,18 +1045,27 @@ export default class GLConfig {
 
 
 
-  /*
-    enums
-      FRONT
-      BACK
-      FRONT_AND_BACK
-  */
+  /**
+   * Set the cull face mode for this config.
+   *
+   * The possible params values are :
+   * - `GL_FRONT`
+   * - `GL_BACK`
+   * - `GL_FRONT_AND_BACK`
+   *
+   * @param {GLenum} mode The mode to use
+   */
   cullFace ( mode : GLenum ) : this {
     this._dat[ Slots.CULL_MODE ] = mode;
     this._set |= SetsBits.CULL_MODE_SET|0;
     return this;
   }
 
+  /**
+   * Enable or disable culling for this config.
+   *
+   * @param {boolean} [flag=true] Whether to enable culling or not
+   */
   enableCullface( flag : boolean = true ) : this {
     this._dat[ Slots.CULL_FACE_ENABLE ] = +flag;
     this._set |= SetsBits.CULL_FACE_ENABLE_SET|0;
@@ -976,8 +1074,12 @@ export default class GLConfig {
 
 
 
-  // polygon offset
-  //
+  /**
+   * Set the polygon offset factor & units for this config.
+   *
+   * @param {number} polyOffsetFactor The scale factor for the variable depth offset for each polygon
+   * @param {number} polyOffsetUnits The multiplier by which an implementation-specific value is multiplied with to create a constant depth offset
+   */
   polygonOffset( polyOffsetFactor : number, polyOffsetUnits : number ) : this {
     this._dat[ Slots.POLYOFF_FACTOR] = encodeHalf( polyOffsetFactor );
     this._dat[ Slots.POLYOFF_UNITS ] = encodeHalf( polyOffsetUnits );
@@ -985,6 +1087,11 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Enable or disable polygon offset for this config.
+   *
+   * @param {boolean} [flag=true] Whether to enable polygon offset or not
+   */
   enablePolygonOffset( flag : boolean = true ) : this {
     this._dat[ Slots.POLYOFF_ENABLE ] = +flag;
     this._set |= SetsBits.POLYOFF_ENABLE_SET|0;
@@ -993,15 +1100,25 @@ export default class GLConfig {
 
 
 
-  // SCISSOR
-  // --------
-
+  /**
+   * Enable or disable the scissor test for this config.
+   *
+   * @param {boolean} [flag=true] Whether to enable the scissor test or not
+   */
   enableScissor   ( flag : boolean = true ) : this {
     this._dat[ Slots.SCISSOR_ENABLE ] = +flag;
     this._set |= SetsBits.SCISSOR_ENABLE_SET|0;
     return this;
   }
 
+  /**
+   * Set the scissor box for this config.
+   *
+   * @param {number} x The x coordinate of the lower left corner of the scissor box
+   * @param {number} y The y coordinate of the lower left corner of the scissor box
+   * @param {number} w The width of the scissor box
+   * @param {number} h The height of the scissor box
+   */
   scissor( x : number, y : number, w : number, h : number ) : this {
     this._dat[ Slots.SCISSOR_TEST_X ] = x;
     this._dat[ Slots.SCISSOR_TEST_Y ] = y;
@@ -1011,9 +1128,14 @@ export default class GLConfig {
     return this;
   }
 
-  // VIEWPORT
-  // --------
-
+  /**
+   * Set the viewport for this config.
+   *
+   * @param {number} x The x coordinate of the lower left corner of the viewport origin
+   * @param {number} y The y coordinate of the lower left corner of the viewport origin
+   * @param {number} w The width of the viewport
+   * @param {number} h The height of the viewport
+   */
   viewport( x : number, y : number, w : number, h : number ) : this {
     this._dat[ Slots.VIEWPORT_X ] = x;
     this._dat[ Slots.VIEWPORT_Y ] = y;
@@ -1023,19 +1145,36 @@ export default class GLConfig {
     return this;
   }
 
-
+  /**
+   * Enable or disable dithering for this config.
+   *
+   * @param {boolean} [flag=true] Whether to enable dithering or not
+   */
   enableDither( flag : boolean = true ) : this {
     this._dat[ Slots.DITHER_ENABLE ] = +flag;
     this._set |= SetsBits.DITHER_ENABLE_SET|0;
     return this;
   }
 
+  /**
+   * Enable or disable writing into the depth buffer for this config.
+   *
+   * @param {boolean} [flag] Whether to enable the depth mask or not
+   */
   depthMask( flag : boolean ) : this {
     this._dat[ Slots.DEPTH_MASK ] = +flag;
     this._set |= SetsBits.DEPTH_MASK_SET|0;
     return this;
   }
 
+  /**
+   * Set which color components to enable or to disable for this config.
+   *
+   * @param {boolean} r Whether to enable the red component or not
+   * @param {boolean} g Whether to enable the green component or not
+   * @param {boolean} b Whether to enable the blue component or not
+   * @param {boolean} a Whether to enable the alpha component or not
+   */
   colorMask( r : boolean, g : boolean, b : boolean, a : boolean ) : this {
     const mask =
       ((r?1:0)   ) |
@@ -1064,27 +1203,49 @@ export default class GLConfig {
 
 
 
-  /*
-    enums
-      CW
-      CCW
-  */
+  /**
+   * Set facing direction for this config.
+   *
+   * The possible params values are :
+   * - `GL_CW`
+   * - `GL_CCW`
+   *
+   * @param {GLenum} dir The winding orientation to use
+   */
   frontFace ( dir : GLenum ) : this {
     this._dat[ Slots.FACE_DIR ] = dir;
     this._set |= SetsBits.FACE_DIR_SET|0;
     return this;
   }
 
-  /*
-    Stencils
-  */
-
+  /**
+   * Enable or disable stencil testing for this config.
+   *
+   * @param {boolean} [flag] Whether to enable stencil testing or not
+   */
   enableStencil( flag : boolean = true ) : this {
     this._dat[ Slots.STENCIL_ENABLE ] = +flag;
     this._set |= SetsBits.STENCIL_ENABLE_SET|0;
     return this;
   }
 
+  /**
+   * Set the stencil function for this config.
+   *
+   * The possible func values are :
+   * - `GL_NEVER`
+   * - `GL_LESS`
+   * - `GL_EQUAL`
+   * - `GL_LEQUAL`
+   * - `GL_GREATER`
+   * - `GL_NOTEQUAL`
+   * - `GL_GEQUAL`
+   * - `GL_ALWAYS`
+   *
+   * @param {GLenum} func The stencil test function to use
+   * @param {number} ref The reference value for the stencil test
+   * @param {number} mask The mask to use to `AND` the reference value and the stored stencil value when the test is done
+   */
   stencilFunc ( func : GLenum, ref : number, mask : number ) : this {
     this._dat[ Slots.STENCIL_FUNC       ] = func;
     this._dat[ Slots.STENCIL_REF        ] = ref;
@@ -1093,6 +1254,23 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Set the stencil test actions for this config.
+   *
+   * The possible params values are :
+   * - `GL_KEEP`
+   * - `GL_ZERO`
+   * - `GL_REPLACE`
+   * - `GL_INCR`
+   * - `GL_INCR_WRAP`
+   * - `GL_DECR`
+   * - `GL_DECR_WRAP`
+   * - `GL_INVERT`
+   *
+   * @param {GLenum} sfail The function to use when the stencil test fails
+   * @param {GLenum} dpfail The function to use when the stencil test passes, but the depth test fails
+   * @param {GLenum} dppass The function to use when both the stencil test and the depth test pass
+   */
   stencilOp ( sfail : GLenum, dpfail : GLenum, dppass : GLenum ) : this {
     this._dat[ Slots.STENCIL_OP_FAIL ] = sfail;
     this._dat[ Slots.STENCIL_OP_ZFAIL] = dpfail;
@@ -1101,6 +1279,11 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Set the stencil mask for this config.
+   *
+   * @param {number} mask The bit mask to enable or disable writing in the stencil planes
+   */
   stencilMask ( mask : number ) : this {
     this._dat[ Slots.STENCIL_WRITEMASK ] = mask;
     this._set = (this._set & ~SetsBits.STENCIL_B_MASK_SET) | (SetsBits.STENCIL_MASK_SET);
@@ -1108,7 +1291,26 @@ export default class GLConfig {
   }
 
 
-
+  /**
+   * Set the stencil function separatly for the front and back stencil for this config.
+   *
+   * The possible func values are :
+   * - `GL_NEVER`
+   * - `GL_LESS`
+   * - `GL_EQUAL`
+   * - `GL_LEQUAL`
+   * - `GL_GREATER`
+   * - `GL_NOTEQUAL`
+   * - `GL_GEQUAL`
+   * - `GL_ALWAYS`
+   *
+   * @param {GLenum} func The stencil test function to use for the front stencil
+   * @param {number} ref The reference value for the front stencil test
+   * @param {number} mask The mask to use to `AND` the reference value and the stored stencil value when the test is done for the front stencil
+   * @param {GLenum} funcback The stencil test function to use for the back stencil
+   * @param {number} refback The reference value for the back stencil test
+   * @param {number} maskback The mask to use to `AND` the reference value and the stored stencil value when the test is done for the back stencil
+   */
   stencilFuncSeparate ( func : GLenum, ref : number, mask : number, funcback : GLenum, refback : number, maskback : number ) : this {
     const dat = this._dat;
     dat[ Slots.STENCIL_FUNC         ] = func;
@@ -1121,6 +1323,26 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Set the stencil test actions separatly for the front and back stencil for this config.
+   *
+   * The possible params values are :
+   * - `GL_KEEP`
+   * - `GL_ZERO`
+   * - `GL_REPLACE`
+   * - `GL_INCR`
+   * - `GL_INCR_WRAP`
+   * - `GL_DECR`
+   * - `GL_DECR_WRAP`
+   * - `GL_INVERT`
+   *
+   * @param {GLenum} sfail The function to use when the front stencil test fails
+   * @param {GLenum} dpfail The function to use when the front stencil test passes, but the depth test fails
+   * @param {GLenum} dppass The function to use when both the front stencil test and the depth test pass
+   * @param {GLenum} sfailback The function to use when the back stencil test fails
+   * @param {GLenum} dpfailback The function to use when the back stencil test passes, but the depth test fails
+   * @param {GLenum} dppassback The function to use when both the back stencil test and the depth test pass
+   */
   stencilOpSeparate ( sfail : GLenum, dpfail : GLenum, dppass : GLenum, sfailback : GLenum, dpfailback : GLenum, dppassback : GLenum ) : this {
     const dat = this._dat;
     dat[ Slots.STENCIL_OP_FAIL    ] = sfail;
@@ -1133,6 +1355,12 @@ export default class GLConfig {
     return this;
   }
 
+  /**
+   * Set the stencil mask separatly for the front and back stencil for this config.
+   *
+   * @param {number} mask The bit mask to enable or disable writing in the stencil planes for the front stencil
+   * @param {number} maskback The bit mask to enable or disable writing in the stencil planes for the back stencil
+   */
   stencilMaskSeparate ( mask : number, maskback : number ) : this {
     this._dat[ Slots.STENCIL_WRITEMASK   ] = mask;
     this._dat[ Slots.STENCIL_B_WRITEMASK ] = maskback;

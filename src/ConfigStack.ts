@@ -20,37 +20,43 @@ const MIN_ALLOC = 16,
 //
 //
 
-
+/**
+ * This class manages the GLConfig stack.
+ */
 class ConfigStack {
 
 
   /**
-   * values of the states at each position in the stack
+   * The values of the configs at each position in the stack.
+   * The stack is a 2d array where each row is a config.
    */
   private _stack  : Uint16Array;
 
 
   /**
-   * bitmask set of all the configs in the stack
+   * The list of the bitmask set of all the configs in the stack
    */
   private _sets   : Uint32Array;
 
 
   /**
-   * allocated size of the stack
+   * The allocated size of the stack
    */
   private _size   : number     ;
 
   /**
-   * current positionin the stack
+   * The current position in the stack
    */
   private _ptr    : number     ;
 
   /**
-   * position in teh stack of the last "commit"
+   * The position in the stack of the last "commit"
    */
   private _headPos: number     ;
 
+  /**
+   * The position in the stack of the last "commit"
+   */
   private readonly _wcfg : GLConfig;
 
   constructor(){
@@ -66,8 +72,11 @@ class ConfigStack {
 
 
   /**
-   * Fetch state from gl context and set initial set and dat
-   * @param gl 
+   * Setup initial config from to match the config the
+   * given webgl context is currently in, and set the
+   * first config of the stack to this config.
+   *
+   * @param {WebGLRenderingContext} gl The webgl context to match
    */
   initFromGL( gl : WebGLRenderingContext )
   {
@@ -79,17 +88,34 @@ class ConfigStack {
 
 
   /**
-   * Add a config to the stack
-   * @param cfg 
-   * 
-   * A, B, C, D, E, F, G   -- previous row in _stack
-   * 1, 0, 0, 1, 1, 1, 0   -- previous row in _sets
+   * Add a config to the stack.
    *
-   * ?, ?, X, D, E, ?, ?   -- cfg _dat
-   * 0, 0, 1, 1, 1, 0, 0   -- cfg _set
+   * The input config is applied to the previous config in the stack,
+   * and the resulting config is added to the stack.
    *
-   * A, B, X, D, E, F, G   -- new row in _stack
-   * 1, 0, 1, 1, 1, 1, 0   -- new row in _sets
+   * @example
+   * If the previous config in the stack is:
+   *
+   * ```js
+   * [A, B, C, D, E, F, G] // previous row in _stack
+   * [1, 0, 0, 1, 1, 1, 0] // previous row in _sets
+   * ```
+   *
+   * And the input config is :
+   *
+   * ```js
+   * [?, ?, X, D, E, ?, ?] // cfg _dat
+   * [0, 0, 1, 1, 1, 0, 0] // cfg _set
+   * ```
+   *
+   * Then the new config in the stack is:
+   *
+   * ```js
+   * [A, B, X, D, E, F, G] // new row in _stack
+   * [1, 0, 1, 1, 1, 1, 0] // new row in _sets
+   * ```
+   *
+   * @param {GLConfig} cfg The config to add to the stack
    */
   push( cfg : GLConfig ){
 
@@ -124,8 +150,10 @@ class ConfigStack {
   }
 
   /**
-   * remove the last config from the stack
-   * if the HEAD position is ahead the new position, the new position set is unioned with the previous set
+   * Remove the last config from the stack.
+   *
+   * If the HEAD position is ahead of the current position in the stack,
+   * the current position config set is unioned with the removed config set.
    */
   pop() {
     const ptr = --this._ptr;
@@ -137,7 +165,9 @@ class ConfigStack {
 
   }
 
-
+  /**
+   * Remove all configs from the stack.
+   */
   flush(){
     while( this._ptr>0 ){
       this.pop();
@@ -145,8 +175,8 @@ class ConfigStack {
   }
 
   /**
-   * copy current stack state to the given patch config and mark HEAD as the current position
-   * @param patch 
+   * Copy the current stack state to the given patch config and mark HEAD as the current position.
+   * @param {GLConfig} patch The config to copy to
    */
   commit( patch : GLConfig ){
     const ptr = this._ptr;
@@ -154,7 +184,7 @@ class ConfigStack {
     this.copyConfig( ptr, patch );
 
     this._headPos = ptr;
-    if( ptr > 0 ) { 
+    if( ptr > 0 ) {
       this._sets[ ptr-1 ] |= this._sets[ ptr ];
     }
     this._sets[ ptr ] = 0;
@@ -168,9 +198,13 @@ class ConfigStack {
   // }
 
   /**
-   * Copy a row in the stack and sets to the given config
-   * @param at position in the stack to copy from
-   * @param cfg config to copy to
+   * Copy a row in the stack to the given config.
+   *
+   * This will copy the row from `_stack` to the config `_dat`
+   * and the row from `_set` to the config `_set`.
+   *
+   * @param at The position in the stack to copy from
+   * @param cfg The config to copy to
    */
   copyConfig( at : number, cfg : GLConfig )
   {
@@ -185,7 +219,9 @@ class ConfigStack {
     cfg._set = this._sets[at];
   }
 
-
+  /**
+   * Grow the allocated size of stack.
+   */
   private _grow(){
     const s      = this._size << 1,
           stack  = new Uint16Array( s * (0|LEN) ),
